@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-//TEST FOR IVAN
+
 package org.usfirst.frc.team6969.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
