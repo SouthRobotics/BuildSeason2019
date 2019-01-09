@@ -31,7 +31,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * connectivity issues after initial installation of the navX-MXP sensor.
  *
  */
-public class Robot extends SampleRobot {
+public class DataMonitorNavX extends SampleRobot {
   AHRS ahrs;
   Joystick stick;
 
