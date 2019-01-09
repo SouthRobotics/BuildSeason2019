@@ -39,7 +39,7 @@ import org.usfirst.frc.team6969.robot.Robot;
  * be tuned for your drive system.
  */
 
-public class Robot extends SampleRobot implements PIDOutput {
+public class RotateToAngle extends SampleRobot implements PIDOutput {
     DifferentialDrive myRobot;  // class that handles basic drive operations
     Joystick leftStick;  // set to ID 1 in DriverStation
     Joystick rightStick; // set to ID 2 in DriverStation
@@ -70,7 +70,7 @@ public class Robot extends SampleRobot implements PIDOutput {
     Spark leftMotor;
     Spark rightMotor;
 
-    public Robot() {
+    public void Robot() {
     	leftMotor = new Spark(leftChannel);
     	rightMotor = new Spark(rightChannel);
         myRobot = new DifferentialDrive(leftMotor, rightMotor); 
