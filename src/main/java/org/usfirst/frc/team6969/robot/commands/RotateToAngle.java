@@ -1,5 +1,5 @@
-package org.usfirst.frc.team6969.robot;
-import org.usfirst.frc.team6969.robot.Robot;
+package org.usfirst.frc.team6969.robot.commands;
+
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SampleRobot;
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
+import org.usfirst.frc.team6969.robot.Robot;
 /**
  * This is a demo program showing the use of the navX MXP to implement
  * the "rotate to angle", "zero yaw" and "drive straight" on a Tank
