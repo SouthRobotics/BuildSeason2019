@@ -35,7 +35,7 @@ public class DataMonitorNavX extends SampleRobot {
   AHRS ahrs;
   Joystick stick;
 
-  public Robot() {
+  public void Robot() {
       stick = new Joystick(0);
       try {
           /* Communicate w/navX-MXP via the MXP SPI Bus.                                     */
