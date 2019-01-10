@@ -50,10 +50,10 @@ public class RobotMap {
 	public static double wheelRotation360degree = 6.97814; //amount of wheel rotations the robot will make 360* turn in when both sides are driving opposite ways 
 	
 	//Talons that control drivetrain
-    public static SpeedController driveTrainLeftFront;	//must declare as type SpeedController
-    public static SpeedController driveTrainLeftBack;
-    public static SpeedController driveTrainRightFront;
-    public static SpeedController  driveTrainRightBack;
+    public static Spark driveTrainLeftFront;	//must declare as type SpeedController
+    public static Spark driveTrainLeftBack;
+    public static Spark driveTrainRightFront;
+    public static Spark  driveTrainRightBack;
     
     //Spark motorcontrollers that control subsystems
     public static Spark forkliftMotor;
@@ -95,23 +95,23 @@ public class RobotMap {
 		Talon 14 - Front Left
 		Talon 15 - Back Left
 		*/
-		driveTrainLeftBack = new WPI_TalonSRX(15); 
-		driveTrainLeftFront =  new WPI_TalonSRX(14);
-		driveTrainRightBack = new WPI_TalonSRX(13); 
-		driveTrainRightFront =  new WPI_TalonSRX(12);
+		driveTrainLeftBack = new Spark(3); 
+		driveTrainLeftFront =  new Spark(2);
+		driveTrainRightBack = new Spark(1); 
+		driveTrainRightFront =  new Spark(0);
 		
 		//PWM port numbers for subsystems.
-		forkliftMotor = new Spark(1);
-		clawMotor = new Spark(0);
+		forkliftMotor = new Spark(5);
+		clawMotor = new Spark(4);
 		
 		/*
 		 * LiveWindow.add() adds a device to the smartdashboard (in DriverStation go to third tab on left, and change dashboard
 		 * to smartdashboard) so that you can see more data about that device
 		 */
-	    LiveWindow.add( (WPI_TalonSRX) driveTrainLeftFront);
-	    LiveWindow.add( (WPI_TalonSRX) driveTrainLeftBack);
-	    LiveWindow.add( (WPI_TalonSRX) driveTrainRightFront);
-	    LiveWindow.add( (WPI_TalonSRX) driveTrainRightBack);
+	    LiveWindow.add( driveTrainLeftFront);
+	    LiveWindow.add( driveTrainLeftBack);
+	    LiveWindow.add( driveTrainRightFront);
+	    LiveWindow.add( driveTrainRightBack);
 
 	    //PWM ports for sensors
 	    magLimit = new  DigitalInput(0);
