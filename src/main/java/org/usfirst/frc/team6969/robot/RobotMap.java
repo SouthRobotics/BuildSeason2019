@@ -56,9 +56,6 @@ public class RobotMap {
     public static SpeedController  driveTrainRightBack;
     
     //Spark motorcontrollers that control subsystems
-    public static Spark forkliftMotor;
-    public static Spark clawMotor;
-    public static Spark dropMotor;
     
     //list of sensors: http://1418.team/assets/resources/Introduction%20to%20Sensors.pdf
     
@@ -101,17 +98,11 @@ public class RobotMap {
 		driveTrainRightFront =  new WPI_TalonSRX(12);
 		
 		//PWM port numbers for subsystems.
-		forkliftMotor = new Spark(1);
-		clawMotor = new Spark(0);
 		
 		/*
 		 * LiveWindow.add() adds a device to the smartdashboard (in DriverStation go to third tab on left, and change dashboard
 		 * to smartdashboard) so that you can see more data about that device
 		 */
-	    LiveWindow.add( (WPI_TalonSRX) driveTrainLeftFront);
-	    LiveWindow.add( (WPI_TalonSRX) driveTrainLeftBack);
-	    LiveWindow.add( (WPI_TalonSRX) driveTrainRightFront);
-	    LiveWindow.add( (WPI_TalonSRX) driveTrainRightBack);
 
 	    //PWM ports for sensors
 	    magLimit = new  DigitalInput(0);
@@ -130,14 +121,5 @@ public class RobotMap {
 	     * when true, safetyenabled turns off motors if their output isn't updated for a certain amount of time
 	     * setExpiration() sets the time for safetyenabled
 	     */
-		forkliftMotor.setSafetyEnabled(false);
-		forkliftMotor.setExpiration(0.1);
-		
-		clawMotor.setSafetyEnabled(false);
-		clawMotor.setExpiration(0.1);
-		
-	    drive.setSafetyEnabled(false);
-	    drive.setExpiration(0.1);
-	    drive.setMaxOutput(1.0);
 	}
 }
