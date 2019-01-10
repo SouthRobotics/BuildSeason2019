@@ -103,15 +103,6 @@ public class RobotMap {
 		//PWM port numbers for subsystems.
 		forkliftMotor = new Spark(5);
 		clawMotor = new Spark(4);
-		
-		/*
-		 * LiveWindow.add() adds a device to the smartdashboard (in DriverStation go to third tab on left, and change dashboard
-		 * to smartdashboard) so that you can see more data about that device
-		 */
-	    LiveWindow.add( driveTrainLeftFront);
-	    LiveWindow.add( driveTrainLeftBack);
-	    LiveWindow.add( driveTrainRightFront);
-	    LiveWindow.add( driveTrainRightBack);
 
 	    //PWM ports for sensors
 	    magLimit = new  DigitalInput(0);
