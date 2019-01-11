@@ -123,7 +123,7 @@ public class TestMovementCommand extends Command {
 	public void turn(double power) {
 		//calculate the relative angle, the angle given by gyro compared to target angle
 		//radians to degrees = 57.2958, that is why i multiply
-		double readAngle = (gyro.getAngle() * 57.2958)%360;//don't allow angle to exceed 360 by dividing by 360 and using remainder
+		double readAngle = (gyro.getAngle())%360;//don't allow angle to exceed 360 by dividing by 360 and using remainder
 		double error = findShortestAngleBetween(targetAngle, readAngle);
 		//check if robot has reached target position (if so, set finishedMoving = true)
 		if (error > -angleErrorThreshold && error < angleErrorThreshold) {
