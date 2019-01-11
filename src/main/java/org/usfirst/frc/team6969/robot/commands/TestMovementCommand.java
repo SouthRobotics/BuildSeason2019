@@ -51,7 +51,7 @@ public class TestMovementCommand extends Command {
 	//a multiplier for speed. Probably should be within the range [0, 1]
 	private static final double turnPower = 1;
 
-	public static double targetAngle = 0;// change to rotate robot. (the robot tries to reach this angle, relative to gyro angle)
+	public static double targetAngle = 90;// change to rotate robot. (the robot tries to reach this angle, relative to gyro angle)
 	public static boolean finishedMoving = false;// is the robot currently turning? (see angleErrotThreshold)
 	private static AnalogGyro gyro;// reference needed to sense rotation
 	private static DifferentialDrive drive;// reference needed to drive
@@ -88,7 +88,7 @@ public class TestMovementCommand extends Command {
 	@Override
 	protected void execute() {
 //		if(Robot.m_oi.xButton.get()) {
-		turn(90);
+		turn(0.0);
 //		}else {
 ////			turn(-90);
 //		}
