@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team6969.robot.Robot;
+import org.usfirst.frc.team6969.robot.RobotMap;
 /**
  * This is a demo program showing the use of the navX MXP to implement
  * the "rotate to angle", "zero yaw" and "drive straight" on a Tank
@@ -63,17 +64,10 @@ public class RotateToAngle extends SampleRobot implements PIDOutput {
     
     static final double kTargetAngleDegrees = 90.0f;
     
-    // Channels for the wheels
-    final static int leftChannel	= 0;
-    final static int rightChannel	= 1;
-    
-    Spark leftMotor;
-    Spark rightMotor;
+
 
     public void Robot() {
-    	leftMotor = new Spark(leftChannel);
-    	rightMotor = new Spark(rightChannel);
-        myRobot = new DifferentialDrive(leftMotor, rightMotor); 
+
         myRobot.setExpiration(0.1);
         leftStick = new Joystick(0);
         rightStick = new Joystick(1);
@@ -147,14 +141,14 @@ public class RotateToAngle extends SampleRobot implements PIDOutput {
         		double magnitude = (leftStick.getY() + rightStick.getY()) / 2;
         		double leftStickValue = magnitude + rotateToAngleRate;
         		double rightStickValue = magnitude - rotateToAngleRate;
-        		myRobot.tankDrive(leftStickValue,  rightStickValue);
+        		RobotMap.drive.tankDrive(leftStickValue,  rightStickValue);
         	} else {
         		/* If the turn controller had been enabled, disable it now. */
         		if(turnController.isEnabled()) {
         			turnController.disable();
         		}
         		/* Standard tank drive, no driver assistance. */
-        		myRobot.tankDrive(leftStick.getY(), rightStick.getY());
+        		RobotMap.drive.tankDrive(leftStick.getY(), rightStick.getY());
         	}
             Timer.delay(0.005);		// wait for a motor update time
         }
