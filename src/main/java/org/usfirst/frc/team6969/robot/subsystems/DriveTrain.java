@@ -11,7 +11,7 @@ import org.usfirst.frc.team6969.robot.OI;
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 import org.usfirst.frc.team6969.robot.commands.TeleOpDrive;
-import org.usfirst.frc.team6969.robot.commands.TestMovementCommand;
+
 
 //import org.usfirst.frc.team6969.robot.GyroItg3200;
 import edu.wpi.first.wpilibj.ADXL345_I2C;
