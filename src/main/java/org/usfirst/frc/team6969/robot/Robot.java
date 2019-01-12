@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import org.usfirst.frc.team6969.robot.subsystems.*;
 import org.usfirst.frc.team6969.robot.RobotMap;
-import org.usfirst.frc.team6969.robot.commands.TestMovementCommand;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -33,6 +32,7 @@ public class Robot extends TimedRobot {
 	//subsystems
 	//public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static DriveTrain driveTrain;
+
 	
 	//controller map
 	public static OI m_oi;
@@ -52,6 +52,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		RobotMap.init();
 		driveTrain = new DriveTrain();
+//		testMovement = new TestMovement();
 		m_oi = new OI();
 		pdp = new PowerDistributionPanel(30);
 		ds = DriverStation.getInstance();
@@ -94,7 +95,7 @@ public class Robot extends TimedRobot {
 		
 		//testing this, not sure if it will work
 		//TODO check if this works. Should execute a new instance of TestMovementCommans.java
-		autonomousCommand = new TestMovementCommand(); //new auto(color, station)
+		//autonomousCommand = new TestMovementCommand(); //new auto(color, station)
 
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
