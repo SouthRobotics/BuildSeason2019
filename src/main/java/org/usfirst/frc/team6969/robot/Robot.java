@@ -33,8 +33,6 @@ public class Robot extends TimedRobot {
 	//subsystems
 	//public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static DriveTrain driveTrain;
-	public static Forklift forklift;
-	public static Claw claw;
 //	public static TestMovement testMovement;
 	
 	//controller map
@@ -55,8 +53,6 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		RobotMap.init();
 		driveTrain = new DriveTrain();
-		forklift = new Forklift();
-		claw = new Claw();
 //		testMovement = new TestMovement();
 		m_oi = new OI();
 		pdp = new PowerDistributionPanel(30);
@@ -127,8 +123,6 @@ public class Robot extends TimedRobot {
 		//for every subsystem just do subsystem.initDefaultCommand()
 		//subsystems
 		driveTrain.initDefaultCommand();
-		forklift.initDefaultCommand();
-		claw.initDefaultCommand();
 	}
 
 	/**
