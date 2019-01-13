@@ -106,11 +106,11 @@ public class RobotMap {
 		 */
 
 	    //PWM ports for sensors
-	    magLimit = new  DigitalInput(0);
+	    //magLimit = new  DigitalInput(0);
 	    
 	    //Analog channels for sensors
-		gyro = new AnalogGyro(1);
-		ahrs = new AHRS(SerialPort.Port.kUSB); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
+		//gyro = new AnalogGyro(1);
+		//ahrs = new AHRS(SerialPort.Port.kUSB); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 	    
 	    //creates motor groups for TankDrive
 	    final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainLeftFront, driveTrainLeftBack); //left drivetrain motors
