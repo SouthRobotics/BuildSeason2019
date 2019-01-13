@@ -8,6 +8,7 @@
 package org.usfirst.frc.team6969.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
 //All imports below are the default imports that come with the FRC package
 import edu.wpi.first.wpilibj.ADXL345_I2C;
