@@ -10,6 +10,7 @@ package org.usfirst.frc.team6969.robot.subsystems;
 import org.usfirst.frc.team6969.robot.OI;
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
+import org.usfirst.frc.team6969.robot.commands.GripPipeline;
 import org.usfirst.frc.team6969.robot.commands.TeleOpDrive;
 import org.usfirst.frc.team6969.robot.commands.TestMovementCommand;
 
@@ -39,7 +40,8 @@ public class DriveTrain extends Subsystem {
         rightYAxis = Robot.m_oi.rightYAxis;
 //        test = new TestMovementCommand();
 //        test.start();//cheese solution
-        setDefaultCommand(new TeleOpDrive());
+		setDefaultCommand(new GripPipeline());
+		
     }
     
     public void takeJoystickInputs(OI oi) {
