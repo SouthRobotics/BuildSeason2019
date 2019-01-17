@@ -29,6 +29,7 @@ public class DriveTrain extends Subsystem {
 //	private static TestMovementCommand test;//cheese solution
 	public static AnalogGyro gyro;
 	//public static ADXL345_I2C accelerometer; 
+	public static GripPipeline cargoCoord;
 	
     public void initDefaultCommand() {
     	robotDrive =  RobotMap.drive;
@@ -41,6 +42,7 @@ public class DriveTrain extends Subsystem {
 //        test = new TestMovementCommand();
 //        test.start();//cheese solution
 		setDefaultCommand(new GripPipeline());
+		cargoCoord = new GripPipeline();
 		
     }
     

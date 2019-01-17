@@ -55,6 +55,7 @@ public class GripPipeline extends Command{
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+		process();
 
 	}
 
@@ -155,6 +156,7 @@ public class GripPipeline extends Command{
 		findBlobs(findBlobsInput, findBlobsMinArea, findBlobsCircularity, findBlobsDarkBlobs, findBlobsOutput);
 		KeyPoint[] temp = findBlobsOutput.toArray();
 		System.out.println(temp[0].pt.toString());
+		System.out.println(temp.toString());
 		return temp;
 	}
 
