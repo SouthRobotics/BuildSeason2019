@@ -50,11 +50,18 @@ public class RobotMap {
 	public static double driveWheelCircumferance = driveWheelRadius * 2 * Math.PI; // 18.84956inches
 	public static double wheelRotation360degree = 6.97814; //amount of wheel rotations the robot will make 360* turn in when both sides are driving opposite ways 
 	
+	//Test Robot Spark Ports: 13, 12, 15, 14
 	//Talons that control drivetrain
-    public static SpeedController driveTrainLeftFront;	//must declare as type SpeedController
+	public static SpeedController driveTrainLeftFront;	//must declare as type SpeedController
     public static SpeedController driveTrainLeftBack;
     public static SpeedController driveTrainRightFront;
-    public static SpeedController  driveTrainRightBack;
+	public static SpeedController  driveTrainRightBack;
+	
+	//test robot
+    /*public static Spark driveTrainLeftFront;
+    public static Spark driveTrainLeftBack;
+    public static Spark driveTrainRightFront;
+    public static Spark  driveTrainRightBack;*/
     
     //Spark motorcontrollers that control subsystems
     
@@ -92,12 +99,25 @@ public class RobotMap {
 		Talon 13 - Front Right
 		Talon 14 - Front Left
 		Talon 15 - Back Left
+
+		Test Robot:
+		Spark 1 - Back Right
+		Spark 0 - Front Right
+		Spark 2 - Front Left
+		Spark 3 - Back Left
 		*/
-		driveTrainLeftBack = new WPI_TalonSRX(15); 
-		driveTrainLeftFront =  new WPI_TalonSRX(14);
-		driveTrainRightBack = new WPI_TalonSRX(13); 
-		driveTrainRightFront =  new WPI_TalonSRX(12);
 		
+		driveTrainRightBack = new WPI_TalonSRX(13);
+		driveTrainRightFront =  new WPI_TalonSRX(12); 
+		driveTrainLeftFront =  new WPI_TalonSRX(14);
+		driveTrainLeftBack = new WPI_TalonSRX(15); 
+		
+		//test robot
+		/*driveTrainRightBack = new Spark(1); 
+		driveTrainRightFront =  new Spark(0);
+		driveTrainLeftFront =  new Spark(2);
+		driveTrainLeftBack = new Spark(3); */
+
 		//PWM port numbers for subsystems.
 		
 		/*

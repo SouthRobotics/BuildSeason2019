@@ -61,13 +61,13 @@ public class DriveTrain extends Subsystem {
     	
     	//Sets motor speeds
     	if(!goHalfSpeed && !goFullSpeed) { //going 0.75 speed (NORMAL)
-	    	robotDrive.tankDrive(oi.getController().getRawAxis(leftYAxis) * -1 * 0.75, oi.getController().getRawAxis(rightYAxis) * -1 *  0.75);
+	    	robotDrive.tankDrive(oi.getController().getRawAxis(leftYAxis) * -1 * 0.75, oi.getController().getRawAxis(rightYAxis) *  0.75);
     	}
     	if(goHalfSpeed) {
-    		robotDrive.tankDrive(oi.getController().getRawAxis(leftYAxis) * -1 * 0.5, oi.getController().getRawAxis(rightYAxis) * -1 * 0.5);
+    		robotDrive.tankDrive(oi.getController().getRawAxis(leftYAxis) * -1 * 0.5, oi.getController().getRawAxis(rightYAxis) * 0.5);
     	}
     	if(goFullSpeed) {
-    		robotDrive.tankDrive(oi.getController().getRawAxis(leftYAxis) * -1 , oi.getController().getRawAxis(rightYAxis) * -1);
+    		robotDrive.tankDrive(oi.getController().getRawAxis(leftYAxis) * -1 , oi.getController().getRawAxis(rightYAxis));
     	}
     }
     
