@@ -8,7 +8,6 @@
 package org.usfirst.frc.team6969.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.kauailabs.navx.frc.AHRS;
 
 //All imports below are the default imports that come with the FRC package
 import edu.wpi.first.wpilibj.ADXL345_I2C;
@@ -50,18 +49,18 @@ public class RobotMap {
 	public static double driveWheelCircumferance = driveWheelRadius * 2 * Math.PI; // 18.84956inches
 	public static double wheelRotation360degree = 6.97814; //amount of wheel rotations the robot will make 360* turn in when both sides are driving opposite ways 
 	
-	//Test Robot Spark Ports: 13, 12, 15, 14
 	//Talons that control drivetrain
-	public static SpeedController driveTrainLeftFront;	//must declare as type SpeedController
-    public static SpeedController driveTrainLeftBack;
-    public static SpeedController driveTrainRightFront;
-	public static SpeedController  driveTrainRightBack;
+    public static SpeedController driveTrainBackRight;	//must declare as type SpeedController
+    public static SpeedController driveTrainFrontRight;
+    public static SpeedController driveTrainBackLeft;
+	public static SpeedController  driveTrainFrontLeft;
 	
-	//test robot
-    /*public static Spark driveTrainLeftFront;
-    public static Spark driveTrainLeftBack;
-    public static Spark driveTrainRightFront;
-    public static Spark  driveTrainRightBack;*/
+	/* Test Robot
+	public static Spark driveTrainBackRight;
+    public static Spark driveTrainFrontRight;
+    public static Spark driveTrainBackLeft;
+    public static Spark  driveTrainFrontLeft;
+	*/
     
     //Spark motorcontrollers that control subsystems
     
@@ -97,27 +96,28 @@ public class RobotMap {
 		Current PDP port numbers for Talons:
 		Talon 12 - Back Right
 		Talon 13 - Front Right
-		Talon 14 - Front Left
 		Talon 15 - Back Left
+		Talon 14 - Front Left
 
-		Test Robot:
+		Sparks (Test Robot):
 		Spark 1 - Back Right
 		Spark 0 - Front Right
-		Spark 2 - Front Left
 		Spark 3 - Back Left
+		Spark 2 - Front Left
+		*/
+		driveTrainBackRight = new WPI_TalonSRX(12); 
+		driveTrainFrontRight =  new WPI_TalonSRX(13);
+		driveTrainBackLeft = new WPI_TalonSRX(15); 
+		driveTrainFrontLeft =  new WPI_TalonSRX(14);
+
+		/*
+		Test Robot:
+		driveTrainBackRight = new Spark(1); 
+		driveTrainFrontRight =  new Spark(0);
+		driveTrainBackLeft = new Spark(3); 
+		driveTrainFrontLeft =  new Spark(2);
 		*/
 		
-		driveTrainRightBack = new WPI_TalonSRX(13);
-		driveTrainRightFront =  new WPI_TalonSRX(12); 
-		driveTrainLeftFront =  new WPI_TalonSRX(14);
-		driveTrainLeftBack = new WPI_TalonSRX(15); 
-		
-		//test robot
-		/*driveTrainRightBack = new Spark(1); 
-		driveTrainRightFront =  new Spark(0);
-		driveTrainLeftFront =  new Spark(2);
-		driveTrainLeftBack = new Spark(3); */
-
 		//PWM port numbers for subsystems.
 		
 		/*
@@ -126,15 +126,14 @@ public class RobotMap {
 		 */
 
 	    //PWM ports for sensors
-	    //magLimit = new  DigitalInput(0);
+	    magLimit = new  DigitalInput(0);
 	    
 	    //Analog channels for sensors
-		//gyro = new AnalogGyro(1);
-		//ahrs = new AHRS(SerialPort.Port.kUSB); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
+		gyro = new AnalogGyro(1);
 	    
 	    //creates motor groups for TankDrive
-	    final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainLeftFront, driveTrainLeftBack); //left drivetrain motors
-	    final SpeedControllerGroup m_right = new SpeedControllerGroup(driveTrainRightFront, driveTrainRightBack); //Right drivetrain motors
+	    final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainFrontLeft, driveTrainBackLeft); //left drivetrain motors
+	    final SpeedControllerGroup m_right = new SpeedControllerGroup(driveTrainFrontRight, driveTrainBackRight); //Right drivetrain motors
 	    //creates TankDrive drivetrain	
 	    drive = new DifferentialDrive(m_left, m_right);
 	    
