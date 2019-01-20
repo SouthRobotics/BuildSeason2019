@@ -78,7 +78,8 @@ public class RobotMap {
      */
     
     //Other sensors
-    public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
+	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
+	public static AHRS navx;
     /*
      * Example code to use gyro:
      * gyro.calibrate() right when robot turns on (calibrate needs to work while robot is stationary)
@@ -133,6 +134,7 @@ public class RobotMap {
 	    
 	    //Analog channels for sensors
 		gyro = new AnalogGyro(1);
+		navx = new AHRS(SPI.Port.kMXP);
 	    
 	    //creates motor groups for TankDrive
 	    final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainFrontLeft, driveTrainBackLeft); //left drivetrain motors

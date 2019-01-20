@@ -11,9 +11,6 @@ import org.usfirst.frc.team6969.robot.OI;
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 import org.usfirst.frc.team6969.robot.commands.TeleOpDrive;
-
-
-//import org.usfirst.frc.team6969.robot.GyroItg3200;
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -25,20 +22,13 @@ public class DriveTrain extends Subsystem {
 	private static boolean goFullSpeed;
 	private static int leftYAxis;
 	private static int rightYAxis;
-//	private static TestMovementCommand test;//cheese solution
-	public static AnalogGyro gyro;
-	//public static ADXL345_I2C accelerometer; 
 	
     public void initDefaultCommand() {
     	robotDrive =  RobotMap.drive;
-    	gyro = RobotMap.gyro;
-    	//accelerometer = RobotMap.accelerometer;
         goHalfSpeed = false;
         goFullSpeed = false;
         leftYAxis = Robot.m_oi.leftYAxis;
         rightYAxis = Robot.m_oi.rightYAxis;
-//        test = new TestMovementCommand();
-//        test.start();//cheese solution
         setDefaultCommand(new TeleOpDrive());
     }
     
