@@ -97,7 +97,7 @@ public class DriveTrain extends Subsystem {
 	public void rotateChassisToAngle(double targetAngle) {
 
         // For angles below 0, rotate to the left. For angles above 0, rotate right.
-        if (targetAngle < 0) 
+        if ( targetAngle < 0 ) 
             rotateLeft = true;
         else
 			rotateLeft = false;
@@ -118,13 +118,13 @@ public class DriveTrain extends Subsystem {
 				rotation = 0.55;
 
 			// .45 is min amount of power to move motors. want to slow down within final 20 degrees to ensure we don't overshoot target
-			if (rotation < 0.45 || error < 20)
+			if ( rotation < 0.45 || error < 20 )
 				rotation = 0.45;
 
             if (rotateLeft)
-				robotDrive.tankDrive( -rotation , rotation);   // Turn left side backwards, right side forwards
+				robotDrive.tankDrive( -rotation , rotation );   // Turn left side backwards, right side forwards
 			else
-				robotDrive.tankDrive( rotation, - rotation);  // Turn left side forwards, right side backwards
+				robotDrive.tankDrive( rotation, - rotation );  // Turn left side forwards, right side backwards
 			
 			// terminate if robot stops rotating over the last 1 second (robot is probably stuck)
 			// time substraction is to ensure this isn't first time through loop because then robot hasn't had enough time to begin rotating so isRotating() will be false
