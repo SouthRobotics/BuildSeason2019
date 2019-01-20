@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import org.usfirst.frc.team6969.robot.subsystems.*;
 import org.usfirst.frc.team6969.robot.RobotMap;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -123,6 +124,33 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+
+		// code taken from navx website to detect if robot has crashed by looking for a "jerk"
+		// https://pdocs.kauailabs.com/navx-mxp/examples/collision-detection/
+		
+		double last_world_linear_accel_x = 0;
+  		double last_world_linear_accel_y = 0;
+		boolean collisionDetected = false;
+		final double kCollisionThreshold_DeltaG = 1.5f;
+          
+        double curr_world_linear_accel_x = RobotMap.navx.getWorldLinearAccelX();
+        double currentJerkX = curr_world_linear_accel_x - last_world_linear_accel_x;
+        last_world_linear_accel_x = curr_world_linear_accel_x;
+        double curr_world_linear_accel_y = RobotMap.navx.getWorldLinearAccelY();
+        double currentJerkY = curr_world_linear_accel_y - last_world_linear_accel_y;
+        last_world_linear_accel_y = curr_world_linear_accel_y;
+          
+        if ( ( Math.abs(currentJerkX) > kCollisionThreshold_DeltaG ) ||
+             ( Math.abs(currentJerkY) > kCollisionThreshold_DeltaG) ) {
+            collisionDetected = true;
+		}
+		
+		if ( collisionDetected )
+			DriverStation.reportError("COLLISION DETECTED", false);
+
+		// -----------------------------------------------------------------------
+
+		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 	}
 
 	/**
