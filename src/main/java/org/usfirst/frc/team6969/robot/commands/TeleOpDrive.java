@@ -15,7 +15,7 @@ public class TeleOpDrive extends Command {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.driveTrain);
 		
-    	this.initialize(); // after the TeleopDrive object is declared
+    	this.initialize();
 	}
 
 	// Called just before this Command runs the first time

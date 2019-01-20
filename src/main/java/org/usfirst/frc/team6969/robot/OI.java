@@ -19,107 +19,96 @@ public class OI {
 
 	//Below are examples from FIRST:
 	
-	//// CREATING BUTTONS
-	// One type of button is a joystick button which is any button on a
-	//// joystick.
-	// You create one by telling it which joystick it's on and which button
-	// number it is.
-	// Joystick stick = new Joystick(port);
-	// Button button = new JoystickButton(stick, buttonNumber);
+	/* CREATING BUTTONS
+	One type of button is a joystick button which is any button on a joystick.
+	You create one by telling it which joystick it's on and which button number it is.
+	Joystick stick = new Joystick(port);
+	Button button = new JoystickButton(stick, buttonNumber);
 
-	// There are a few additional built in buttons you can use. Additionally,
-	// by subclassing Button you can create custom triggers and bind those to
-	// commands the same as any other Button.
+	There are a few additional built in buttons you can use. Additionally,
+	by subclassing Button you can create custom triggers and bind those to
+	commands the same as any other Button.
 
-	//// TRIGGERING COMMANDS WITH BUTTONS
-	// Once you have a button, it's trivial to bind it to a button in one of
-	// three ways:
+	// TRIGGERING COMMANDS WITH BUTTONS
+	Once you have a button, it's trivial to bind it to a button in one of three ways:
+	  Start the command when the button is pressed and let it run the command
+	  until it is finished as determined by it's isFinished method.
+	  button.whenPressed(new ExampleCommand());
 
-	// Start the command when the button is pressed and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenPressed(new ExampleCommand());
+	  Run the command while the button is being held down and interrupt it once
+	  the button is released.
+	  button.whileHeld(new ExampleCommand());
 
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
-
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
+	  Start the command when the button is released and let it run the command
+	  until it is finished as determined by it's isFinished method.
+	  button.whenReleased(new ExampleCommand());
 	
 	
 	
 	//XBOX 360 controller mappings (we got these from DriverStation)
-	/*
-	 * Buttons: (gives pressed or not pressed)
-	 * 1: X
-	 * 2: A
-	 * 3: B
-	 * 4: Y
-	 * 5: Left Bumper
-	 * 6: Right Bumper
-	 * 7: Back Left Trigger
-	 * 8: Back Right Trigger
-	 * 9: Back
-	 * 10: Start
-	 * 
-	 * Axes: (gives degrees or amount pressed)
-	 * 1. 
-	 * 
-	 */
 	
+	 Buttons: (gives pressed or not pressed)
+	  1: X
+	  2: A
+	  3: B
+	  4: Y
+	  5: Left Bumper
+	  6: Right Bumper
+	  7: Back Left Trigger
+	  8: Back Right Trigger
+	  9: Back
+	  10: Start
+	  
+	  Axes: (gives degrees or amount pressed)
+	  1. 
+	  	 
 	//XBOX 1 controller mappings (we got these from DriverStation)
-		/*
-		 * Buttons: (gives pressed or not pressed)
-		 * 1: A
-		 * 2: B
-		 * 3: X
-		 * 4: Y
-		 * 5: Left Bumper
-		 * 6: Right Bumper
-		 * 7: View Button
-		 * 8: Menu Button
-		 * 9: Left Joystick
-		 * 10: Right Joystick
-		 * 
-		 * Axes: (gives degrees or amount pressed)
-		 * 0. Left Joystick X Axis
-		 * 1. Left Joystick Y Axis 
-		 * 2. Back Left Trigger
-		 * 3. Back Right Trigger
-		 * 4. Right Joystick X Axis
-		 * 5. Right Joystick Y Axis
-		 * 
-		 */
-	
+		 Buttons: (gives pressed or not pressed)
+		  1: A
+		  2: B
+		  3: X
+		  4: Y
+		  5: Left Bumper
+		  6: Right Bumper
+		  7: View Button
+		  8: Menu Button
+		  9: Left Joystick
+		  10: Right Joystick
+		  
+		  Axes: (gives degrees or amount pressed)
+		  0. Left Joystick X Axis
+		  1. Left Joystick Y Axis 
+		  2. Back Left Trigger
+		  3. Back Right Trigger
+		  4. Right Joystick X Axis
+		  5. Right Joystick Y Axis
+		  		 	
 	//PS4 controller mappings (we got these from DriverStation)
-		/*
-		 * Buttons:	(gives pressed or not pressed)
-		 * 1: Square
-		 * 2: X
-		 * 3: Circle
-		 * 4: Triangle
-		 * 5: Left Bumper
-		 * 6: Right Bumper
-		 * 7: Back Left Trigger
-		 * 8: Back Right Trigger
-		 * 9: Share
-		 * 10: Options
-		 * 11: Power
-		 * 12: Touchpad
-		 * 
-		 * Axes:	(gives degrees or amount pressed)
-		 * 0. Left Joystick X Axis
-		 * 1. Left Joystick Y Axis
-		 * 2. Right Joystick X Axis
-		 * 3. Back Left Trigger
-		 * 4. Back Right Trigger
-		 * 5. Right Joystick Y Axis
-		 * 
-		 */
-	
-	//For ALL XBOX/PS4 controllers: dpad is a number (called POV) between 0 and 360, inclusive. Get number with controller.getPOV()
-	
+		 Buttons:	(gives pressed or not pressed)
+		  1: Square
+		  2: X
+		  3: Circle
+		  4: Triangle
+		  5: Left Bumper
+		  6: Right Bumper
+		  7: Back Left Trigger
+		  8: Back Right Trigger
+		  9: Share
+		  10: Options
+		  11: Power
+		  12: Touchpad
+		  
+		 Axes:	(gives degrees or amount pressed)
+		  0. Left Joystick X Axis
+		  1. Left Joystick Y Axis
+		  2. Right Joystick X Axis
+		  3. Back Left Trigger
+		  4. Back Right Trigger
+		  5. Right Joystick Y Axis
+		
+		  
+		//For ALL XBOX/PS4 controllers: dpad is a number (called POV) between 0 and 360, inclusive. Get number with controller.getPOV()
+	*/	
 	
 	private XboxController controller = new XboxController(1); // Must be USB port 1 in DriverStation.
 

@@ -52,17 +52,17 @@ public class RobotMap {
 	public static double driveWheelCircumferance = driveWheelRadius * 2 * Math.PI; // 18.84956inches
 	public static double wheelRotation360degree = 6.97814; //amount of wheel rotations the robot will make 360* turn in when both sides are driving opposite ways 
 	
-	//Talons that control drivetrain
-    public static SpeedController driveTrainBackRight;	//must declare as type SpeedController
+	//Talons that control drivetrain ( must declare talons as type SpeedController )
+    public static SpeedController driveTrainBackRight;
     public static SpeedController driveTrainFrontRight;
     public static SpeedController driveTrainBackLeft;
-	public static SpeedController  driveTrainFrontLeft;
+	public static SpeedController driveTrainFrontLeft;
 	
 	/* Test Robot
 	public static Spark driveTrainBackRight;
     public static Spark driveTrainFrontRight;
     public static Spark driveTrainBackLeft;
-    public static Spark  driveTrainFrontLeft;
+    public static Spark driveTrainFrontLeft;
 	*/
     
     //Spark motorcontrollers that control subsystems
@@ -72,20 +72,27 @@ public class RobotMap {
     //Limit switches
     public static DigitalInput magLimit;
     /*
-     * Example code to use limit switch:
-     * if (limitSwitchName.get())
-     * 	motor.setSpeed(0);
+     Example code to use limit switch:
+     if (limitSwitchName.get())
+     	motor.setSpeed(0);
      */
     
     //Other sensors
 	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
-	public static AHRS navx;
+	public static AHRS navx;	// https://pdocs.kauailabs.com/navx-mxp/
+
     /*
-     * Example code to use gyro:
-     * gyro.calibrate() right when robot turns on (calibrate needs to work while robot is stationary)
-     * in auto/teleop init functions, first line is gyro.reset(); This sets the current orientation of the robot as 0 degrees.
-     * gyro.getAngle(); gets total degrees (continuous number that can exceed 360) change in robot orientation from last reset() call
-     * to drive straight: https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599713-gyros-measuring-rotation-and-controlling-robot-driving-direction
+     * Example code to use Analog gyro:
+      gyro.calibrate() right when robot turns on (calibrate needs to work while robot is stationary)
+      in auto/teleop init functions, first line is gyro.reset(); This sets the current orientation of the robot as 0 degrees.
+      gyro.getAngle(); gets total degrees (continuous number that can exceed 360) change in robot orientation from last reset() call
+	  to drive straight: https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599713-gyros-measuring-rotation-and-controlling-robot-driving-direction
+	  
+	  Navx:
+	  https://www.kauailabs.com/public_files/navx-mxp/apidocs/java/overview-summary.html
+	  ex:
+	  navx.zeroYaw();
+	  navx.getYaw();
      */
     
     //Class for KOP basic drivetrain
@@ -93,9 +100,9 @@ public class RobotMap {
 	
 	
 	public static void init() {
+
 		//Talon Documentation: https://www.ctr-electronics.com/downloads/api/java/html/index.html?com/ctre/phoenix/motorcontrol/can/WPI_TalonSRX.html
-		
-		
+
 		/*
 		Current PDP port numbers for Talons:
 		Talon 12 - Back Right
@@ -109,6 +116,7 @@ public class RobotMap {
 		Spark 3 - Back Left
 		Spark 2 - Front Left
 		*/
+
 		driveTrainBackRight = new WPI_TalonSRX(12); 
 		driveTrainFrontRight =  new WPI_TalonSRX(13);
 		driveTrainBackLeft = new WPI_TalonSRX(15); 
@@ -125,14 +133,14 @@ public class RobotMap {
 		//PWM port numbers for subsystems.
 		
 		/*
-		 * LiveWindow.add() adds a device to the smartdashboard (in DriverStation go to third tab on left, and change dashboard
-		 * to smartdashboard) so that you can see more data about that device
-		 */
+		To add something to SmartDashboard:
+		SmartDashboard.putNumber("key", "value")
+		*/
 
 	    //PWM ports for sensors
 	    magLimit = new  DigitalInput(0);
 	    
-	    //Analog channels for sensors
+	    //Other ports for sensors
 		gyro = new AnalogGyro(1);
 		navx = new AHRS(SPI.Port.kMXP);
 	    
@@ -143,8 +151,8 @@ public class RobotMap {
 	    drive = new DifferentialDrive(m_left, m_right);
 	    
 	    /*
-	     * when true, safetyenabled turns off motors if their output isn't updated for a certain amount of time
-	     * setExpiration() sets the time for safetyenabled
+	     when true, safetyenabled turns off motors if their output isn't updated for a certain amount of time
+	     setExpiration() sets the time for safetyenabled
 	     */
 	}
 }

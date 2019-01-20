@@ -53,30 +53,30 @@ public class DriveTrain extends Subsystem {
     
     public void takeJoystickInputs(OI oi) {
 
-    	if(robotDrive == null ) // prevents robotDrive from being null
-    	{
+    	if ( robotDrive == null ) {
     		this.initDefaultCommand();
-    	}
+		}
+		
     	//Speed Controls
-    	if(oi.leftBumper.get())
+    	if ( oi.leftBumper.get() )
     			goHalfSpeed = true;
-    	if(!oi.leftBumper.get())
+    	if ( !oi.leftBumper.get() )
     			goHalfSpeed = false;
-    	if(oi.rightBumper.get())
+    	if ( oi.rightBumper.get() )
     			goFullSpeed = true;    		
-    	if(!oi.rightBumper.get())
+    	if ( !oi.rightBumper.get() )
     			goFullSpeed = false;
-    	
-    	
+
     	//Sets motor speeds
-    	if(!goHalfSpeed && !goFullSpeed) { //going 0.75 speed (NORMAL)
-	    	robotDrive.tankDrive(oi.getController().getRawAxis(leftYAxis) * -1 * 0.75, oi.getController().getRawAxis(rightYAxis) * -1 *  0.75);
+    	if ( !goHalfSpeed && !goFullSpeed ) {
+			// 75% speed
+	    	robotDrive.tankDrive( oi.getController().getRawAxis(leftYAxis) * -1 * 0.75, oi.getController().getRawAxis(rightYAxis) * -1 *  0.75 );
     	}
-    	if(goHalfSpeed) {
-    		robotDrive.tankDrive(oi.getController().getRawAxis(leftYAxis) * -1 * 0.5, oi.getController().getRawAxis(rightYAxis) * -1 * 0.5);
+    	if ( goHalfSpeed ) {
+    		robotDrive.tankDrive( oi.getController().getRawAxis(leftYAxis) * -1 * 0.5, oi.getController().getRawAxis(rightYAxis) * -1 * 0.5 );
     	}
-    	if(goFullSpeed) {
-    		robotDrive.tankDrive(oi.getController().getRawAxis(leftYAxis) * -1 , oi.getController().getRawAxis(rightYAxis) * -1);
+    	if ( goFullSpeed ) {
+    		robotDrive.tankDrive( oi.getController().getRawAxis(leftYAxis) * -1 , oi.getController().getRawAxis(rightYAxis) * -1 );
     	}
     }
     
@@ -94,7 +94,7 @@ public class DriveTrain extends Subsystem {
 	Pre: targetAngle is a double between -180 and 180
 	Post: Robot turns chassis to proper angle
 	*/
-	public void rotateChassisToAngle(double targetAngle){
+	public void rotateChassisToAngle(double targetAngle) {
 
         // For angles below 0, rotate to the left. For angles above 0, rotate right.
         if (targetAngle < 0) 

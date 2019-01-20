@@ -52,7 +52,6 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		RobotMap.init();
 		driveTrain = new DriveTrain();
-//		testMovement = new TestMovement();
 		m_oi = new OI();
 		pdp = new PowerDistributionPanel(30);
 		ds = DriverStation.getInstance();
@@ -88,14 +87,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		DriverStation.Alliance color = ds.getAlliance();
-		int station = ds.getLocation();
-		
-		//choose auto command based on location/team
-		
-		//testing this, not sure if it will work
-		//TODO check if this works. Should execute a new instance of TestMovementCommans.java
-		//autonomousCommand = new TestMovementCommand(); //new auto(color, station)
+
+		autonomousCommand = null;
 
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
