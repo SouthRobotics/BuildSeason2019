@@ -15,20 +15,39 @@ import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import com.kauailabs.navx.frc.AHRS;
 
 public class DriveTrain extends Subsystem {
+
 	private static DifferentialDrive robotDrive;
 	private static boolean goHalfSpeed;
 	private static boolean goFullSpeed;
 	private static int leftYAxis;
 	private static int rightYAxis;
+	private static double error;
+	private static double threshold;
+	private static double kP;
+	private static double rotation;
+	private static long startTime;
+	public static AHRS navx;
+	public static Boolean rotateLeft;
 	
     public void initDefaultCommand() {
     	robotDrive =  RobotMap.drive;
         goHalfSpeed = false;
         goFullSpeed = false;
         leftYAxis = Robot.m_oi.leftYAxis;
-        rightYAxis = Robot.m_oi.rightYAxis;
+		rightYAxis = Robot.m_oi.rightYAxis;
+		robotDrive =  RobotMap.drive;
+    	navx = RobotMap.navx;
+        goHalfSpeed = false;
+		goFullSpeed = false;
+		rotateLeft = false;
+		error = 0.0;
+		threshold = 0.5;
+		kP = 0.1;
+		rotation = 0.0;
+		startTime = 0;
         setDefaultCommand(new TeleOpDrive());
     }
     
