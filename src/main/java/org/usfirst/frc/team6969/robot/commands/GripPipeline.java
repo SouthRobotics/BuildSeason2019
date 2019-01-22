@@ -39,6 +39,7 @@ public class GripPipeline extends Command{
 	private Mat cvErodeOutput = new Mat();
 	private Mat normalize1Output = new Mat();
 	private MatOfKeyPoint findBlobsOutput = new MatOfKeyPoint();
+	private boolean finished = false;
 	VideoCapture cap = new VideoCapture();
 
 	static {
@@ -62,13 +63,14 @@ public class GripPipeline extends Command{
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		System.out.println(process()[0].pt.toString());
+		process();
+		finished = true;
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return finished;
 	}
 
 	// Called once after isFinished returns true
@@ -155,7 +157,7 @@ public class GripPipeline extends Command{
 		boolean findBlobsDarkBlobs = true;
 		findBlobs(findBlobsInput, findBlobsMinArea, findBlobsCircularity, findBlobsDarkBlobs, findBlobsOutput);
 		KeyPoint[] temp = findBlobsOutput.toArray();
-		System.out.println(temp[0].pt.toString());
+		System.out.println(temp[0].pt.x + ", " + temp[0].pt.y);
 		System.out.println(temp.toString());
 		return temp;
 	}

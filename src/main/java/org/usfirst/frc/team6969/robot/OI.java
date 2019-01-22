@@ -10,6 +10,7 @@ package org.usfirst.frc.team6969.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.usfirst.frc.team6969.robot.commands.GripPipeline;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -140,7 +141,9 @@ public class OI {
 	public int leftYAxis = 1;
 	public int rightYAxis = 5;
     
-    public OI() {}
+    public OI() {
+		xButton.whenPressed(new GripPipeline());
+	}
     
     public XboxController getController() {
         return controller;
