@@ -27,18 +27,16 @@ public class DriveTrain extends Subsystem {
 	private static int leftYAxis;
 	private static int rightYAxis;
 //	private static TestMovementCommand test;//cheese solution
-	public static AnalogGyro gyro;
+
 	//public static ADXL345_I2C accelerometer; 
 	public static GripPipeline cargoCoord;
 	
     public void initDefaultCommand() {
     	robotDrive =  RobotMap.drive;
-    	gyro = RobotMap.gyro;
     	//accelerometer = RobotMap.accelerometer;
         goHalfSpeed = false;
         goFullSpeed = false;
-        leftYAxis = Robot.m_oi.leftYAxis;
-        rightYAxis = Robot.m_oi.rightYAxis;
+
 //        test = new TestMovementCommand();
 //        test.start();//cheese solution
 		setDefaultCommand(new GripPipeline());
