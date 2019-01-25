@@ -57,6 +57,8 @@ public class RobotMap {
     public static SpeedController driveTrainFrontRight;
     public static SpeedController driveTrainBackLeft;
 	public static SpeedController driveTrainFrontLeft;
+	public static SpeedController clawdriveLeft;
+	public static SpeedController clawdriveRight;
 	
 	/* Test Robot
 	public static Spark driveTrainBackRight;
@@ -97,6 +99,7 @@ public class RobotMap {
     
     //Class for KOP basic drivetrain
 	public static DifferentialDrive drive = null;
+	public static DifferentialDrive clawdrive = null;
 	
 	
 	public static void init() {
@@ -121,6 +124,8 @@ public class RobotMap {
 		driveTrainFrontRight =  new WPI_TalonSRX(13);
 		driveTrainBackLeft = new WPI_TalonSRX(15); 
 		driveTrainFrontLeft =  new WPI_TalonSRX(14);
+		clawdriveRight = new Spark(1); 
+		clawdriveLeft =  new Spark(0);
 
 		/*
 		Test Robot:
@@ -148,7 +153,8 @@ public class RobotMap {
 	    final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainFrontLeft, driveTrainBackLeft); //left drivetrain motors
 	    final SpeedControllerGroup m_right = new SpeedControllerGroup(driveTrainFrontRight, driveTrainBackRight); //Right drivetrain motors
 	    //creates TankDrive drivetrain	
-	    drive = new DifferentialDrive(m_left, m_right);
+		drive = new DifferentialDrive(m_left, m_right);
+		clawdrive = new DifferentialDrive(clawdriveLeft, clawdriveRight);
 	    
 	    /*
 	     when true, safetyenabled turns off motors if their output isn't updated for a certain amount of time

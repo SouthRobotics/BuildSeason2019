@@ -33,6 +33,7 @@ public class Robot extends TimedRobot {
 	//subsystems
 	//public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static DriveTrain driveTrain;
+	public static ClawDrive clawDrive;
 
 	
 	//controller map
