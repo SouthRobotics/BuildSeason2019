@@ -53,9 +53,12 @@ public class RobotMap {
 	public static double wheelRotation360degree = 6.97814; //amount of wheel rotations the robot will make 360* turn in when both sides are driving opposite ways 
 	
 	//Talons that control drivetrain ( must declare talons as type SpeedController )
-    public static SpeedController driveTrainBackRight;
-    public static SpeedController driveTrainFrontRight;
-    public static SpeedController driveTrainBackLeft;
+	public static SpeedController driveTrainBackRight;
+	public static SpeedController driveTrainMiddleRight;
+	public static SpeedController driveTrainFrontRight;
+	
+	public static SpeedController driveTrainBackLeft;
+	public static SpeedController driveTrainMiddleLeft;
 	public static SpeedController driveTrainFrontLeft;
 	
 	/* Test Robot
@@ -117,10 +120,13 @@ public class RobotMap {
 		Spark 2 - Front Left
 		*/
 
-		driveTrainBackRight = new WPI_TalonSRX(12); 
-		driveTrainFrontRight =  new WPI_TalonSRX(13);
-		driveTrainBackLeft = new WPI_TalonSRX(15); 
-		driveTrainFrontLeft =  new WPI_TalonSRX(14);
+		driveTrainBackRight = new WPI_TalonSRX(10);
+		driveTrainMiddleRight = new WPI_TalonSRX(11); 
+		driveTrainFrontRight =  new WPI_TalonSRX(12);
+
+		driveTrainBackLeft = new WPI_TalonSRX(13); 
+		driveTrainMiddleLeft = new WPI_TalonSRX(14);
+		driveTrainFrontLeft =  new WPI_TalonSRX(15);
 
 		/*
 		Test Robot:
@@ -145,8 +151,8 @@ public class RobotMap {
 		navx = new AHRS(SPI.Port.kMXP);
 	    
 	    //creates motor groups for TankDrive
-	    final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainFrontLeft, driveTrainBackLeft); //left drivetrain motors
-	    final SpeedControllerGroup m_right = new SpeedControllerGroup(driveTrainFrontRight, driveTrainBackRight); //Right drivetrain motors
+	    final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainFrontLeft, driveTrainMiddleLeft, driveTrainBackLeft); //left drivetrain motors
+	    final SpeedControllerGroup m_right = new SpeedControllerGroup(driveTrainFrontRight, driveTrainMiddleRight, driveTrainBackRight); //Right drivetrain motors
 	    //creates TankDrive drivetrain	
 	    drive = new DifferentialDrive(m_left, m_right);
 	    
