@@ -12,7 +12,7 @@ import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 import org.usfirst.frc.team6969.robot.commands.GripPipeline;
 import org.usfirst.frc.team6969.robot.commands.TeleOpDrive;
-import org.usfirst.frc.team6969.robot.commands.TestMovementCommand;
+
 
 //import org.usfirst.frc.team6969.robot.GyroItg3200;
 import edu.wpi.first.wpilibj.ADXL345_I2C;
@@ -39,8 +39,7 @@ public class DriveTrain extends Subsystem {
 
 //        test = new TestMovementCommand();
 //        test.start();//cheese solution
-		setDefaultCommand(new GripPipeline());
-		cargoCoord = new GripPipeline();
+
 		
     }
     

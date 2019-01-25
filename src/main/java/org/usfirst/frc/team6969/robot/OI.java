@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team6969.robot.commands.GripPipeline;
+import org.usfirst.frc.team6969.robot.commands.GripPipelineHATCH;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -122,7 +123,7 @@ public class OI {
 	//For ALL XBOX/PS4 controllers: dpad is a number (called POV) between 0 and 360, inclusive. Get number with controller.getPOV()
 	
 	
-	private XboxController controller = new XboxController(1); // Must be USB port 1 in DriverStation.
+	private XboxController controller = new XboxController(0); // Must be USB port 1 in DriverStation.
 
 	//PS4 controller running DS4 for windows
 	public Button squareButton = new JoystickButton(controller, 1),
@@ -142,7 +143,7 @@ public class OI {
 	public int rightYAxis = 5;
     
     public OI() {
-		xButton.whenPressed(new GripPipeline());
+		circleButton.whenPressed(new GripPipelineHATCH());
 	}
     
     public XboxController getController() {
