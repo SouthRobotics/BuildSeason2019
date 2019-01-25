@@ -1,5 +1,8 @@
 package org.usfirst.frc.team6969.robot.commands;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team6969.robot.Robot;
 
@@ -40,7 +43,6 @@ public class GripPipeline extends Command{
 	private Mat normalize1Output = new Mat();
 	private MatOfKeyPoint findBlobsOutput = new MatOfKeyPoint();
 	private boolean finished = false;
-	VideoCapture cap = new VideoCapture();
 
 	static {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -97,9 +99,11 @@ public class GripPipeline extends Command{
 	 * This is the primary method that runs the entire pipeline and updates the outputs.
 	 */
 	public KeyPoint[] process() {
-		cap.open(0);
 		Mat source0 = new Mat();
-		cap.read(source0);
+		// UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		// camera.setResolution(640, 480);
+		CvSink cvSink = CameraServer.getInstance().getVideo();
+		cvSink.grabFrame(source0);
 		// Step Blur0:
 		Mat blur0Input = source0;
 		BlurType blur0Type = BlurType.get("Median Filter");
