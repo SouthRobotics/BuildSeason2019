@@ -155,7 +155,9 @@ public class RobotMap {
 	    final SpeedControllerGroup m_right = new SpeedControllerGroup(driveTrainFrontRight, driveTrainMiddleRight, driveTrainBackRight); //Right drivetrain motors
 	    //creates TankDrive drivetrain	
 	    drive = new DifferentialDrive(m_left, m_right);
-	    
+		
+		drive.setExpiration(1);	//prevents Motor Output error with Pixy Cam code
+		
 	    /*
 	     when true, safetyenabled turns off motors if their output isn't updated for a certain amount of time
 	     setExpiration() sets the time for safetyenabled
