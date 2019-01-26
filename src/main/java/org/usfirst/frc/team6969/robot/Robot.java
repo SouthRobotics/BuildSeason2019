@@ -151,6 +151,13 @@ public class Robot extends TimedRobot {
 		// -----------------------------------------------------------------------
 
 		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
+
+		//--------------------Ultrasonic code--------------------------
+		double in = 0;
+		in = RobotMap.ultrason.getInches();
+		SmartDashboard.putNumber("Distance", in);
+
+		
 	}
 
 	/**
