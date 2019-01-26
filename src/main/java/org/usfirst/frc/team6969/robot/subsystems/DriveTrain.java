@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team6969.robot.subsystems;
 
+import org.usfirst.frc.team6969.robot.AnalogUltraSon;
 import org.usfirst.frc.team6969.robot.OI;
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
@@ -31,6 +32,7 @@ public class DriveTrain extends Subsystem {
 	private static long startTime;
 	public static AHRS navx;
 	public static Boolean rotateLeft;
+	public static AnalogUltraSon ultrason;
 	
     public void initDefaultCommand() {
     	robotDrive =  RobotMap.drive;
@@ -48,7 +50,8 @@ public class DriveTrain extends Subsystem {
 		kP = 0.1;
 		rotation = 0.0;
 		startTime = 0;
-        setDefaultCommand(new TeleOpDrive());
+		setDefaultCommand(new TeleOpDrive());
+		ultrason = RobotMap.ultrason;
     }
     
     public void takeJoystickInputs(OI oi) {
@@ -133,4 +136,15 @@ public class DriveTrain extends Subsystem {
         }
         rotation = 0;  //stop turning
 	}
+	/*
+	public void moveUltraSonic()
+	{
+		double distance = ultrason.getInches();
+		while (distance >= 6)
+		{
+			robotDrive.tankDrive(1,1);
+		}
+	}
+	*/
+
 }
