@@ -11,8 +11,6 @@ import org.usfirst.frc.team6969.robot.OI;
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 import org.usfirst.frc.team6969.robot.commands.TeleOpDrive;
-import edu.wpi.first.wpilibj.ADXL345_I2C;
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import com.kauailabs.navx.frc.AHRS;
@@ -58,13 +56,13 @@ public class DriveTrain extends Subsystem {
 		}
 		
     	//Speed Controls
-    	if ( oi.leftBumper.get() )
+    	if ( oi.LeftBumper.get() )
     			goHalfSpeed = true;
-    	if ( !oi.leftBumper.get() )
+    	if ( !oi.LeftBumper.get() )
     			goHalfSpeed = false;
-    	if ( oi.rightBumper.get() )
+    	if ( oi.RightBumper.get() )
     			goFullSpeed = true;    		
-    	if ( !oi.rightBumper.get() )
+    	if ( !oi.RightBumper.get() )
     			goFullSpeed = false;
 
     	//Sets motor speeds

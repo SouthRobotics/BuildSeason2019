@@ -8,10 +8,7 @@
 package org.usfirst.frc.team6969.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.frc.team6969.robot.OI;
-import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
-import org.usfirst.frc.team6969.robot.commands.ClawDriveCommand;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -23,27 +20,20 @@ public class ClawDrive extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  @Override
+  
   public void initDefaultCommand() {
    clawDrive =  RobotMap.clawdrive;
-   setDefaultCommand(new ClawDriveCommand());
+   
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-  public void takeJoystickInputs(OI oi) {
-
-    if ( clawDrive == null ) {
-      this.initDefaultCommand();
-    
-    }
-    if ( oi.circleButton.get() ){
-          clawDrive.tankDrive(1, 1);
-        }
-    if ( oi.triangleButton.get() ){
-          clawDrive.tankDrive(-1, -1);
-        }
-      }
+  public void shoot() {
+     clawDrive.tankDrive(1, 1);
+  }
+  public void intake() {
+      clawDrive.tankDrive(-1, -1);
+  }
   public void stop() {
-    clawDrive.stopMotor();
-}
+      clawDrive.stopMotor();
+  }
 }

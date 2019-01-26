@@ -10,12 +10,11 @@ package org.usfirst.frc.team6969.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team6969.robot.Robot;
 
-public class ClawDriveCommand extends Command {
-  public ClawDriveCommand() {
+public class ClawIntake extends Command {
+  public ClawIntake() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.clawDrive);
-    this.initialize();
   }
 
   // Called just before this Command runs the first time
@@ -26,7 +25,7 @@ public class ClawDriveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.clawDrive.takeJoystickInputs(Robot.m_oi);
+    Robot.clawDrive.intake();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -45,5 +44,6 @@ public class ClawDriveCommand extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

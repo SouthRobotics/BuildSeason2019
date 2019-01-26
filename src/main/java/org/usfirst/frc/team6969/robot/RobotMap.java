@@ -10,7 +10,7 @@ package org.usfirst.frc.team6969.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 //All imports below are the default imports that come with the FRC package
-import edu.wpi.first.wpilibj.ADXL345_I2C;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Spark;
@@ -57,8 +57,10 @@ public class RobotMap {
     public static SpeedController driveTrainFrontRight;
     public static SpeedController driveTrainBackLeft;
 	public static SpeedController driveTrainFrontLeft;
-	public static SpeedController clawdriveLeft;
-	public static SpeedController clawdriveRight;
+	public static SpeedController clawdriveLeft1;
+	public static SpeedController clawdriveRight1;
+	public static SpeedController clawdriveLeft2;
+	public static SpeedController clawdriveRight2;
 	
 	/* Test Robot
 	public static Spark driveTrainBackRight;
@@ -80,7 +82,7 @@ public class RobotMap {
      */
     
     //Other sensors
-	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
+ //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
 	public static AHRS navx;	// https://pdocs.kauailabs.com/navx-mxp/
 
     /*
@@ -124,8 +126,8 @@ public class RobotMap {
 		driveTrainFrontRight =  new WPI_TalonSRX(13);
 		driveTrainBackLeft = new WPI_TalonSRX(15); 
 		driveTrainFrontLeft =  new WPI_TalonSRX(14);
-		clawdriveRight = new Spark(1); 
-		clawdriveLeft =  new Spark(0);
+		clawdriveRight1 = new Spark(0); 
+		clawdriveLeft1 =  new Spark(2);
 
 		/*
 		Test Robot:
@@ -146,15 +148,15 @@ public class RobotMap {
 	    magLimit = new  DigitalInput(0);
 	    
 	    //Other ports for sensors
-		gyro = new AnalogGyro(1);
+
 		navx = new AHRS(SPI.Port.kMXP);
 	    
 	    //creates motor groups for TankDrive
 	    final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainFrontLeft, driveTrainBackLeft); //left drivetrain motors
 	    final SpeedControllerGroup m_right = new SpeedControllerGroup(driveTrainFrontRight, driveTrainBackRight); //Right drivetrain motors
-	    //creates TankDrive drivetrain	
+		//creates TankDrive drivetrain	
 		drive = new DifferentialDrive(m_left, m_right);
-		clawdrive = new DifferentialDrive(clawdriveLeft, clawdriveRight);
+		clawdrive = new DifferentialDrive(clawdriveLeft1, clawdriveRight2);
 	    
 	    /*
 	     when true, safetyenabled turns off motors if their output isn't updated for a certain amount of time

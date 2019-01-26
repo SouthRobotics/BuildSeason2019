@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import org.usfirst.frc.team6969.robot.subsystems.*;
 import org.usfirst.frc.team6969.robot.RobotMap;
+
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -117,6 +119,7 @@ public class Robot extends TimedRobot {
 		//for every subsystem just do subsystem.initDefaultCommand()
 		//subsystems
 		driveTrain.initDefaultCommand();
+		clawDrive.initDefaultCommand();
 	}
 
 	/**
