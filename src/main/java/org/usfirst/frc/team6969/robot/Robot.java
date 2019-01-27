@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
     public static DifferentialDrive robotDrive;
 	public static DriverStation ds;
 	public static PowerDistributionPanel pdp;
-	private SerialPort arduino;
+	public static SerialPort arduino;
 	private String arduinoString;
 	private ArrayList<Integer> pixyData;
 	private Integer pixyVal;
