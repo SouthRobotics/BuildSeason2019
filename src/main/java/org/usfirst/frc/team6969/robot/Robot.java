@@ -47,8 +47,8 @@ public class Robot extends TimedRobot {
 	private ArrayList<Integer> pixyData;
 	private Integer pixyVal;
 	private int pixyCounter;
-	public int pixyCenter;
-	public final int PIXYXCENTER = 158;	// pixy cam x-values range from 0 to 316 
+	public static int pixyCenter;
+	public static final int PIXYXCENTER = 158;	// pixy cam x-values range from 0 to 316 
 	
 	//auto command... will vary based on location/alliance
 	public Command autonomousCommand = null;
