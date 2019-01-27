@@ -43,13 +43,13 @@ public class TeleOpDrive extends Command {
     	//Sets motor speeds
     	if ( !goHalfSpeed && !goFullSpeed ) {
 			// 75% speed
-	    	Robot.robotDrive.tankDrive( Robot.m_oi.getController().getRawAxis(leftYAxis) * -1 * 0.75, oi.getController().getRawAxis(rightYAxis) * -1 *  0.75 );
+	    	Robot.robotDrive.tankDrive( Robot.m_oi.getController().getRawAxis(Robot.m_oi.leftYAxis) * -1 * 0.75, Robot.m_oi.getController().getRawAxis(Robot.m_oi.rightYAxis) * -1 *  0.75 );
     	}
     	if ( goHalfSpeed ) {
-    		Robot.robotDrive.tankDrive( Robot.m_oi.getController().getRawAxis(leftYAxis) * -1 * 0.5, oi.getController().getRawAxis(rightYAxis) * -1 * 0.5 );
+    		Robot.robotDrive.tankDrive( Robot.m_oi.getController().getRawAxis(Robot.m_oi.leftYAxis) * -1 * 0.5, Robot.m_oi.getController().getRawAxis(Robot.m_oi.rightYAxis) * -1 * 0.5 );
     	}
     	if ( goFullSpeed ) {
-    		Robot.robotDrive.tankDrive( Robot.m_oi.getController().getRawAxis(leftYAxis) * -1 , oi.getController().getRawAxis(rightYAxis) * -1 );
+    		Robot.robotDrive.tankDrive( Robot.m_oi.getController().getRawAxis(Robot.m_oi.leftYAxis) * -1 , Robot.m_oi.getController().getRawAxis(Robot.m_oi.rightYAxis) * -1 );
     	}
 	}
 
@@ -62,7 +62,6 @@ public class TeleOpDrive extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.driveTrain.stop();
 	}
 
 	// Called when another command which requires one or more of the same

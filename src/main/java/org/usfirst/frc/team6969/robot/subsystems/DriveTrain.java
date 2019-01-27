@@ -34,10 +34,5 @@ public class DriveTrain extends Subsystem {
         goHalfSpeed = false;
 		goFullSpeed = false;
         setDefaultCommand(new TeleOpDrive());
-    }
-    
-    public void stop() {
-    	robotDrive.stopMotor();
-	}
-	
+    }	
 }
