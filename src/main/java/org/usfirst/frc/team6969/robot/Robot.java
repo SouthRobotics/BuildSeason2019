@@ -9,14 +9,15 @@ package org.usfirst.frc.team6969.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import org.usfirst.frc.team6969.robot.subsystems.*;
 import org.usfirst.frc.team6969.robot.RobotMap;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import java.util.ArrayList;;
 
 
 /**
@@ -41,6 +42,13 @@ public class Robot extends TimedRobot {
     public static DifferentialDrive robotDrive;
 	public static DriverStation ds;
 	public static PowerDistributionPanel pdp;
+	private SerialPort arduino;
+	private String arduinoString;
+	private ArrayList<Integer> pixyData;
+	private Integer pixyVal;
+	private int pixyCounter;
+	public int pixyCenter;
+	public final int PIXYXCENTER = 158;	// pixy cam x-values range from 0 to 316 
 	
 	//auto command... will vary based on location/alliance
 	public Command autonomousCommand = null;
@@ -56,8 +64,13 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 		pdp = new PowerDistributionPanel(30);
 		ds = DriverStation.getInstance();
-		pdp.clearStickyFaults();	//clears pdp issue with yellow light
+		pdp.clearStickyFaults();	// clears pdp issue with yellow light
 		robotDrive =  RobotMap.drive;
+		arduino = new SerialPort(9600, SerialPort.Port.kUSB1);
+		arduinoString = "";
+		pixyData = new ArrayList<Integer>();
+		for (int i = 0; i < 3; i++)	// initialize pixyData
+			pixyData.add(new Integer(PIXYXCENTER));
 	}
 
 	/**
@@ -124,6 +137,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		getPixyData();
+		reportCollisionDetection();
+		displaySmartDashboardData();
 	}
 
 	/**
