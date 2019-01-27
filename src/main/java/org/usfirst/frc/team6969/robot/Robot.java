@@ -71,8 +71,9 @@ public class Robot extends TimedRobot {
 		arduino = new SerialPort(9600, SerialPort.Port.kUSB1);
 		arduinoString = "";
 		pixyData = new ArrayList<Integer>();
-		for (int i = 0; i < 3; i++)	// initialize pixyData
-			pixyData.add(new Integer(PIXYXCENTER));
+		for (int i = 0; i < 50; i++)	// initialize pixyData
+			pixyData.add(new Integer(-1));
+		pixyCenter = 158;
 	}
 
 	/**
@@ -141,6 +142,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		getPixyData();
+		System.out.println("Center: " + pixyCenter);
 		reportCollisionDetection();
 		displaySmartDashboardData();
 	}
@@ -165,7 +167,7 @@ public class Robot extends TimedRobot {
 
 			arduinoString = arduino.readString();
 
-			if ( pixyData.size() > 3 )	// only remember last 3 centers
+			if ( pixyData.size() > 50 )	// only remember last 3 centers
 				pixyData.remove(0);
 
 			try{	//arduino sometimes passes strings containing characters other than #s when detection not found
@@ -183,10 +185,10 @@ public class Robot extends TimedRobot {
 				System.out.println("Error parsing Pixy data.");
 			}
 
-			pixyCenter = pixyData.get(0);
+			pixyCenter = pixyData.get(49);
 
 			if ( pixyCounter > 8 )	//if lost sight of object stop turning
-				pixyCenter = PIXYXCENTER;
+				pixyCenter = -1;
 		}
 	}
 

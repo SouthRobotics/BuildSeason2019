@@ -8,7 +8,6 @@
 package org.usfirst.frc.team6969.robot.commands;
 
 import org.usfirst.frc.team6969.robot.Robot;
-import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.SerialPort;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -50,29 +49,31 @@ public class RotateToPixyTarget extends Command {
 
       if ( center > 0 ) { // center is set to -1 when target is lost for 8 straight data packets from arduino
 
-          error = Math.abs( PIXYXCENTER - center );
-          rotation = error * kP;
+        error = Math.abs( PIXYXCENTER - center );
+        rotation = error * kP;
 
-          if ( rotation > .55 )	// Don't need to turn extremely fast, so max at .55 for better accuracy
-            rotation = 0.55;
+        if ( rotation > .55 )	// Don't need to turn extremely fast, so max at .55 for better accuracy
+          rotation = 0.55;
     
-          // .45 is min amount of power to move motors. want to slow down as we near target to ensure we don't overshoot
-          if ( rotation < 0.45 || error < 40 )
-            rotation = 0.40;
+        // .45 is min amount of power to move motors. want to slow down as we near target to ensure we don't overshoot
+        if ( rotation < 0.45 || error < 50 )
+          rotation = 0.35;
 
-          if ( center > PIXYXCENTER )
-            Robot.robotDrive.tankDrive(rotation, -rotation);
-          else
-            Robot.robotDrive.tankDrive(-rotation, rotation);
-        }
-
+        if ( center > PIXYXCENTER )
+          Robot.robotDrive.tankDrive(rotation, -rotation);
+        else
+          Robot.robotDrive.tankDrive(-rotation, rotation);
       }
       else {  // target was lost
         Robot.pixyCenter = PIXYXCENTER;
         isFinished(); // ends command so we don't endlessly rotate
       }
-
     }
+    else {  // target was reached
+      Robot.pixyCenter = PIXYXCENTER;
+      isFinished(); // ends command so we don't endlessly rotate
+    }
+  }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
