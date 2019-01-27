@@ -27,6 +27,7 @@ public class RotateToAngle extends Command {
 
         targetAngle = angle;
         navx = RobotMap.navx;
+        navx.zeroYaw(); // set the direction we are facing right now as zero
 		rotateLeft = false;
 		error = 0.0;
 		threshold = 0.5;
@@ -53,7 +54,6 @@ public class RotateToAngle extends Command {
         else
             rotateLeft = false;
 
-        navx.zeroYaw(); // set the direction we are facing right now as zero
         error = targetAngle - navx.getYaw(); // how far we are from target angle
 
         if ( Math.abs(error) > threshold ) {

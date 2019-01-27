@@ -36,40 +36,6 @@ public class DriveTrain extends Subsystem {
         setDefaultCommand(new TeleOpDrive());
     }
     
-    public void takeJoystickInputs(OI oi) {
-
-    	if ( robotDrive == null ) {
-    		this.initDefaultCommand();
-		}
-		
-    	//Speed Controls
-    	if ( oi.leftBumper.get() )
-    			goHalfSpeed = true;
-    	if ( !oi.leftBumper.get() )
-    			goHalfSpeed = false;
-    	if ( oi.rightBumper.get() )
-    			goFullSpeed = true;    		
-    	if ( !oi.rightBumper.get() )
-    			goFullSpeed = false;
-
-    	//Sets motor speeds
-    	if ( !goHalfSpeed && !goFullSpeed ) {
-			// 75% speed
-	    	robotDrive.tankDrive( oi.getController().getRawAxis(leftYAxis) * -1 * 0.75, oi.getController().getRawAxis(rightYAxis) * -1 *  0.75 );
-    	}
-    	if ( goHalfSpeed ) {
-    		robotDrive.tankDrive( oi.getController().getRawAxis(leftYAxis) * -1 * 0.5, oi.getController().getRawAxis(rightYAxis) * -1 * 0.5 );
-    	}
-    	if ( goFullSpeed ) {
-    		robotDrive.tankDrive( oi.getController().getRawAxis(leftYAxis) * -1 , oi.getController().getRawAxis(rightYAxis) * -1 );
-    	}
-    }
-    
-    //Arcade drive rather than take drive
-    public void takeArcadeInputs(double speed, double zRotation) {
-    	robotDrive.arcadeDrive(speed, zRotation);
-    }
-    
     public void stop() {
     	robotDrive.stopMotor();
 	}
