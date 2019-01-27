@@ -124,7 +124,57 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+	}
 
+	/**
+	 * This function is called periodically during test mode.
+	 */
+	@Override
+	public void testPeriodic() {
+	}
+
+	/*
+	Communicates with arduino to receive x-coordinate of center of target and store in array
+	Pre: Arduino is connected to RoboRio via usb port 1
+	Post: x-coordinate of center of target is stored in pixyCenter
+	*/
+	private void getPixyData() {
+
+		arduino.write(new byte[] {0x12}, 1);	//RoboRio must initiate communication with arduino
+		
+		if ( arduino.getBytesReceived() > 0 ) {
+
+			arduinoString = arduino.readString();
+
+			if ( pixyData.size() > 3 )	// only remember last 3 centers
+				pixyData.remove(0);
+
+			try{	//arduino sometimes passes strings containing characters other than #s when detection not found
+				
+				pixyVal = new Integer(Integer.parseInt(arduinoString));
+
+				if ( pixyVal.intValue() >= 0 ) {	//-1 is default if no object detected			
+					pixyData.add(pixyVal);
+					pixyCounter = 0;
+				}
+				else
+					pixyCounter++;
+			}
+			catch(Exception e){
+				System.out.println("Error parsing Pixy data.");
+			}
+
+			pixyCenter = pixyData.get(0);
+
+			if ( pixyCounter > 8 )	//if lost sight of object stop turning
+				pixyCenter = PIXYXCENTER;
+		}
+	}
+
+	/*
+	Sends error message to Driver Station warning that a collision may have occured
+	*/
+	private void reportCollisionDetection() {
 		// code taken from navx website to detect if robot has crashed by looking for a "jerk"
 		// https://pdocs.kauailabs.com/navx-mxp/examples/collision-detection/
 		
@@ -148,16 +198,13 @@ public class Robot extends TimedRobot {
 		if ( collisionDetected )
 			DriverStation.reportError("COLLISION DETECTED", false);
 
-		// -----------------------------------------------------------------------
-
-		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 	}
 
-	/**
-	 * This function is called periodically during test mode.
-	 */
-	@Override
-	public void testPeriodic() {
+	/*
+	Place values to monitor in Smart Dashboard
+	*/
+	private void displaySmartDashboardData() {
+		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 	}
 }
 
