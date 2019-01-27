@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import org.usfirst.frc.team6969.robot.subsystems.*;
 import org.usfirst.frc.team6969.robot.RobotMap;
+import org.usfirst.frc.team6969.robot.commands.RotateToAngle;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import java.util.ArrayList;;
@@ -102,7 +104,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 
-		autonomousCommand = null;
+		autonomousCommand = new RotateToAngle(12.5);
 
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
@@ -128,7 +130,8 @@ public class Robot extends TimedRobot {
 		}
 		//for every subsystem just do subsystem.initDefaultCommand()
 		//subsystems
-		driveTrain.initDefaultCommand();
+		//driveTrain.initDefaultCommand();
+		
 	}
 
 	/**
