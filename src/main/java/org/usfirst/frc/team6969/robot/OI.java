@@ -7,6 +7,10 @@
 
 package org.usfirst.frc.team6969.robot;
 
+import org.usfirst.frc.team6969.robot.commands.ManualOverride;
+import org.usfirst.frc.team6969.robot.commands.RotateToAngle;
+import org.usfirst.frc.team6969.robot.commands.RotateToPixyTarget;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -112,24 +116,25 @@ public class OI {
 	
 	private XboxController controller = new XboxController(1); // Must be USB port 1 in DriverStation.
 
-	//PS4 controller running DS4 for windows
-	public Button squareButton = new JoystickButton(controller, 1),
-			xButton = new JoystickButton(controller, 2),
-			circleButton = new JoystickButton(controller, 3),
-			triangleButton = new JoystickButton(controller, 4),
+	public Button aButton = new JoystickButton(controller, 1),
+			bButton = new JoystickButton(controller, 2),
+			xButton = new JoystickButton(controller, 3),
+			yButton = new JoystickButton(controller, 4),
 			leftBumper = new JoystickButton(controller,5),
 			rightBumper = new JoystickButton(controller, 6),
-			backLeftTrigger = new JoystickButton(controller, 7),
-			backRightTribber = new JoystickButton(controller, 8),
-			shareButton = new JoystickButton(controller, 9),
-			optionsButton = new JoystickButton(controller, 10),
-			powerButton = new JoystickButton(controller, 11),
-			touchpadButton = new JoystickButton(controller, 12);
+			viewButton = new JoystickButton(controller, 7),
+			menuButton = new JoystickButton(controller, 8),
+			leftStick = new JoystickButton(controller, 9),	//push stick in not tilt
+			rightStick = new JoystickButton(controller, 10);
 	
 	public int leftYAxis = 1;
 	public int rightYAxis = 5;
     
-    public OI() {}
+    public OI() {
+		viewButton.whenPressed(new ManualOverride());
+		xButton.whenPressed(new RotateToPixyTarget(Robot.pixyCenter));
+		aButton.whenPressed(new RotateToAngle(90));
+	}
     
     public XboxController getController() {
         return controller;
