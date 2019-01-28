@@ -47,8 +47,6 @@ public class OI {
 	  until it is finished as determined by it's isFinished method.
 	  button.whenReleased(new ExampleCommand());
 	
-	
-	
 	//XBOX 360 controller mappings (we got these from DriverStation)
 	
 	 Buttons: (gives pressed or not pressed)
@@ -86,33 +84,7 @@ public class OI {
 		  3. Back Right Trigger
 		  4. Right Joystick X Axis
 		  5. Right Joystick Y Axis
-		  		 	
-	//PS4 controller mappings (we got these from DriverStation)
-		 Buttons:	(gives pressed or not pressed)
-		  1: Square
-		  2: X
-		  3: Circle
-		  4: Triangle
-		  5: Left Bumper
-		  6: Right Bumper
-		  7: Back Left Trigger
-		  8: Back Right Trigger
-		  9: Share
-		  10: Options
-		  11: Power
-		  12: Touchpad
-		  
-		 Axes:	(gives degrees or amount pressed)
-		  0. Left Joystick X Axis
-		  1. Left Joystick Y Axis
-		  2. Right Joystick X Axis
-		  3. Back Left Trigger
-		  4. Back Right Trigger
-		  5. Right Joystick Y Axis
-		
-		  
-		//For ALL XBOX/PS4 controllers: dpad is a number (called POV) between 0 and 360, inclusive. Get number with controller.getPOV()
-	*/	
+		*/	
 	
 	private XboxController controller = new XboxController(1); // Must be USB port 1 in DriverStation.
 
