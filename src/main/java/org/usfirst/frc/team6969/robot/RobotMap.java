@@ -7,23 +7,13 @@
 
 package org.usfirst.frc.team6969.robot;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-//All imports below are the default imports that come with the FRC package
-import edu.wpi.first.wpilibj.ADXL345_I2C;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Accelerometer;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.SPI;
-import com.kauailabs.navx.frc.AHRS;
-import com.kauailabs.navx.frc.AHRS.SerialDataType;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -31,9 +21,10 @@ import com.kauailabs.navx.frc.AHRS.SerialDataType;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-//hhjhjh
+// hhjhjh
 public class RobotMap {
-	//RobotMap class connects hardware to software based on the port # the hardware is plugged into on the PDP.
+	// RobotMap class connects hardware to software based on the port # the hardware
+	// is plugged into on the PDP.
 
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
