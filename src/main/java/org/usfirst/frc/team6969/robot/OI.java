@@ -126,25 +126,23 @@ public class OI {
 	private XboxController controller = new XboxController(0); // Must be USB port 1 in DriverStation.
 
 	//PS4 controller running DS4 for windows
-	public Button squareButton = new JoystickButton(controller, 1),
-			xButton = new JoystickButton(controller, 2),
-			circleButton = new JoystickButton(controller, 3),
-			triangleButton = new JoystickButton(controller, 4),
-			leftBumper = new JoystickButton(controller,5),
-			rightBumper = new JoystickButton(controller, 6),
-			backLeftTrigger = new JoystickButton(controller, 7),
-			backRightTribber = new JoystickButton(controller, 8),
-			shareButton = new JoystickButton(controller, 9),
-			optionsButton = new JoystickButton(controller, 10),
-			powerButton = new JoystickButton(controller, 11),
-			touchpadButton = new JoystickButton(controller, 12);
+	public Button A = new JoystickButton(controller, 1),
+		B = new JoystickButton(controller, 2),
+		X = new JoystickButton(controller, 3),
+		Y = new JoystickButton(controller, 4),
+		LeftBumper = new JoystickButton(controller, 5),
+		RightBumper = new JoystickButton(controller, 6),
+		ViewButton = new JoystickButton(controller, 7),
+		MenuButton = new JoystickButton(controller, 8),
+		LeftJoystick = new JoystickButton(controller, 9),
+		RightJoystick = new JoystickButton(controller, 10);
 	
 	public int leftYAxis = 1;
 	public int rightYAxis = 5;
     
     public OI() {
-		circleButton.whenPressed(new GripPipelineHATCH());
-		triangleButton.whenPressed(new GripPipelineBall());
+		B.whenPressed(new GripPipelineHATCH());
+		A.whenPressed(new GripPipelineBall());
 	}
     
     public XboxController getController() {

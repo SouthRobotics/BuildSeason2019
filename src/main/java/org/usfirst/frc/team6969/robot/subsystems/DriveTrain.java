@@ -49,13 +49,13 @@ public class DriveTrain extends Subsystem {
     		this.initDefaultCommand();
     	}
     	//Speed Controls
-    	if(oi.leftBumper.get())
+    	if(oi.LeftBumper.get())
     			goHalfSpeed = true;
-    	if(!oi.leftBumper.get())
+    	if(!oi.LeftBumper.get())
     			goHalfSpeed = false;
-    	if(oi.rightBumper.get())
+    	if(oi.RightBumper.get())
     			goFullSpeed = true;    		
-    	if(!oi.rightBumper.get())
+    	if(!oi.RightBumper.get())
     			goFullSpeed = false;
     	
     	
