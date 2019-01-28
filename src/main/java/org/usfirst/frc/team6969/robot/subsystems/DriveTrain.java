@@ -24,24 +24,5 @@ public class DriveTrain extends Subsystem {
         leftYAxis = Robot.m_oi.leftYAxis;
 		rightYAxis = Robot.m_oi.rightYAxis;
         setDefaultCommand(new TeleOpDrive());
-	}	
-
-	public boolean halfSpeed()
-	{
-		return Robot.m_oi.leftBumper.get();
-	}
-	public boolean fullSpeed()
-	{
-		return Robot.m_oi.rightBumper.get();
-	}
-	public void move()
-	{
-		if(halfSpeed())
-			robotDrive.tankDrive(leftYAxis*.5, rightYAxis*.5);
-		else if(fullSpeed())
-			robotDrive.tankDrive(leftYAxis,rightYAxis);
-		else
-			robotDrive.tankDrive(leftYAxis*.75, rightYAxis*.75);
-	}
-	
+    }	
 }
