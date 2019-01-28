@@ -7,6 +7,9 @@
 
 package org.usfirst.frc.team6969.robot;
 
+import org.usfirst.frc.team6969.robot.commands.ClawIntake;
+import org.usfirst.frc.team6969.robot.commands.ClawShoot;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -127,7 +130,10 @@ public class OI {
 	public int leftYAxis = 1;
 	public int rightYAxis = 5;
     
-    public OI() {}
+    public OI() {
+		A.whileHeld(new ClawIntake());
+		B.whileHeld(new ClawShoot());
+	}
     
     public XboxController getController() {
         return controller;

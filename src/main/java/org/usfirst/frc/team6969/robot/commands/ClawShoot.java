@@ -9,14 +9,13 @@ package org.usfirst.frc.team6969.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team6969.robot.Robot;
-import org.usfirst.frc.team6969.robot.subsystems.ClawDrive;
 
 
 public class ClawShoot extends Command {
   public ClawShoot() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.clawDrive);
+    //requires(Robot.claw);
   }
 
   
@@ -28,7 +27,7 @@ public class ClawShoot extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.clawDrive.shoot();
+    Robot.claw.out();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -40,13 +39,11 @@ public class ClawShoot extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.clawDrive.stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }

@@ -25,6 +25,8 @@ import edu.wpi.first.wpilibj.SPI;
 import com.kauailabs.navx.frc.AHRS;
 import com.kauailabs.navx.frc.AHRS.SerialDataType;
 
+import org.usfirst.frc.team6969.robot.subsystems.Claw;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -57,8 +59,8 @@ public class RobotMap {
     public static SpeedController driveTrainFrontRight;
     public static SpeedController driveTrainBackLeft;
 	public static SpeedController driveTrainFrontLeft;
-	public static SpeedController clawdriveLeft;
-	public static SpeedController clawdriveRight;
+	public static SpeedController clawLeft;
+	public static SpeedController clawRight;
 	
 	/* Test Robot
 	public static Spark driveTrainBackRight;
@@ -99,7 +101,6 @@ public class RobotMap {
     
     //Class for KOP basic drivetrain
 	public static DifferentialDrive drive = null;
-	public static DifferentialDrive clawdrive = null;
 	
 	
 	public static void init() {
@@ -120,20 +121,18 @@ public class RobotMap {
 		Spark 2 - Front Left
 		*/
 
-		driveTrainBackRight = new WPI_TalonSRX(12); 
+		/*driveTrainBackRight = new WPI_TalonSRX(12); 
 		driveTrainFrontRight =  new WPI_TalonSRX(13);
 		driveTrainBackLeft = new WPI_TalonSRX(15); 
-		driveTrainFrontLeft =  new WPI_TalonSRX(14);
-		clawdriveRight = new Spark(0); 
-		clawdriveLeft =  new Spark(2);
-
-		/*
-		Test Robot:
+		driveTrainFrontLeft =  new WPI_TalonSRX(14);*/
+		clawLeft = new WPI_TalonSRX(0); 
+		clawRight =  new WPI_TalonSRX(1);
+	
 		driveTrainBackRight = new Spark(1); 
 		driveTrainFrontRight =  new Spark(0);
 		driveTrainBackLeft = new Spark(3); 
 		driveTrainFrontLeft =  new Spark(2);
-		*/
+		
 		
 		//PWM port numbers for subsystems.
 		
@@ -154,7 +153,6 @@ public class RobotMap {
 	    final SpeedControllerGroup m_right = new SpeedControllerGroup(driveTrainFrontRight, driveTrainBackRight); //Right drivetrain motors
 		//creates TankDrive drivetrain	
 		drive = new DifferentialDrive(m_left, m_right);
-		clawdrive = new DifferentialDrive(clawdriveLeft, clawdriveRight);
 	    
 	    /*
 	     when true, safetyenabled turns off motors if their output isn't updated for a certain amount of time

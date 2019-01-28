@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
 	//subsystems
 	//public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static DriveTrain driveTrain;
-	public static ClawDrive clawDrive;
+	public static Claw claw;
 
 	
 	//controller map
@@ -61,6 +61,7 @@ public class Robot extends TimedRobot {
 		ds = DriverStation.getInstance();
 		pdp.clearStickyFaults();	//clears pdp issue with yellow light
 		robotDrive =  RobotMap.drive;
+		claw = new Claw();
 	}
 
 	/**
@@ -119,7 +120,7 @@ public class Robot extends TimedRobot {
 		//for every subsystem just do subsystem.initDefaultCommand()
 		//subsystems
 		driveTrain.initDefaultCommand();
-		clawDrive.initDefaultCommand();
+		claw.initDefaultCommand();
 	}
 
 	/**
