@@ -9,7 +9,6 @@ package org.usfirst.frc.team6969.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-
 import org.usfirst.frc.team6969.robot.Robot;
 
 /**
