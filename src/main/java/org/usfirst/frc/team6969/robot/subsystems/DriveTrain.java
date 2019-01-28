@@ -10,7 +10,6 @@ package org.usfirst.frc.team6969.robot.subsystems;
 import org.usfirst.frc.team6969.robot.OI;
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
-import org.usfirst.frc.team6969.robot.commands.GripPipeline;
 import org.usfirst.frc.team6969.robot.commands.TeleOpDrive;
 
 
@@ -29,7 +28,7 @@ public class DriveTrain extends Subsystem {
 //	private static TestMovementCommand test;//cheese solution
 
 	//public static ADXL345_I2C accelerometer; 
-	public static GripPipeline cargoCoord;
+
 	
     public void initDefaultCommand() {
     	robotDrive =  RobotMap.drive;

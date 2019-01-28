@@ -1,7 +1,11 @@
 package org.usfirst.frc.team6969.robot.commands;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team6969.robot.Robot;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,17 +15,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.HashMap;
 
-import edu.wpi.first.wpilibj.vision.VisionPipeline;
-
 import org.opencv.core.*;
-import org.opencv.highgui.*;
 import org.opencv.core.Core.*;
 import org.opencv.features2d.FeatureDetector;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.*;
 import org.opencv.objdetect.*;
 import org.opencv.videoio.VideoCapture;
+import org.opencv.highgui.*;
 
+/**
 /**
 * GripPipelineHATCH class.
 *
@@ -87,9 +90,11 @@ public class GripPipelineHATCH extends Command {
 	 * This is the primary method that runs the entire pipeline and updates the outputs.
 	 */
 	public KeyPoint[] process() {
-		cap.open(2);
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+        camera.setResolution(640, 480);
+        CvSink cvSink = CameraServer.getInstance().getVideo();
 		Mat source0 = new Mat();
-		cap.read(source0);
+		cvSink.grabFrame(source0);
 		HighGui.namedWindow("camfeed");
 		HighGui.imshow("camfeed", source0);
 		
