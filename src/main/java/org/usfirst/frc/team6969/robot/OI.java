@@ -10,6 +10,8 @@ package org.usfirst.frc.team6969.robot;
 import org.usfirst.frc.team6969.robot.commands.ManualOverride;
 import org.usfirst.frc.team6969.robot.commands.RotateToAngle;
 import org.usfirst.frc.team6969.robot.commands.RotateToPixyTarget;
+import org.usfirst.frc.team6969.robot.commands.Schedule;
+import org.usfirst.frc.team6969.robot.commands.moveBotFast;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -134,6 +136,8 @@ public class OI {
 		viewButton.whenPressed(new ManualOverride());
 		xButton.whenPressed(new RotateToPixyTarget(Robot.pixyCenter));
 		aButton.whenPressed(new RotateToAngle(90));
+		yButton.whenPressed(new Schedule());
+		bButton.whenPressed(new moveBotFast());
 	}
     
     public XboxController getController() {
