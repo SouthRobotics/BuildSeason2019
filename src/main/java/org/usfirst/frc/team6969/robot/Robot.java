@@ -10,11 +10,13 @@ package org.usfirst.frc.team6969.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import org.usfirst.frc.team6969.robot.subsystems.*;
 import org.usfirst.frc.team6969.robot.RobotMap;
+import org.usfirst.frc.team6969.robot.commands.MoveClawToHeight;
 import org.usfirst.frc.team6969.robot.commands.MoveDistance;
 import org.usfirst.frc.team6969.robot.commands.RotateToAngle;
 
@@ -105,7 +107,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
+		// autonomousCommand = new MoveClawToHeight(5, new Spark(0));
 		autonomousCommand = new MoveDistance(5);
 
 		if (autonomousCommand != null) {
