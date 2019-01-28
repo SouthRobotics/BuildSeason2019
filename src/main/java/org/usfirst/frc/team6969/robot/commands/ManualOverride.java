@@ -9,7 +9,6 @@ package org.usfirst.frc.team6969.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-
 import org.usfirst.frc.team6969.robot.Robot;
 
 /**
@@ -37,9 +36,7 @@ public class ManualOverride extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-        if (true)
-            return true;
-		return false;
+        return true;
 	}
 
 	// Called once after isFinished returns true

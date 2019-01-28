@@ -10,7 +10,6 @@ package org.usfirst.frc.team6969.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
-
 import com.kauailabs.navx.frc.AHRS;
 
 public class RotateToAngle extends Command {
