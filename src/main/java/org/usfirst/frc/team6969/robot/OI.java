@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team6969.robot;
 
+import org.usfirst.frc.team6969.robot.commands.ExampleSchedule;
 import org.usfirst.frc.team6969.robot.commands.ManualOverride;
 import org.usfirst.frc.team6969.robot.commands.RotateToAngle;
 import org.usfirst.frc.team6969.robot.commands.RotateToPixyTarget;
@@ -108,7 +109,7 @@ public class OI {
 		viewButton.whenPressed(new ManualOverride());
 		xButton.whenPressed(new RotateToPixyTarget(Robot.pixyCenter));
 		aButton.whenPressed(new RotateToAngle(90));
-		yButton.whenPressed(new Schedule());
+		yButton.whenPressed(new ExampleSchedule());
 		bButton.whenPressed(new moveBotFast());
 	}
     
