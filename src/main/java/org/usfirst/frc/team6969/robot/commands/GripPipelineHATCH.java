@@ -91,12 +91,10 @@ public class GripPipelineHATCH extends Command {
 	 */
 	public KeyPoint[] process() {
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-        camera.setResolution(640, 480);
         CvSink cvSink = CameraServer.getInstance().getVideo();
 		Mat source0 = new Mat();
+		
 		cvSink.grabFrame(source0);
-		HighGui.namedWindow("camfeed");
-		HighGui.imshow("camfeed", source0);
 		
 		// Step Blur0:
 		Mat blur0Input = source0;
@@ -111,20 +109,14 @@ public class GripPipelineHATCH extends Command {
 		double normalize0Beta = 200.0;
 		normalize(normalize0Input, normalize0Type, normalize0Alpha, normalize0Beta, normalize0Output);
 
-		// Step CV_resize0:
-		Mat cvResizeSrc = normalize0Output;
-		Size cvResizeDsize = new Size(0, 0);
-		double cvResizeFx = 1.0;
-		double cvResizeFy = 1.0;
-		int cvResizeInterpolation = Imgproc.INTER_LINEAR;
-		cvResize(cvResizeSrc, cvResizeDsize, cvResizeFx, cvResizeFy, cvResizeInterpolation, cvResizeOutput);
+		
 
 		// Step RGB_Threshold0:
-		Mat rgbThresholdInput = cvResizeOutput;
-		double[] rgbThresholdRed = {102.28544776119404, 255.0};
-		double[] rgbThresholdGreen = {114.17910447761192, 208.35365853658539};
-		double[] rgbThresholdBlue = {66.85820895522389, 215.11367595818822};
-		rgbThreshold(rgbThresholdInput, rgbThresholdRed, rgbThresholdGreen, rgbThresholdBlue, rgbThresholdOutput);
+		//Mat rgbThresholdInput = normalize0Output;
+		//double[] rgbThresholdRed = {102.28544776119404, 255.0};
+		//double[] rgbThresholdGreen = {114.17910447761192, 208.35365853658539};
+		//double[] rgbThresholdBlue = {66.85820895522389, 215.11367595818822};
+		//rgbThreshold(rgbThresholdInput, rgbThresholdRed, rgbThresholdGreen, rgbThresholdBlue, rgbThresholdOutput);
 
 		// Step HSV_Threshold0:
 		Mat hsvThresholdInput = cvResizeOutput;
@@ -134,12 +126,12 @@ public class GripPipelineHATCH extends Command {
 		hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
 		// Step Mask0:
-		Mat maskInput = hsvThresholdOutput;
-		Mat maskMask = rgbThresholdOutput;
-		mask(maskInput, maskMask, maskOutput);
+		//Mat maskInput = hsvThresholdOutput;
+		//Mat maskMask = rgbThresholdOutput;
+		//mask(maskInput, maskMask, maskOutput);
 
 		// Step Blur1:
-		Mat blur1Input = maskOutput;
+		Mat blur1Input = normalize0Output;
 		BlurType blur1Type = BlurType.get("Gaussian Blur");
 		double blur1Radius = 12.25533415623347;
 		blur(blur1Input, blur1Type, blur1Radius, blur1Output);

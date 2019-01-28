@@ -90,12 +90,9 @@ public class GripPipelineBall extends Command {
 	 */
 	public KeyPoint[] process() {
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-        camera.setResolution(640, 480);
         CvSink cvSink = CameraServer.getInstance().getVideo();
 		Mat source0 = new Mat();
-		cvSink.grabFrame(source0);
-		HighGui.namedWindow("camfeed");
-		HighGui.imshow("camfeed", source0);
+		cvSink.grabFrame(source0); 
 		
 		// Step Blur0:
 		Mat blur0Input = source0;
@@ -110,20 +107,12 @@ public class GripPipelineBall extends Command {
 		double normalize0Beta = 200.0;
 		normalize(normalize0Input, normalize0Type, normalize0Alpha, normalize0Beta, normalize0Output);
 
-		// Step CV_resize0:
-		Mat cvResizeSrc = normalize0Output;
-		Size cvResizeDsize = new Size(0, 0);
-		double cvResizeFx = 1.0;
-		double cvResizeFy = 1.0;
-		int cvResizeInterpolation = Imgproc.INTER_LINEAR;
-		cvResize(cvResizeSrc, cvResizeDsize, cvResizeFx, cvResizeFy, cvResizeInterpolation, cvResizeOutput);
-
 		// Step RGB_Threshold0:
-		Mat rgbThresholdInput = cvResizeOutput;
-		double[] rgbThresholdRed = {164.13246268656718, 226.12369337979092};
-		double[] rgbThresholdGreen = {35.68097014925373, 175.0348432055749};
-		double[] rgbThresholdBlue = {0.0, 181.698606271777};
-		rgbThreshold(rgbThresholdInput, rgbThresholdRed, rgbThresholdGreen, rgbThresholdBlue, rgbThresholdOutput);
+		//Mat rgbThresholdInput = normalize0Output;
+		//double[] rgbThresholdRed = {164.13246268656718, 226.12369337979092};
+		//double[] rgbThresholdGreen = {35.68097014925373, 175.0348432055749};
+		//double[] rgbThresholdBlue = {0.0, 181.698606271777};
+		//rgbThreshold(rgbThresholdInput, rgbThresholdRed, rgbThresholdGreen, rgbThresholdBlue, rgbThresholdOutput);
 
 		// Step HSV_Threshold0:
 		Mat hsvThresholdInput = cvResizeOutput;
@@ -133,12 +122,12 @@ public class GripPipelineBall extends Command {
 		hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
 		// Step Mask0:
-		Mat maskInput = hsvThresholdOutput;
-		Mat maskMask = rgbThresholdOutput;
-		mask(maskInput, maskMask, maskOutput);
+		//Mat maskInput = hsvThresholdOutput;
+		//Mat maskMask = rgbThresholdOutput;
+		//mask(maskInput, maskMask, maskOutput);
 
 		// Step Blur1:
-		Mat blur1Input = maskOutput;
+		Mat blur1Input = normalize0Output;
 		BlurType blur1Type = BlurType.get("Gaussian Blur");
 		double blur1Radius = 16.002468700405572;
 		blur(blur1Input, blur1Type, blur1Radius, blur1Output);
@@ -166,6 +155,7 @@ public class GripPipelineBall extends Command {
 		boolean findBlobsDarkBlobs = false;
 		findBlobs(findBlobsInput, findBlobsMinArea, findBlobsCircularity, findBlobsDarkBlobs, findBlobsOutput);
 		KeyPoint[] temp = findBlobsOutput.toArray();
+		System.out.println("gottohere");
 		System.out.println(temp[0].pt.x + ", " + temp[0].pt.y);
 		System.out.println(temp.toString());
 		HighGui.namedWindow("findbout");
