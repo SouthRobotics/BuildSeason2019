@@ -16,32 +16,37 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class DriveTrain extends Subsystem {
 
 	private static DifferentialDrive robotDrive;
-	private static int leftYAxis;
-	private static int rightYAxis;
 	
-    public void initDefaultCommand() {
+	public void initDefaultCommand() 
+	{
     	robotDrive =  RobotMap.drive;
-        leftYAxis = Robot.m_oi.leftYAxis;
-		rightYAxis = Robot.m_oi.rightYAxis;
         setDefaultCommand(new TeleOpDrive());
 	}	
 
-	public boolean halfSpeed()
+	public boolean halfSpeed()//checks if left bumper is pressed -->go half speed
 	{
 		return Robot.m_oi.leftBumper.get();
 	}
-	public boolean fullSpeed()
+	public boolean fullSpeed()//checks if right bumper is pressed -->go full speed
 	{
 		return Robot.m_oi.rightBumper.get();
 	}
-	public void move()
+	public double leftSpeed()//returns level that left trigger is pressed
 	{
-		if(halfSpeed())
-			robotDrive.tankDrive(leftYAxis*.5, rightYAxis*.5);
+		return Robot.m_oi.getController().getRawAxis(Robot.m_oi.leftYAxis)*-1;//-1 because axis is inverted
+	}
+	public double rightSpeed()//returns level that right trigger is pressed
+	{
+		return Robot.m_oi.getController().getRawAxis(Robot.m_oi.rightYAxis)*-1;
+	}
+	public void move()//called in TeleOpDrive.java
+	{
+		if(halfSpeed())//multiplies by .5 if halfSpeed
+			robotDrive.tankDrive(.5*leftSpeed(), .5*rightSpeed());
 		else if(fullSpeed())
-			robotDrive.tankDrive(leftYAxis,rightYAxis);
+			robotDrive.tankDrive(leftSpeed(),rightSpeed());
 		else
-			robotDrive.tankDrive(leftYAxis*.75, rightYAxis*.75);
+			robotDrive.tankDrive(.75*leftSpeed(), .75*rightSpeed());
 	}
 	
 }
