@@ -9,7 +9,6 @@ package org.usfirst.frc.team6969.robot.commands;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team6969.robot.Robot;
 
 /**
  * An example command.  You can replace me with your own command.

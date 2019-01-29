@@ -8,21 +8,16 @@
 package org.usfirst.frc.team6969.robot;
 
 import java.util.ArrayList;
+
+import org.usfirst.frc.team6969.robot.commands.MoveDistance;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import org.usfirst.frc.team6969.robot.subsystems.*;
-import org.usfirst.frc.team6969.robot.RobotMap;
-import org.usfirst.frc.team6969.robot.commands.MoveClawToHeight;
-import org.usfirst.frc.team6969.robot.commands.MoveDistance;
-import org.usfirst.frc.team6969.robot.commands.RotateToAngle;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;;
 
@@ -36,9 +31,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;;
 public class Robot extends TimedRobot {
 	// Robot class controls the whole robot
 	// if you ever get lost: https://frc-pdr.readthedocs.io/en/latest/index.html
-	
-	//subsystems
-	//public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
+
+	// subsystems
+	// public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static DriveTrain driveTrain;
 
 	

@@ -7,11 +7,10 @@
 
 package org.usfirst.frc.team6969.robot.subsystems;
 
-import org.usfirst.frc.team6969.robot.AnalogUltraSon;
-import org.usfirst.frc.team6969.robot.OI;
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 import org.usfirst.frc.team6969.robot.commands.TeleOpDrive;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
