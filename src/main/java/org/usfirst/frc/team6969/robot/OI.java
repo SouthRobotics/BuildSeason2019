@@ -12,6 +12,7 @@ import org.usfirst.frc.team6969.robot.commands.ManualOverride;
 import org.usfirst.frc.team6969.robot.commands.RotateToAngle;
 import org.usfirst.frc.team6969.robot.commands.RotateToPixyTarget;
 import org.usfirst.frc.team6969.robot.commands.moveBotFast;
+import org.usfirst.frc.team6969.robot.commands.SpinRollerIntake;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
