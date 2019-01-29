@@ -7,11 +7,13 @@
 
 package org.usfirst.frc.team6969.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -56,7 +58,10 @@ public class RobotMap {
 	public static Spark driveTrainBackRight;
     public static Spark driveTrainFrontRight;
     public static Spark driveTrainBackLeft;
-    public static Spark driveTrainFrontLeft;
+	public static Spark driveTrainFrontLeft;
+	
+	public static SpeedController clawLeft;
+	public static SpeedController clawRight;
 	
     
     //Spark motorcontrollers that control subsystems
@@ -123,7 +128,9 @@ public class RobotMap {
 		driveTrainFrontRight =  new Spark(0);
 		driveTrainBackLeft = new Spark(3); 
 		driveTrainFrontLeft =  new Spark(2);
-		
+
+		clawLeft = new WPI_TalonSRX(0);
+		clawRight = new WPI_TalonSRX(1);		
 		
 		//PWM port numbers for subsystems.
 		

@@ -110,6 +110,8 @@ public class OI {
 		aButton.whenPressed(new RotateToAngle(90));
 		yButton.whenPressed(new ExampleSchedule());
 		bButton.whenPressed(new moveBotFast());
+		leftBumper.whileHeld(new SpinRollerIntake(true));
+		rightBumper.whileHeld(new SpinRollerIntake(false));
 	}
     
     public XboxController getController() {

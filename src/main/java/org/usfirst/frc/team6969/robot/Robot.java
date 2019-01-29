@@ -8,6 +8,8 @@
 package org.usfirst.frc.team6969.robot;
 
 import java.util.ArrayList;
+
+import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -32,6 +34,7 @@ public class Robot extends TimedRobot {
 	//subsystems
 	//public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static DriveTrain driveTrain;
+	public static Claw claw;
 
 	
 	//controller map
@@ -58,6 +61,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		RobotMap.init();
 		driveTrain = new DriveTrain();
+		claw = new Claw();
 		m_oi = new OI();
 		pdp = new PowerDistributionPanel(30);
 		ds = DriverStation.getInstance();
