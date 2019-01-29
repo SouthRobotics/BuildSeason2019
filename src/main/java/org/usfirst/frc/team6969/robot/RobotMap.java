@@ -11,19 +11,14 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 //All imports below are the default imports that come with the FRC package
 
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Accelerometer;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.SPI;
-import com.kauailabs.navx.frc.AHRS;
-import com.kauailabs.navx.frc.AHRS.SerialDataType;
 
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 
@@ -33,9 +28,10 @@ import org.usfirst.frc.team6969.robot.subsystems.Claw;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-//hhjhjh
+// hhjhjh
 public class RobotMap {
-	//RobotMap class connects hardware to software based on the port # the hardware is plugged into on the PDP.
+	// RobotMap class connects hardware to software based on the port # the hardware
+	// is plugged into on the PDP.
 
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
@@ -55,19 +51,23 @@ public class RobotMap {
 	public static double wheelRotation360degree = 6.97814; //amount of wheel rotations the robot will make 360* turn in when both sides are driving opposite ways 
 	
 	//Talons that control drivetrain ( must declare talons as type SpeedController )
-    public static SpeedController driveTrainBackRight;
-    public static SpeedController driveTrainFrontRight;
-    public static SpeedController driveTrainBackLeft;
-	public static SpeedController driveTrainFrontLeft;
+
 	public static SpeedController clawLeft;
 	public static SpeedController clawRight;
+	/*
+	public static SpeedController driveTrainBackRight;
+	public static SpeedController driveTrainMiddleRight;
+	public static SpeedController driveTrainFrontRight;
 	
-	/* Test Robot
+	public static SpeedController driveTrainBackLeft;
+	public static SpeedController driveTrainMiddleLeft;
+	public static SpeedController driveTrainFrontLeft;
+	*/
 	public static Spark driveTrainBackRight;
     public static Spark driveTrainFrontRight;
     public static Spark driveTrainBackLeft;
     public static Spark driveTrainFrontLeft;
-	*/
+	
     
     //Spark motorcontrollers that control subsystems
     
@@ -120,18 +120,22 @@ public class RobotMap {
 		Spark 3 - Back Left
 		Spark 2 - Front Left
 		*/
+/*
+		driveTrainBackRight = new WPI_TalonSRX(10);
+		driveTrainMiddleRight = new WPI_TalonSRX(11); 
+		driveTrainFrontRight =  new WPI_TalonSRX(12);
 
-		/*driveTrainBackRight = new WPI_TalonSRX(12); 
-		driveTrainFrontRight =  new WPI_TalonSRX(13);
-		driveTrainBackLeft = new WPI_TalonSRX(15); 
-		driveTrainFrontLeft =  new WPI_TalonSRX(14);*/
-		clawLeft = new WPI_TalonSRX(0); 
-		clawRight =  new WPI_TalonSRX(1);
-	
+		driveTrainBackLeft = new WPI_TalonSRX(13); 
+		driveTrainMiddleLeft = new WPI_TalonSRX(14);
+		driveTrainFrontLeft =  new WPI_TalonSRX(15);
+		*/
 		driveTrainBackRight = new Spark(1); 
 		driveTrainFrontRight =  new Spark(0);
 		driveTrainBackLeft = new Spark(3); 
 		driveTrainFrontLeft =  new Spark(2);
+
+		clawLeft = new WPI_TalonSRX(0); 
+		clawRight =  new WPI_TalonSRX(1);
 		
 		
 		//PWM port numbers for subsystems.
@@ -148,12 +152,20 @@ public class RobotMap {
 
 		navx = new AHRS(SPI.Port.kMXP);
 	    
-	    //creates motor groups for TankDrive
-	    final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainFrontLeft, driveTrainBackLeft); //left drivetrain motors
-	    final SpeedControllerGroup m_right = new SpeedControllerGroup(driveTrainFrontRight, driveTrainBackRight); //Right drivetrain motors
-		//creates TankDrive drivetrain	
-		drive = new DifferentialDrive(m_left, m_right);
-	    
+		//creates motor groups for TankDrive
+		/*
+	    final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainFrontLeft, driveTrainMiddleLeft, driveTrainBackLeft); //left drivetrain motors
+		final SpeedControllerGroup m_right = new SpeedControllerGroup(driveTrainFrontRight, driveTrainMiddleRight, driveTrainBackRight); //Right drivetrain motors
+		*/
+		
+		final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainFrontLeft, driveTrainBackLeft); //left drivetrain motors
+		final SpeedControllerGroup m_right = new SpeedControllerGroup(driveTrainFrontRight, driveTrainBackRight); //Right drivetrain motors
+		
+	    //creates TankDrive drivetrain	
+	    drive = new DifferentialDrive(m_left, m_right);
+		
+		drive.setExpiration(1);	//prevents Motor Output error with Pixy Cam code
+		
 	    /*
 	     when true, safetyenabled turns off motors if their output isn't updated for a certain amount of time
 	     setExpiration() sets the time for safetyenabled

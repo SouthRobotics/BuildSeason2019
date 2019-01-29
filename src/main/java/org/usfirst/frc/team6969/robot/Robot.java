@@ -7,8 +7,11 @@
 
 package org.usfirst.frc.team6969.robot;
 
+import java.util.ArrayList;
+import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -19,7 +22,7 @@ import org.usfirst.frc.team6969.robot.RobotMap;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,8 +32,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  * project.
  */
 public class Robot extends TimedRobot {
-	//Robot class controls the whole robot
-	//if you ever get lost: https://frc-pdr.readthedocs.io/en/latest/index.html
+	// Robot class controls the whole robot
+	// if you ever get lost: https://frc-pdr.readthedocs.io/en/latest/index.html
 	
 	//subsystems
 	//public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
@@ -40,10 +43,16 @@ public class Robot extends TimedRobot {
 	
 	//controller map
 	public static OI m_oi;
-	
     public static DifferentialDrive robotDrive;
 	public static DriverStation ds;
 	public static PowerDistributionPanel pdp;
+	public static SerialPort arduino;
+	private String arduinoString;
+	private ArrayList<Integer> pixyData;
+	private Integer pixyVal;
+	private int pixyCounter;
+	public static int pixyCenter;
+	public static final int PIXYXCENTER = 158;	// pixy cam x-values range from 0 to 316 
 	
 	//auto command... will vary based on location/alliance
 	public Command autonomousCommand = null;
@@ -59,9 +68,15 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 		pdp = new PowerDistributionPanel(30);
 		ds = DriverStation.getInstance();
-		pdp.clearStickyFaults();	//clears pdp issue with yellow light
+		pdp.clearStickyFaults();	// clears pdp issue with yellow light
 		robotDrive =  RobotMap.drive;
 		claw = new Claw();
+		arduino = new SerialPort(9600, SerialPort.Port.kUSB1);
+		arduinoString = "";
+		pixyData = new ArrayList<Integer>();
+		for (int i = 0; i < 50; i++)	// initialize pixyData
+			pixyData.add(new Integer(-1));
+		pixyCenter = 158;
 	}
 
 	/**
@@ -119,8 +134,9 @@ public class Robot extends TimedRobot {
 		}
 		//for every subsystem just do subsystem.initDefaultCommand()
 		//subsystems
-		driveTrain.initDefaultCommand();
-		claw.initDefaultCommand();
+		//driveTrain.initDefaultCommand();
+		//claw.initDefaultCommand();
+		
 	}
 
 	/**
@@ -129,7 +145,61 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		getPixyData();
+		System.out.println("Center: " + pixyCenter);
+		reportCollisionDetection();
+		displaySmartDashboardData();
+	}
 
+	/**
+	 * This function is called periodically during test mode.
+	 */
+	@Override
+	public void testPeriodic() {
+	}
+
+	/*
+	Communicates with arduino to receive x-coordinate of center of target and store in array
+	Pre: Arduino is connected to RoboRio via usb port 1
+	Post: x-coordinate of center of target is stored in pixyCenter
+	*/
+	private void getPixyData() {
+
+		arduino.write(new byte[] {0x12}, 1);	//RoboRio must initiate communication with arduino
+		
+		if ( arduino.getBytesReceived() > 0 ) {
+
+			arduinoString = arduino.readString();
+
+			if ( pixyData.size() > 50 )	// only remember last 3 centers
+				pixyData.remove(0);
+
+			try{	//arduino sometimes passes strings containing characters other than #s when detection not found
+				
+				pixyVal = new Integer(Integer.parseInt(arduinoString));
+
+				if ( pixyVal.intValue() >= 0 ) {	//-1 is default if no object detected			
+					pixyData.add(pixyVal);
+					pixyCounter = 0;
+				}
+				else
+					pixyCounter++;
+			}
+			catch(Exception e){
+				System.out.println("Error parsing Pixy data.");
+			}
+
+			pixyCenter = pixyData.get(49);
+
+			if ( pixyCounter > 8 )	//if lost sight of object stop turning
+				pixyCenter = -1;
+		}
+	}
+
+	/*
+	Sends error message to Driver Station warning that a collision may have occured
+	*/
+	private void reportCollisionDetection() {
 		// code taken from navx website to detect if robot has crashed by looking for a "jerk"
 		// https://pdocs.kauailabs.com/navx-mxp/examples/collision-detection/
 		
@@ -153,16 +223,14 @@ public class Robot extends TimedRobot {
 		if ( collisionDetected )
 			DriverStation.reportError("COLLISION DETECTED", false);
 
-		// -----------------------------------------------------------------------
-
-		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 	}
 
-	/**
-	 * This function is called periodically during test mode.
-	 */
-	@Override
-	public void testPeriodic() {
+	/*
+	Place values to monitor in Smart Dashboard
+	*/
+	private void displaySmartDashboardData() {
+		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
+		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
 	}
 }
 
