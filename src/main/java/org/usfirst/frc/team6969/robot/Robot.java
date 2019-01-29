@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team6969.robot;
 
+import java.util.ArrayList;
+import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -22,8 +24,7 @@ import org.usfirst.frc.team6969.robot.commands.RotateToAngle;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import java.util.ArrayList;;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,8 +34,8 @@ import java.util.ArrayList;;
  * project.
  */
 public class Robot extends TimedRobot {
-	//Robot class controls the whole robot
-	//if you ever get lost: https://frc-pdr.readthedocs.io/en/latest/index.html
+	// Robot class controls the whole robot
+	// if you ever get lost: https://frc-pdr.readthedocs.io/en/latest/index.html
 	
 	//subsystems
 	//public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
@@ -43,7 +44,6 @@ public class Robot extends TimedRobot {
 	
 	//controller map
 	public static OI m_oi;
-	
     public static DifferentialDrive robotDrive;
 	public static DriverStation ds;
 	public static PowerDistributionPanel pdp;

@@ -7,9 +7,11 @@
 
 package org.usfirst.frc.team6969.robot;
 
+import org.usfirst.frc.team6969.robot.commands.ExampleSchedule;
 import org.usfirst.frc.team6969.robot.commands.ManualOverride;
 import org.usfirst.frc.team6969.robot.commands.RotateToAngle;
 import org.usfirst.frc.team6969.robot.commands.RotateToPixyTarget;
+import org.usfirst.frc.team6969.robot.commands.moveBotFast;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -46,8 +48,6 @@ public class OI {
 	  Start the command when the button is released and let it run the command
 	  until it is finished as determined by it's isFinished method.
 	  button.whenReleased(new ExampleCommand());
-	
-	
 	
 	//XBOX 360 controller mappings (we got these from DriverStation)
 	
@@ -86,33 +86,7 @@ public class OI {
 		  3. Back Right Trigger
 		  4. Right Joystick X Axis
 		  5. Right Joystick Y Axis
-		  		 	
-	//PS4 controller mappings (we got these from DriverStation)
-		 Buttons:	(gives pressed or not pressed)
-		  1: Square
-		  2: X
-		  3: Circle
-		  4: Triangle
-		  5: Left Bumper
-		  6: Right Bumper
-		  7: Back Left Trigger
-		  8: Back Right Trigger
-		  9: Share
-		  10: Options
-		  11: Power
-		  12: Touchpad
-		  
-		 Axes:	(gives degrees or amount pressed)
-		  0. Left Joystick X Axis
-		  1. Left Joystick Y Axis
-		  2. Right Joystick X Axis
-		  3. Back Left Trigger
-		  4. Back Right Trigger
-		  5. Right Joystick Y Axis
-		
-		  
-		//For ALL XBOX/PS4 controllers: dpad is a number (called POV) between 0 and 360, inclusive. Get number with controller.getPOV()
-	*/	
+		*/	
 	
 	private XboxController controller = new XboxController(1); // Must be USB port 1 in DriverStation.
 
@@ -134,6 +108,8 @@ public class OI {
 		viewButton.whenPressed(new ManualOverride());
 		xButton.whenPressed(new RotateToPixyTarget(Robot.pixyCenter));
 		aButton.whenPressed(new RotateToAngle(90));
+		yButton.whenPressed(new ExampleSchedule());
+		bButton.whenPressed(new moveBotFast());
 	}
     
     public XboxController getController() {

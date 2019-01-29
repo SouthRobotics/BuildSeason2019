@@ -12,28 +12,43 @@ import org.usfirst.frc.team6969.robot.OI;
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 import org.usfirst.frc.team6969.robot.commands.TeleOpDrive;
-import edu.wpi.first.wpilibj.ADXL345_I2C;
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveTrain extends Subsystem {
 
 	private static DifferentialDrive robotDrive;
-	private static boolean goHalfSpeed;
-	private static boolean goFullSpeed;
-	private static int leftYAxis;
-	private static int rightYAxis;
 	
-    public void initDefaultCommand() {
+	public void initDefaultCommand() 
+	{
     	robotDrive =  RobotMap.drive;
-        goHalfSpeed = false;
-        goFullSpeed = false;
-        leftYAxis = Robot.m_oi.leftYAxis;
-		rightYAxis = Robot.m_oi.rightYAxis;
-		robotDrive =  RobotMap.drive;
-        goHalfSpeed = false;
-		goFullSpeed = false;
         setDefaultCommand(new TeleOpDrive());
-    }	
+	}	
+
+	public boolean halfSpeed()//checks if left bumper is pressed -->go half speed
+	{
+		return Robot.m_oi.leftBumper.get();
+	}
+	public boolean fullSpeed()//checks if right bumper is pressed -->go full speed
+	{
+		return Robot.m_oi.rightBumper.get();
+	}
+	public double leftSpeed()//returns level that left trigger is pressed
+	{
+		return Robot.m_oi.getController().getRawAxis(Robot.m_oi.leftYAxis)*-1;//-1 because axis is inverted
+	}
+	public double rightSpeed()//returns level that right trigger is pressed
+	{
+		return Robot.m_oi.getController().getRawAxis(Robot.m_oi.rightYAxis)*-1;
+	}
+	public void move()//called in TeleOpDrive.java
+	{
+		if(halfSpeed())//multiplies by .5 if halfSpeed
+			robotDrive.tankDrive(.5*leftSpeed(), .5*rightSpeed());
+		else if(fullSpeed())
+			robotDrive.tankDrive(leftSpeed(),rightSpeed());
+		else
+			robotDrive.tankDrive(.75*leftSpeed(), .75*rightSpeed());
+	}
+	
 }
