@@ -18,7 +18,8 @@ public class ManualOverride extends Command {
 	public ManualOverride() {
 		// Use requires() here to declare subsystem dependencies
         //requires(Robot.m_subsystem);
-        requires(Robot.driveTrain);
+		requires(Robot.driveTrain);
+		requires(Robot.claw);
 	}
 
 	// Called just before this Command runs the first time
