@@ -14,7 +14,7 @@ import org.usfirst.frc.team6969.robot.commands.RotateToPixyTarget;
 import org.usfirst.frc.team6969.robot.commands.moveBotFast;
 import org.usfirst.frc.team6969.robot.commands.SpinRollerIntake;
 
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 /**
@@ -49,75 +49,55 @@ public class OI {
 	  Start the command when the button is released and let it run the command
 	  until it is finished as determined by it's isFinished method.
 	  button.whenReleased(new ExampleCommand());
-	
-	//XBOX 360 controller mappings (we got these from DriverStation)
-	
-	 Buttons: (gives pressed or not pressed)
-	  1: X
-	  2: A
-	  3: B
-	  4: Y
-	  5: Left Bumper
-	  6: Right Bumper
-	  7: Back Left Trigger
-	  8: Back Right Trigger
-	  9: Back
-	  10: Start
-	  
-	  Axes: (gives degrees or amount pressed)
-	  1. 
-	  	 
-	//XBOX 1 controller mappings (we got these from DriverStation)
-		 Buttons: (gives pressed or not pressed)
-		  1: A
-		  2: B
-		  3: X
-		  4: Y
-		  5: Left Bumper
-		  6: Right Bumper
-		  7: View Button
-		  8: Menu Button
-		  9: Left Joystick
-		  10: Right Joystick
-		  
-		  Axes: (gives degrees or amount pressed)
-		  0. Left Joystick X Axis
-		  1. Left Joystick Y Axis 
-		  2. Back Left Trigger
-		  3. Back Right Trigger
-		  4. Right Joystick X Axis
-		  5. Right Joystick Y Axis
-		*/	
-	
-	private XboxController controller = new XboxController(1); // Must be USB port 1 in DriverStation.
+	*/
 
-	public Button aButton = new JoystickButton(controller, 1),
-			bButton = new JoystickButton(controller, 2),
-			xButton = new JoystickButton(controller, 3),
-			yButton = new JoystickButton(controller, 4),
-			leftBumper = new JoystickButton(controller,5),
-			rightBumper = new JoystickButton(controller, 6),
-			viewButton = new JoystickButton(controller, 7),
-			menuButton = new JoystickButton(controller, 8),
-			leftStick = new JoystickButton(controller, 9),	//push stick in not tilt
-			rightStick = new JoystickButton(controller, 10);
-	
-	public int leftYAxis = 1;
-	public int rightYAxis = 5;
+	public int yAxis = 1;
+
+	public Joystick leftJoy = new Joystick(0);
+	public Button lButton1 = new JoystickButton(leftJoy, 1),
+		lButton2 = new JoystickButton(leftJoy, 2),
+		lButton3 = new JoystickButton(leftJoy, 3),
+		lButton4 = new JoystickButton(leftJoy, 4),
+		lButton5 = new JoystickButton(leftJoy, 5),
+		lButton6 = new JoystickButton(leftJoy, 6),
+		lButton7 = new JoystickButton(leftJoy, 7),
+		lButton8 = new JoystickButton(leftJoy, 8),
+		lButton9 = new JoystickButton(leftJoy, 9),
+		lButton10 = new JoystickButton(leftJoy, 10),
+		lButton11 = new JoystickButton(leftJoy, 11),
+		lButton12 = new JoystickButton(leftJoy, 12);
+
+	public Joystick rightJoy = new Joystick(1);
+	public Button rButton1 = new JoystickButton(rightJoy, 1),
+		rButton2 = new JoystickButton(rightJoy, 2),
+		rButton3 = new JoystickButton(rightJoy, 3),
+		rButton4 = new JoystickButton(rightJoy, 4),
+		rButton5 = new JoystickButton(rightJoy, 5),
+		rButton6 = new JoystickButton(rightJoy, 6),
+		rButton7 = new JoystickButton(rightJoy, 7),
+		rButton8 = new JoystickButton(rightJoy, 8),
+		rButton9 = new JoystickButton(rightJoy, 9),
+		rButton10 = new JoystickButton(rightJoy, 10),
+		rButton11 = new JoystickButton(rightJoy, 11),
+		rButton12 = new JoystickButton(rightJoy, 12);
     
     public OI() {
-		viewButton.whenPressed(new ManualOverride());
-		xButton.whenPressed(new RotateToPixyTarget(Robot.pixyCenter));
-		aButton.whenPressed(new RotateToAngle(90));
-		//yButton.whenPressed(new ExampleSchedule());
-		bButton.whenPressed(new moveBotFast());
-		leftBumper.whileHeld(new SpinRollerIntake(true));
-		rightBumper.whileHeld(new SpinRollerIntake(false));
+		/*viewButton.whenPressed(new ManualOverride());
+		*/
+
+		rButton2.whenPressed(new ManualOverride());
+		lButton3.whenPressed(new RotateToPixyTarget(Robot.pixyCenter));
+		lButton4.whenPressed(new RotateToAngle(90));
+		//rButton3.whenPressed(new ExampleSchedule());
+		rButton4.whenPressed(new moveBotFast());
+		//leftBumper.whileHeld(new SpinRollerIntake(true));
+		//rightBumper.whileHeld(new SpinRollerIntake(false));
+
 	}
-    
-    public XboxController getController() {
+	
+    /*public XboxController getController() {
         return controller;
-    }
+    }*/
     
         
 }
