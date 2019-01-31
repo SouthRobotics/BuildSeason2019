@@ -107,27 +107,27 @@ public class GripPipelineBall extends Command {
 		double normalize0Beta = 200.0;
 		normalize(normalize0Input, normalize0Type, normalize0Alpha, normalize0Beta, normalize0Output);
 
-		// Step RGB_Threshold0:
-		//Mat rgbThresholdInput = normalize0Output;
-		//double[] rgbThresholdRed = {164.13246268656718, 226.12369337979092};
-		//double[] rgbThresholdGreen = {35.68097014925373, 175.0348432055749};
-		//double[] rgbThresholdBlue = {0.0, 181.698606271777};
-		//rgbThreshold(rgbThresholdInput, rgbThresholdRed, rgbThresholdGreen, rgbThresholdBlue, rgbThresholdOutput);
+		 //Step RGB_Threshold0:
+		Mat rgbThresholdInput = normalize0Output;
+		double[] rgbThresholdRed = {164.13246268656718, 226.12369337979092};
+		double[] rgbThresholdGreen = {35.68097014925373, 175.0348432055749};
+		double[] rgbThresholdBlue = {0.0, 181.698606271777};
+		rgbThreshold(rgbThresholdInput, rgbThresholdRed, rgbThresholdGreen, rgbThresholdBlue, rgbThresholdOutput);
 
 		// Step HSV_Threshold0:
-		Mat hsvThresholdInput = cvResizeOutput;
+		Mat hsvThresholdInput = normalize0Output;
 		double[] hsvThresholdHue = {0.0, 26.341463414634145};
 		double[] hsvThresholdSaturation = {45.19589552238806, 255.0};
 		double[] hsvThresholdValue = {195.05597014925374, 208.35365853658536};
 		hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
 		// Step Mask0:
-		//Mat maskInput = hsvThresholdOutput;
-		//Mat maskMask = rgbThresholdOutput;
-		//mask(maskInput, maskMask, maskOutput);
+		Mat maskInput = hsvThresholdOutput;
+		Mat maskMask = rgbThresholdOutput;
+		mask(maskInput, maskMask, maskOutput);
 
 		// Step Blur1:
-		Mat blur1Input = normalize0Output;
+		Mat blur1Input = maskOutput;
 		BlurType blur1Type = BlurType.get("Gaussian Blur");
 		double blur1Radius = 16.002468700405572;
 		blur(blur1Input, blur1Type, blur1Radius, blur1Output);
@@ -158,8 +158,7 @@ public class GripPipelineBall extends Command {
 		System.out.println("gottohere");
 		System.out.println(temp[0].pt.x + ", " + temp[0].pt.y);
 		System.out.println(temp.toString());
-		HighGui.namedWindow("findbout");
-		HighGui.imshow("findbout", findBlobsOutput);
+
 		return temp;
 	}
 

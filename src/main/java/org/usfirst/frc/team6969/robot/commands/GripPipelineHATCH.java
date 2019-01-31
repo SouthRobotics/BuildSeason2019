@@ -112,26 +112,26 @@ public class GripPipelineHATCH extends Command {
 		
 
 		// Step RGB_Threshold0:
-		//Mat rgbThresholdInput = normalize0Output;
-		//double[] rgbThresholdRed = {102.28544776119404, 255.0};
-		//double[] rgbThresholdGreen = {114.17910447761192, 208.35365853658539};
-		//double[] rgbThresholdBlue = {66.85820895522389, 215.11367595818822};
-		//rgbThreshold(rgbThresholdInput, rgbThresholdRed, rgbThresholdGreen, rgbThresholdBlue, rgbThresholdOutput);
+		Mat rgbThresholdInput = normalize0Output;
+		double[] rgbThresholdRed = {102.28544776119404, 255.0};
+		double[] rgbThresholdGreen = {114.17910447761192, 208.35365853658539};
+		double[] rgbThresholdBlue = {66.85820895522389, 215.11367595818822};
+		rgbThreshold(rgbThresholdInput, rgbThresholdRed, rgbThresholdGreen, rgbThresholdBlue, rgbThresholdOutput);
 
 		// Step HSV_Threshold0:
-		Mat hsvThresholdInput = cvResizeOutput;
+		Mat hsvThresholdInput = normalize0Output;
 		double[] hsvThresholdHue = {19.666058198217545, 94.60307378049244};
 		double[] hsvThresholdSaturation = {0.0, 172.48797101898393};
 		double[] hsvThresholdValue = {126.55216815290581, 211.14890358027878};
 		hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
 		// Step Mask0:
-		//Mat maskInput = hsvThresholdOutput;
-		//Mat maskMask = rgbThresholdOutput;
-		//mask(maskInput, maskMask, maskOutput);
+		Mat maskInput = hsvThresholdOutput;
+		Mat maskMask = rgbThresholdOutput;
+		mask(maskInput, maskMask, maskOutput);
 
 		// Step Blur1:
-		Mat blur1Input = normalize0Output;
+		Mat blur1Input = maskOutput;
 		BlurType blur1Type = BlurType.get("Gaussian Blur");
 		double blur1Radius = 12.25533415623347;
 		blur(blur1Input, blur1Type, blur1Radius, blur1Output);
@@ -161,8 +161,6 @@ public class GripPipelineHATCH extends Command {
 		KeyPoint[] temp = findBlobsOutput.toArray();
 		System.out.println(temp[0].pt.x + ", " + temp[0].pt.y);
 		System.out.println(temp.toString());
-		HighGui.namedWindow("findbout");
-		HighGui.imshow("findbout", findBlobsOutput);
 		return temp;
 	}
 
