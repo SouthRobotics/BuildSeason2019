@@ -27,12 +27,12 @@ public class Claw extends Subsystem {
 	}
     
     public void spinIn() {
-        leftMotor.set(-1);
+       // leftMotor.set(-1);
         rightMotor.set(-1);
     }
 
     public void spinOut() {
-        leftMotor.set(1);
+        //leftMotor.set(1);
         rightMotor.set(1);
     }
 }
