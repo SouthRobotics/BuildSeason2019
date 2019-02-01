@@ -129,8 +129,8 @@ public class RobotMap {
 		driveTrainBackLeft = new Spark(3); 
 		driveTrainFrontLeft =  new Spark(2);
 
-		//clawLeft = new WPI_TalonSRX(0);
-		clawRight = new WPI_TalonSRX(1);		
+		clawLeft = new WPI_TalonSRX(14); //talon id number from phoenix tuner
+		clawRight = new WPI_TalonSRX(15);		
 		
 		//PWM port numbers for subsystems.
 		

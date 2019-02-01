@@ -9,6 +9,7 @@ package org.usfirst.frc.team6969.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team6969.robot.Robot;
+import org.usfirst.frc.team6969.robot.RobotMap;
 
 public class SpinRollerIntake extends Command {
     private static boolean spinIn;
@@ -35,17 +36,21 @@ public class SpinRollerIntake extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return false;
+		//if ( ! (Robot.m_oi.leftBumper.get() || Robot.m_oi.rightBumper.get() ) )
+	      //  return true;
+		return true;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
+		Robot.claw.stopSpinning();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
+		Robot.claw.stopSpinning();
 	}
 }
