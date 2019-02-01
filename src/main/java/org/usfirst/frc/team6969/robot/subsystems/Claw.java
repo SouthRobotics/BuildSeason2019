@@ -26,13 +26,13 @@ public class Claw extends Subsystem {
         setDefaultCommand(null);
 	}
     
-    public void spinIn() {
-        leftMotor.set(-1);
-        rightMotor.set(-1);
+    public void spinIn() {  //slower intake is better control so ball doesn't bounce out
+        leftMotor.set(0.35);
+        rightMotor.set(-0.35);
     }
 
     public void spinOut() {
-        leftMotor.set(1);
+        leftMotor.set(-1);
         rightMotor.set(1);
     }
 

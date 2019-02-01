@@ -12,7 +12,8 @@ import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 
 public class SpinRollerIntake extends Command {
-    private static boolean spinIn;
+	// do not make this variable static or else boolean will never change after first call
+    private boolean spinIn;	
 
 	public SpinRollerIntake(boolean spinInwards) {
         requires(Robot.claw);
@@ -38,7 +39,7 @@ public class SpinRollerIntake extends Command {
 	protected boolean isFinished() {
 		//if ( ! (Robot.m_oi.leftBumper.get() || Robot.m_oi.rightBumper.get() ) )
 	      //  return true;
-		return true;
+		return false;
 	}
 
 	// Called once after isFinished returns true
