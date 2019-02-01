@@ -191,7 +191,6 @@ public class Robot extends TimedRobot {
 		}
 	}
 
-
 	/*
 	Sends error message to Driver Station warning that a collision may have occured
 	*/
