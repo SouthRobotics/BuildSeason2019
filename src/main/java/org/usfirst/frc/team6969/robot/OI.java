@@ -89,7 +89,7 @@ public class OI {
 		lButton3.whenPressed(new RotateToPixyTarget(Robot.pixyCenter));
 		lButton4.whenPressed(new RotateToAngle(90));
 		//rButton3.whenPressed(new ExampleSchedule());
-		rButton4.whenPressed(new moveBotFast());
+		//rButton4.whenPressed(new moveBotFast());
 		//leftBumper.whileHeld(new SpinRollerIntake(true));
 		//rightBumper.whileHeld(new SpinRollerIntake(false));
 
