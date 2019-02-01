@@ -5,7 +5,7 @@ Pixy2 pixy;
 int x, y;
 int area, tempArea, angle;
 byte valueFromRoboRio;
-const byte readValue = 0x12; //can be anything just needs to match in RoboRio code
+const byte pixyValue = 0x12; //can be anything just needs to match in RoboRio code
 
 //SparkFun Ultrasonic VL53L1X Sensor --------------------------------------------------------
 //https://learn.sparkfun.com/tutorials/qwiic-distance-sensor-vl53l1x-hookup-guide?_ga=2.204939472.1584633807.1548511782-934199408.1548001094
@@ -43,6 +43,8 @@ const byte ultrasonicValue = 0x13;*/
  * License:
  *  Public Domain
  */
+
+const byte ultrasonicValue = 0x13; //can be anything just needs to match in RoboRio code
 
 // Pins
 const int TRIG_PIN = 7;
@@ -90,7 +92,7 @@ void loop() {
     
 //PixyCam --------------------------------------------------------
 
-    if ( valueFromRoboRio == readValue )
+    if ( valueFromRoboRio == pixyValue )
     {
       pixy.ccc.getBlocks(); //blocks are detected objects
       x = -1;
@@ -110,6 +112,8 @@ void loop() {
             angle = (int)pixy.ccc.blocks[i].m_angle;
           }
       }
+      Serial.print(x);
+    }
 
 //SparkFun Ultrasonic VL53L1X Sensor --------------------------------------------------------
 /*  if ( valueFromRoboRio == ultrasonicValue ){
@@ -122,43 +126,42 @@ void loop() {
   }*/
 
 //SparkFun Ultrasonic HC-SR04 Sensor --------------------------------------------------------
-    unsigned long t1;
-    unsigned long t2;
-    unsigned long pulse_width;
-    float cm;
-    float inches;
-    String cmString;
-  
-    // Hold the trigger pin high for at least 10 us
-    digitalWrite(TRIG_PIN, HIGH);
-    delayMicroseconds(10);
-    digitalWrite(TRIG_PIN, LOW);
-  
-    // Wait for pulse on echo pin
-    while ( digitalRead(ECHO_PIN) == 0 );
-  
-    // Measure how long the echo pin was held high (pulse width)
-    // Note: the micros() counter will overflow after ~70 min
-    t1 = micros();
-    while ( digitalRead(ECHO_PIN) == 1);
-    t2 = micros();
-    pulse_width = t2 - t1;
-  
-    // Calculate distance in centimeters and inches. The constants
-    // are found in the datasheet, and calculated from the assumed speed 
-    //of sound in air at sea level (~340 m/s).
-    cm = pulse_width / 58.0;
-    inches = pulse_width / 148.0;
-    cmString = cm;
-Serial.println("hi");
-//Both --------------------------------------------------------
-    // Print out results
-    if ( pulse_width > MAX_DIST ) {
-      Serial.println(x + ",");
-    } else {
-      Serial.print(x + "," + cmString);
+
+    if ( valueFromRoboRio == ultrasonicValue )
+      {
+      unsigned long t1;
+      unsigned long t2;
+      unsigned long pulse_width;
+      float cm;
+      float inches;
+    
+      // Hold the trigger pin high for at least 10 us
+      digitalWrite(TRIG_PIN, HIGH);
+      delayMicroseconds(10);
+      digitalWrite(TRIG_PIN, LOW);
+    
+      // Wait for pulse on echo pin
+      while ( digitalRead(ECHO_PIN) == 0 );
+    
+      // Measure how long the echo pin was held high (pulse width)
+      // Note: the micros() counter will overflow after ~70 min
+      t1 = micros();
+      while ( digitalRead(ECHO_PIN) == 1);
+      t2 = micros();
+      pulse_width = t2 - t1;
+    
+      // Calculate distance in centimeters and inches. The constants
+      // are found in the datasheet, and calculated from the assumed speed 
+      //of sound in air at sea level (~340 m/s).
+      cm = pulse_width / 58.0;
+      inches = pulse_width / 148.0;
+
+      if ( pulse_width > MAX_DIST )
+        Serial.print("-1");
+      else
+        Serial.print(cm);
     }
-  }
+//Both --------------------------------------------------------
   delay(60);  // in ms, gives computer time to process data
  
   }

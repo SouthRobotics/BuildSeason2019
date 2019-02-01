@@ -12,8 +12,6 @@ import org.usfirst.frc.team6969.robot.commands.ManualOverride;
 import org.usfirst.frc.team6969.robot.commands.RotateToAngle;
 import org.usfirst.frc.team6969.robot.commands.RotateToPixyTarget;
 import org.usfirst.frc.team6969.robot.commands.moveBotFast;
-import org.usfirst.frc.team6969.robot.commands.SpinRollerIntake;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -82,14 +80,10 @@ public class OI {
 		rButton12 = new JoystickButton(rightJoy, 12);
     
     public OI() {
-		/*viewButton.whenPressed(new ManualOverride());
-		*/
-
 		rButton2.whenPressed(new ManualOverride());
 		lButton3.whenPressed(new RotateToPixyTarget(Robot.pixyCenter));
 		lButton4.whenPressed(new RotateToAngle(90));
-		//rButton3.whenPressed(new ExampleSchedule());
-		rButton4.whenPressed(new moveBotFast());
+
 		//leftBumper.whileHeld(new SpinRollerIntake(true));
 		//rightBumper.whileHeld(new SpinRollerIntake(false));
 
