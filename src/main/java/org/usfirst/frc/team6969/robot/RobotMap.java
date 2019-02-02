@@ -75,6 +75,12 @@ public class RobotMap {
      if (limitSwitchName.get())
      	motor.setSpeed(0);
      */
+
+	 // Potentiometers
+	 // https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599719-potentiometers-measuring-joint-angle-or-linear-motion
+	 Potentiometer bottomJointPot;
+	 Potentiometer middleJointPot;
+	 Potentiometer topJointPot;
     
     //Other sensors
 	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
@@ -141,7 +147,11 @@ public class RobotMap {
 
 	    //PWM ports for sensors
 	    magLimit = new  DigitalInput(0);
-	    
+		
+		bottomJointPot = new AnalogPotentiometer(0, 360, 30);
+		middleJointPot = new AnalogPotentiometer(0, 360, 30);
+		topJointPot = new AnalogPotentiometer(0, 360, 30);
+
 	    //Other ports for sensors
 		gyro = new AnalogGyro(1);
 		navx = new AHRS(SPI.Port.kMXP);
