@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -36,7 +37,6 @@ public class Robot extends TimedRobot {
 	public static DriveTrain driveTrain;
 	public static Claw claw;
 
-	
 	//controller map
 	public static OI m_oi;
     public static DifferentialDrive robotDrive;
@@ -131,6 +131,7 @@ public class Robot extends TimedRobot {
 		//for every subsystem just do subsystem.initDefaultCommand()
 		//subsystems
 		//driveTrain.initDefaultCommand();
+		RobotMap.rotatingPlatformEncoder.reset();
 		
 	}
 
@@ -226,6 +227,7 @@ public class Robot extends TimedRobot {
 	private void displaySmartDashboardData() {
 		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
+		SmartDashboard.putNumber("Encoders", RobotMap.rotatingPlatformEncoder.get());
 	}
 }
 
