@@ -7,13 +7,17 @@
 
 package org.usfirst.frc.team6969.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -56,7 +60,10 @@ public class RobotMap {
 	public static Spark driveTrainBackRight;
     public static Spark driveTrainFrontRight;
     public static Spark driveTrainBackLeft;
-    public static Spark driveTrainFrontLeft;
+	public static Spark driveTrainFrontLeft;
+	
+	public static SpeedController clawLeft;
+	public static SpeedController clawRight;
 	
     
     //Spark motorcontrollers that control subsystems
@@ -71,6 +78,12 @@ public class RobotMap {
      if (limitSwitchName.get())
      	motor.setSpeed(0);
      */
+
+	 // Potentiometers
+	 // https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599719-potentiometers-measuring-joint-angle-or-linear-motion
+	 public static Potentiometer bottomJointPot;
+	 public static Potentiometer middleJointPot;
+	 public static Potentiometer topJointPot;
     
     //Other sensors
 	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
@@ -126,7 +139,9 @@ public class RobotMap {
 		driveTrainFrontRight =  new Spark(0);
 		driveTrainBackLeft = new Spark(3); 
 		driveTrainFrontLeft =  new Spark(2);
-		
+
+		clawLeft = new WPI_TalonSRX(14); //talon id number from phoenix tuner
+		clawRight = new WPI_TalonSRX(15);		
 		
 		//PWM port numbers for subsystems.
 		
@@ -136,9 +151,12 @@ public class RobotMap {
 		*/
 
 	    //PWM ports for sensors
-		magLimit = new  DigitalInput(0);
-		cimCoder = new Encoder();
-	    
+	    magLimit = new  DigitalInput(0);
+		
+		bottomJointPot = new AnalogPotentiometer(0, 360, 30);
+		middleJointPot = new AnalogPotentiometer(0, 360, 30);
+		topJointPot = new AnalogPotentiometer(0, 360, 30);
+
 	    //Other ports for sensors
 		gyro = new AnalogGyro(1);
 		navx = new AHRS(SPI.Port.kMXP);

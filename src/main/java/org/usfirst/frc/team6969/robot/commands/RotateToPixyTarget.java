@@ -15,6 +15,7 @@ public class RotateToPixyTarget extends Command {
   
   public static SerialPort arduino;
   public static int center;
+  public static int cen;
   public static final int PIXYXCENTER = 158;     // Pixycam x values go from 0 to 316 (center is 158)
   private double error;
   private double rotation;
