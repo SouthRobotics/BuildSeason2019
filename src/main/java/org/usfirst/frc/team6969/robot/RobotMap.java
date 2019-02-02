@@ -155,7 +155,6 @@ public class RobotMap {
 		*/
 
 	    //PWM ports for sensors
-	    magLimit = new  DigitalInput(0);
 		
 		/*
 		bottomJointPot = new AnalogPotentiometer(0, 360, 30);
