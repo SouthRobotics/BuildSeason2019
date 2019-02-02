@@ -64,7 +64,8 @@ public class RobotMap {
     //list of sensors: http://1418.team/assets/resources/Introduction%20to%20Sensors.pdf
     
     //Limit switches
-    public static DigitalInput magLimit;
+	public static DigitalInput magLimit;
+	public static Encoder cimCoder;
     /*
      Example code to use limit switch:
      if (limitSwitchName.get())
@@ -135,7 +136,8 @@ public class RobotMap {
 		*/
 
 	    //PWM ports for sensors
-	    magLimit = new  DigitalInput(0);
+		magLimit = new  DigitalInput(0);
+		cimCoder = new Encoder();
 	    
 	    //Other ports for sensors
 		gyro = new AnalogGyro(1);
