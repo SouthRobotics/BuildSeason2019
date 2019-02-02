@@ -80,17 +80,17 @@ public class RobotMap {
 
 	 // Potentiometers
 	 // https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599719-potentiometers-measuring-joint-angle-or-linear-motion
-	 public static Potentiometer bottomJointPot;
+	 /*public static Potentiometer bottomJointPot;
 	 public static Potentiometer middleJointPot;
-	 public static Potentiometer topJointPot;
+	 public static Potentiometer topJointPot;*/
 	
 	//Encoders
 	//https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599717-encoders-measuring-rotation-of-a-wheel-or-other-shaft
 	//Documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/Encoder.html
 	public static Encoder rotatingPlatformEncoder;
-	public static Encoder bottomJointEncoder;
-	public static Encoder middleJointEncoder;
-	public static Encoder topJointEncoder;
+	//public static Encoder bottomJointEncoder;
+	//public static Encoder middleJointEncoder;
+	//public static Encoder topJointEncoder;
 
     //Other sensors
 	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
@@ -157,15 +157,16 @@ public class RobotMap {
 	    //PWM ports for sensors
 	    magLimit = new  DigitalInput(0);
 		
+		/*
 		bottomJointPot = new AnalogPotentiometer(0, 360, 30);
 		middleJointPot = new AnalogPotentiometer(0, 360, 30);
-		topJointPot = new AnalogPotentiometer(0, 360, 30);
+		topJointPot = new AnalogPotentiometer(0, 360, 30);*/
 
 		//DIO ports for encoders (uses 2 ports each, channel a and b)
 		rotatingPlatformEncoder = new Encoder(0,1);
-		bottomJointEncoder = new Encoder(2,3);
+		/* bottomJointEncoder = new Encoder(2,3);
 		middleJointEncoder = new Encoder(4,5);
-		topJointEncoder = new Encoder(6,7);
+		topJointEncoder = new Encoder(6,7); */
 
 	    //Other ports for sensors
 		gyro = new AnalogGyro(1);
