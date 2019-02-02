@@ -7,7 +7,10 @@
 
 package org.usfirst.frc.team6969.robot.commands;
 
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.interfaces.Potentiometer;
+
 import org.usfirst.frc.team6969.robot.Robot;
 
 

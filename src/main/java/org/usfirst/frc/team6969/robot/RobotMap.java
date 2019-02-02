@@ -10,12 +10,14 @@ package org.usfirst.frc.team6969.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -78,9 +80,9 @@ public class RobotMap {
 
 	 // Potentiometers
 	 // https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599719-potentiometers-measuring-joint-angle-or-linear-motion
-	 Potentiometer bottomJointPot;
-	 Potentiometer middleJointPot;
-	 Potentiometer topJointPot;
+	 public static Potentiometer bottomJointPot;
+	 public static Potentiometer middleJointPot;
+	 public static Potentiometer topJointPot;
     
     //Other sensors
 	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
