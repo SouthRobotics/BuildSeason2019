@@ -12,6 +12,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -61,13 +62,12 @@ public class RobotMap {
     public static Spark driveTrainFrontRight;
     public static Spark driveTrainBackLeft;
 	public static Spark driveTrainFrontLeft;
+
+	//Spark motorcontrollers that control subsystems
 	
 	public static SpeedController clawLeft;
 	public static SpeedController clawRight;
 	
-    
-    //Spark motorcontrollers that control subsystems
-    
     //list of sensors: http://1418.team/assets/resources/Introduction%20to%20Sensors.pdf
     
     //Limit switches
@@ -83,7 +83,15 @@ public class RobotMap {
 	 public static Potentiometer bottomJointPot;
 	 public static Potentiometer middleJointPot;
 	 public static Potentiometer topJointPot;
-    
+	
+	//Encoders
+	//https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599717-encoders-measuring-rotation-of-a-wheel-or-other-shaft
+	//Documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/Encoder.html
+	public static Encoder rotatingPlatformEncoder;
+	public static Encoder bottomJointEncoder;
+	public static Encoder middleJointEncoder;
+	public static Encoder topJointEncoder;
+
     //Other sensors
 	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
 	public static AHRS navx;	// https://pdocs.kauailabs.com/navx-mxp/
@@ -104,7 +112,6 @@ public class RobotMap {
     
     //Class for KOP basic drivetrain
 	public static DifferentialDrive drive = null;
-	
 	
 	public static void init() {
 
@@ -153,6 +160,12 @@ public class RobotMap {
 		bottomJointPot = new AnalogPotentiometer(0, 360, 30);
 		middleJointPot = new AnalogPotentiometer(0, 360, 30);
 		topJointPot = new AnalogPotentiometer(0, 360, 30);
+
+		//DIO ports for encoders (uses 2 ports each, channel a and b)
+		rotatingPlatformEncoder = new Encoder(0,1);
+		bottomJointEncoder = new Encoder(2,3);
+		middleJointEncoder = new Encoder(4,5);
+		topJointEncoder = new Encoder(6,7);
 
 	    //Other ports for sensors
 		gyro = new AnalogGyro(1);
