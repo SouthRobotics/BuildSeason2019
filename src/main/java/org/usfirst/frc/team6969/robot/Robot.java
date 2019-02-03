@@ -226,6 +226,7 @@ public class Robot extends TimedRobot {
 	private void displaySmartDashboardData() {
 		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
+		//SmartDashboard.putNumber("potentiometer", RobotMap.pot.get());
 	}
 }
 

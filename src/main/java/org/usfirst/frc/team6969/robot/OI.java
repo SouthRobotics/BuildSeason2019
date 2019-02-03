@@ -10,6 +10,7 @@ package org.usfirst.frc.team6969.robot;
 //import org.usfirst.frc.team6969.robot.commands.ExampleSchedule;
 import org.usfirst.frc.team6969.robot.commands.ManualOverride;
 import org.usfirst.frc.team6969.robot.commands.RotateChassisToAngle;
+import org.usfirst.frc.team6969.robot.commands.RotateChassisToAnglePID;
 import org.usfirst.frc.team6969.robot.commands.RotateToPixyTarget;
 import org.usfirst.frc.team6969.robot.commands.SpinRollerIntake;
 
@@ -84,6 +85,7 @@ public class OI {
 		rButton2.whenPressed(new ManualOverride());
 		lButton3.whenPressed(new RotateToPixyTarget(Robot.pixyCenter));
 		lButton4.whenPressed(new RotateChassisToAngle(90));
+		lButton5.whenPressed(new RotateChassisToAnglePID(-90));
 		rButton5.whileHeld(new SpinRollerIntake(true));
 		rButton6.whileHeld(new SpinRollerIntake(false));
 

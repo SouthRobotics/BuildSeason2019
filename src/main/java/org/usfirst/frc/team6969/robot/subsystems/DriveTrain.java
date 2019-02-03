@@ -16,7 +16,16 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class DriveTrain extends Subsystem {
 
 	private static DifferentialDrive robotDrive;
+	public static double Kp;
+	public static double Ki;
+	public static double Kd;
 	
+	public DriveTrain() {
+		Kp = 0.02;
+		Ki = 0.0;
+		Kd = 0.01;
+	}
+
 	public void initDefaultCommand() 
 	{
     	robotDrive =  RobotMap.drive;
