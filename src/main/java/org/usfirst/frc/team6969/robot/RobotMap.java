@@ -161,6 +161,7 @@ public class RobotMap {
 		pot = new AnalogPotentiometer(0,360,0);
 		leftDriveEncoder = new Encoder(0, 1);
 		rightDriveEncoder = new Encoder(2, 3);
+		pot = new AnalogPotentiometer(0,360,30);
 
 		//creates motor groups for TankDrive
 		/*

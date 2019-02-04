@@ -45,7 +45,6 @@ public class Robot extends TimedRobot {
 	public static DriverStation ds;
 	public static PowerDistributionPanel pdp;
 	public static SerialPort arduino;
-	public static Potentiometer pot;
 	private String arduinoString;
 	private ArrayList<Integer> pixyData;
 	private Integer pixyVal;
@@ -231,6 +230,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
 		SmartDashboard.putNumber("Potentiometer", RobotMap.pot.get());
 		SmartDashboard.putNumber("Encoder", RobotMap.leftDriveEncoder.get());
+		SmartDashboard.putNumber("Potentiometer", (RobotMap.pot.get() / 5));
 	}
 }
 
