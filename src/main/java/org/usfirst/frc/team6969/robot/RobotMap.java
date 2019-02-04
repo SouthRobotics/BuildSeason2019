@@ -154,8 +154,8 @@ public class RobotMap {
 	    //Other ports for sensors
 		gyro = new AnalogGyro(1);
 		navx = new AHRS(SPI.Port.kMXP);
-		ultrason = new AnalogUltraSon(0);
-	    
+		pot = new AnalogPotentiometer(0,360,0);
+
 		//creates motor groups for TankDrive
 		/*
 	    final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainFrontLeft, driveTrainMiddleLeft, driveTrainBackLeft); //left drivetrain motors
