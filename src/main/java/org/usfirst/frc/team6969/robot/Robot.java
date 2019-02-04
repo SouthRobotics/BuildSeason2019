@@ -230,6 +230,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
 		SmartDashboard.putNumber("Potentiometer", RobotMap.pot.get());
+		SmartDashboard.putNumber("Encoder", RobotMap.leftDriveEncoder.get());
 	}
 }
 

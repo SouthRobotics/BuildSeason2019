@@ -12,6 +12,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -74,6 +75,9 @@ public class RobotMap {
 	public static DigitalInput magLimit;
 	
 	public static Potentiometer pot;
+
+	public static Encoder leftDriveEncoder;
+	public static Encoder rightDriveEncoder;
     /*
      Example code to use limit switch:
      if (limitSwitchName.get())
@@ -86,7 +90,6 @@ public class RobotMap {
     //Other sensors
 	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
 	public static AHRS navx;	// https://pdocs.kauailabs.com/navx-mxp/
-	public static AnalogUltraSon ultrason;	//custom class
 	
 
 
@@ -156,6 +159,8 @@ public class RobotMap {
 		gyro = new AnalogGyro(1);
 		navx = new AHRS(SPI.Port.kMXP);
 		pot = new AnalogPotentiometer(0,360,0);
+		leftDriveEncoder = new Encoder(0, 1);
+		rightDriveEncoder = new Encoder(2, 3);
 
 		//creates motor groups for TankDrive
 		/*
