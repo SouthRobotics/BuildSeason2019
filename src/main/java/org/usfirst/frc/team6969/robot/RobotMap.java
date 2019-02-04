@@ -86,6 +86,8 @@ public class RobotMap {
     //Other sensors
 	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
 	public static AHRS navx;	// https://pdocs.kauailabs.com/navx-mxp/
+	public static AnalogUltraSon ultrason;	//custom class
+
 
     /*
      * Example code to use Analog gyro:
@@ -152,7 +154,8 @@ public class RobotMap {
 	    //Other ports for sensors
 		gyro = new AnalogGyro(1);
 		navx = new AHRS(SPI.Port.kMXP);
-	    
+		pot = new AnalogPotentiometer(0,360,0);
+
 		//creates motor groups for TankDrive
 		/*
 	    final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainFrontLeft, driveTrainMiddleLeft, driveTrainBackLeft); //left drivetrain motors
