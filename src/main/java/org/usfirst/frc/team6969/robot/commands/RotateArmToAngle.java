@@ -63,7 +63,7 @@ public class RotateArmToAngle extends Command implements PIDOutput {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-        arm.rotate(joint, pidOutput);
+        Robot.arm.rotate(joint, pidOutput);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -77,9 +77,9 @@ public class RotateArmToAngle extends Command implements PIDOutput {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-        arm.rotate(joint, 0);
+        Robot.arm.rotate(joint, 0);
         anglecontroller.disable();
-        Scheduler.getInstance().add(new LockJoint(joint, potentiometer));
+        Scheduler.getInstance().add(new LockJoint(potentiometer, joint));
 	}
 
 	// Called when another command which requires one or more of the same

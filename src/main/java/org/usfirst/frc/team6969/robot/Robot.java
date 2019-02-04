@@ -9,6 +9,7 @@ package org.usfirst.frc.team6969.robot;
 
 import java.util.ArrayList;
 
+import org.usfirst.frc.team6969.robot.subsystems.Arm;
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 
@@ -37,7 +38,7 @@ public class Robot extends TimedRobot {
 	// public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static DriveTrain driveTrain;
 	public static Claw claw;
-
+	public static Arm arm;
 	
 	//controller map
 	public static OI m_oi;
@@ -52,6 +53,7 @@ public class Robot extends TimedRobot {
 	public static int pixyCenter;
 	public static final int PIXYXCENTER = 158;	// pixy cam x-values range from 0 to 316 
 	
+	
 	//auto command... will vary based on location/alliance
 	public Command autonomousCommand = null;
 	
@@ -64,6 +66,7 @@ public class Robot extends TimedRobot {
 		RobotMap.init();
 		driveTrain = new DriveTrain();
 		claw = new Claw();
+		arm = new Arm();
 		m_oi = new OI();
 		pdp = new PowerDistributionPanel(30);
 		ds = DriverStation.getInstance();

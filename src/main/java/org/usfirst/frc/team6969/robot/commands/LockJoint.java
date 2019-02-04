@@ -21,29 +21,26 @@ import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 
-/**
- * An example command.  You can replace me with your own command.
- */
-public class RotateArmToAngle extends Command implements PIDOutput {
+
+public class LockJoint extends Command implements PIDOutput {
     private double pidOutput;
     private double targetAngle;
     private Potentiometer potentiometer;
     private PIDController anglecontroller;
     private int joint;
 
-	public RotateArmToAngle(double angle, Potentiometer potentiometer, int joint) {
+	public LockJoint(Potentiometer potentiometer, int joint) {
         // Use requires() here to declare subsystem dependencies
-        super("Rotate Arm To Angle PID");
-        targetAngle = angle;
+        super("Lock Joint PID");
         this.potentiometer = potentiometer;
         this.joint = joint;
+        targetAngle = potentiometer.get();
         requires(Robot.arm);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-        targetAngle += potentiometer.get();
         initPIDController();
     }
     
@@ -63,23 +60,18 @@ public class RotateArmToAngle extends Command implements PIDOutput {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-        arm.rotate(joint, pidOutput);
+        Robot.arm.rotate(joint, pidOutput);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		if (anglecontroller.onTarget())
-            return true;
         return false;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-        arm.rotate(joint, 0);
-        anglecontroller.disable();
-        Scheduler.getInstance().add(new LockJoint(joint, potentiometer));
 	}
 
 	// Called when another command which requires one or more of the same
