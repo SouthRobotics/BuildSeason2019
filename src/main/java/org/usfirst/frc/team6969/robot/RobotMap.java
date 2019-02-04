@@ -73,7 +73,7 @@ public class RobotMap {
     //Limit switches
 	public static DigitalInput magLimit;
 	
-	//public static Potentiometer pot;
+	public static Potentiometer pot;
     /*
      Example code to use limit switch:
      if (limitSwitchName.get())
@@ -87,6 +87,7 @@ public class RobotMap {
 	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
 	public static AHRS navx;	// https://pdocs.kauailabs.com/navx-mxp/
 	public static AnalogUltraSon ultrason;	//custom class
+	
 
 
     /*

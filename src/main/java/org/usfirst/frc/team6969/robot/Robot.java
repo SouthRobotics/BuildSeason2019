@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;;
 
 /**
@@ -106,7 +107,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		// autonomousCommand = new MoveClawToHeight(5, new Spark(0));
-		autonomousCommand = new MoveDistance(5);
+		autonomousCommand = null;
 
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
@@ -228,7 +229,7 @@ public class Robot extends TimedRobot {
 	private void displaySmartDashboardData() {
 		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
-		SmartDashboard.putNumber("Potentiometer", AnalogPot.getAngle());
+		SmartDashboard.putNumber("Potentiometer", RobotMap.pot.get());
 	}
 }
 
