@@ -34,8 +34,8 @@ public class DriveStraight extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-        //leftEncoder = RobotMap.leftEncoder;
-        //rightEncoder = RobotMap.rightEncoder;
+        leftEncoder = RobotMap.leftDriveEncoder;
+        rightEncoder = RobotMap.rightDriveEncoder;
         leftEncoder.setDistancePerPulse(distancePerPulse);
         rightEncoder.setDistancePerPulse(distancePerPulse);
         leftEncoder.reset();

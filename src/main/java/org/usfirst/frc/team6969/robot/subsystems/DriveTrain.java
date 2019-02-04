@@ -20,11 +20,15 @@ public class DriveTrain extends Subsystem {
 	public static double Kp;
 	public static double Ki;
 	public static double Kd;
+	private double leftSpeed;
+	private double rightSpeed;
 	
 	public DriveTrain() {
 		Kp = 0.02;
 		Ki = 0.0;
 		Kd = 0.01;
+		leftSpeed = 0;
+		rightSpeed = 0;
 	}
 
 	public void initDefaultCommand() 
@@ -48,6 +52,15 @@ public class DriveTrain extends Subsystem {
 	public double rightSpeed()//returns level that right trigger is pressed
 	{
 		return Robot.m_oi.rightJoy.getRawAxis(Robot.m_oi.yAxis)*-1;
+	}
+	public void setLeftSpeed(double speed) {
+		leftSpeed = speed;
+	}
+	public void setRightSpeed(double speed) {
+		rightSpeed = speed;
+	}
+	public void drive() {
+		robotDrive.tankDrive(leftSpeed, rightSpeed);
 	}
 	public void move()//called in TeleOpDrive.java
 	{
