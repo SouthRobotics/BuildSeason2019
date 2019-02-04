@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team6969.robot;
 
+import org.usfirst.frc.team6969.robot.commands.GripPipelineHATCH;
 //import org.usfirst.frc.team6969.robot.commands.ExampleSchedule;
 import org.usfirst.frc.team6969.robot.commands.ManualOverride;
 import org.usfirst.frc.team6969.robot.commands.RotateChassisToAngle;
@@ -88,6 +89,7 @@ public class OI {
 		lButton5.whenPressed(new RotateChassisToAnglePID(-90));
 		rButton5.whileHeld(new SpinRollerIntake(true));
 		rButton6.whileHeld(new SpinRollerIntake(false));
+		lButton7.whenPressed(new GripPipelineHATCH());
 
 	}
 	
