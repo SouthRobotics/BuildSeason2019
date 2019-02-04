@@ -226,11 +226,12 @@ public class Robot extends TimedRobot {
 	Place values to monitor in Smart Dashboard
 	*/
 	private void displaySmartDashboardData() {
+		double potDegrees = RobotMap.pot.get() * 72;
 		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
 		SmartDashboard.putNumber("Potentiometer", RobotMap.pot.get());
 		SmartDashboard.putNumber("Encoder", RobotMap.leftDriveEncoder.get());
-		SmartDashboard.putNumber("Potentiometer", (RobotMap.pot.get() / 5));
+		SmartDashboard.putNumber("Potentiometer", potDegrees);
 	}
 }
 
