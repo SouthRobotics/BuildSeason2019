@@ -13,6 +13,7 @@ import org.usfirst.frc.team6969.robot.commands.RotateChassisToAngle;
 import org.usfirst.frc.team6969.robot.commands.RotateChassisToAnglePID;
 import org.usfirst.frc.team6969.robot.commands.RotateToPixyTarget;
 import org.usfirst.frc.team6969.robot.commands.SpinRollerIntake;
+import org.usfirst.frc.team6969.robot.commands.ZeroYaw;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -88,7 +89,7 @@ public class OI {
 		lButton5.whenPressed(new RotateChassisToAnglePID(-90));
 		rButton5.whileHeld(new SpinRollerIntake(true));
 		rButton6.whileHeld(new SpinRollerIntake(false));
-
+		rButton3.whenPressed(new ZeroYaw());
 	}
 	
     /*public XboxController getController() {
