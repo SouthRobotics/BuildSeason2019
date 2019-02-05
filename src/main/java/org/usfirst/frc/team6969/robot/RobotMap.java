@@ -10,6 +10,7 @@ package org.usfirst.frc.team6969.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SPI;
@@ -147,10 +148,16 @@ public class RobotMap {
 		*/
 
 	    //PWM ports for sensors
-		//pot = new AnalogPotentiometer(0, 360);
+	    magLimit = new  DigitalInput(0);
+		
+		//potentiometers center wire goes to S.
+		bottomJointPot = new AnalogPotentiometer(0, 360, 0);
+		middleJointPot = new AnalogPotentiometer(1, 360, 0);
+		topJointPot = new AnalogPotentiometer(2, 360, 0);
+
 
 	    //Other ports for sensors
-		gyro = new AnalogGyro(1);
+		//gyro = new AnalogGyro(1);
 		navx = new AHRS(SPI.Port.kMXP);
 	    
 		//creates motor groups for TankDrive
