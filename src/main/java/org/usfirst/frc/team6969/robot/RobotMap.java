@@ -10,7 +10,6 @@ package org.usfirst.frc.team6969.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SPI;
@@ -63,18 +62,15 @@ public class RobotMap {
     public static Spark driveTrainBackLeft;
 	public static Spark driveTrainFrontLeft;
 	
+    //Spark motorcontrollers that control subsystems
 	public static SpeedController clawLeft;
 	public static SpeedController clawRight;
 	
-    
-    //Spark motorcontrollers that control subsystems
-    
     //list of sensors: http://1418.team/assets/resources/Introduction%20to%20Sensors.pdf
     
     //Limit switches
 	public static DigitalInput magLimit;
-	
-	//public static Potentiometer pot;
+
     /*
      Example code to use limit switch:
      if (limitSwitchName.get())
@@ -83,7 +79,11 @@ public class RobotMap {
 
 	 // Potentiometers
 	 // https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599719-potentiometers-measuring-joint-angle-or-linear-motion
-    
+	public static Potentiometer bottomJointPot;
+	public static Potentiometer middleJointPot;
+	public static Potentiometer topJointPot;
+	 
+
     //Other sensors
 	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
 	public static AHRS navx;	// https://pdocs.kauailabs.com/navx-mxp/
