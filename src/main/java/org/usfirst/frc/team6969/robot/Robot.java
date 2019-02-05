@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
-
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -19,7 +18,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;;
 
 /**
@@ -32,9 +30,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;;
 public class Robot extends TimedRobot {
 	// Robot class controls the whole robot
 	// if you ever get lost: https://frc-pdr.readthedocs.io/en/latest/index.html
-
-	// subsystems
-	// public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
+	
+	//subsystems
+	//public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static DriveTrain driveTrain;
 	public static Claw claw;
 
@@ -105,7 +103,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		// autonomousCommand = new MoveClawToHeight(5, new Spark(0));
+
 		autonomousCommand = null;
 
 		if (autonomousCommand != null) {
@@ -226,7 +224,6 @@ public class Robot extends TimedRobot {
 	Place values to monitor in Smart Dashboard
 	*/
 	private void displaySmartDashboardData() {
-		double potDegrees = RobotMap.pot.get() * 72;
 		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
 		SmartDashboard.putNumber("Angle", RobotMap.bottomJointPot.get());
