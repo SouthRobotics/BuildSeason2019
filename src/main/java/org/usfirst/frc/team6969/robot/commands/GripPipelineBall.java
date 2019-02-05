@@ -5,6 +5,10 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team6969.robot.Robot;
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import org.opencv.core.Mat;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -89,13 +93,16 @@ public class GripPipelineBall extends Command {
 	 * This is the primary method that runs the entire pipeline and updates the outputs.
 	 */
 	public KeyPoint[] process() {
-		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-        CvSink cvSink = CameraServer.getInstance().getVideo();
-		Mat source0 = new Mat();
-		cvSink.grabFrame(source0); 
-		
-		// Step Blur0:
-		Mat blur0Input = source0;
+		CvSink cvSink = CameraServer.getInstance().getVideo();
+		Mat source = new Mat();
+		CvSource outputStream = CameraServer.getInstance().putVideo("s1", 640, 480);
+		outputStream.putFrame(source);
+		if(source.empty()) {
+			System.out.print("ERRORORORORO");
+		}
+			//blur
+
+		Mat blur0Input = source;
 		BlurType blur0Type = BlurType.get("Median Filter");
 		double blur0Radius = 10.377358490566039;
 		blur(blur0Input, blur0Type, blur0Radius, blur0Output);
