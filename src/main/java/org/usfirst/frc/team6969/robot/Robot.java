@@ -14,10 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import org.usfirst.frc.team6969.robot.subsystems.*;
 import org.usfirst.frc.team6969.robot.RobotMap;
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;
+
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 
@@ -53,9 +50,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-		camera.setResolution(640, 480);
-		
 		RobotMap.init();
 		driveTrain = new DriveTrain();
 //		testMovement = new TestMovement();

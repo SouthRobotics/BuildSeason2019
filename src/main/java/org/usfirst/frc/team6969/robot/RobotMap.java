@@ -94,7 +94,8 @@ public class RobotMap {
 	
 	public static void init() {
 		//Talon Documentation: https://www.ctr-electronics.com/downloads/api/java/html/index.html?com/ctre/phoenix/motorcontrol/can/WPI_TalonSRX.html
-		
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(640, 480);
 
 		
 		/*
