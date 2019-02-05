@@ -86,7 +86,7 @@ public class OI {
 		rButton2.whenPressed(new ManualOverride());
 		lButton3.whenPressed(new RotateToPixyTarget(Robot.pixyCenter));
 		lButton4.whenPressed(new RotateChassisToAngle(90));
-		lButton5.whenPressed(new RotateChassisToAnglePID(-90));
+		lButton5.whileHeld(new RotateChassisToAnglePID(-90));
 		rButton5.whileHeld(new SpinRollerIntake(true));
 		rButton6.whileHeld(new SpinRollerIntake(false));
 		rButton3.whenPressed(new ZeroYaw());
