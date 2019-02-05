@@ -7,67 +7,62 @@
 
 package org.usfirst.frc.team6969.robot.commands;
 
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import com.kauailabs.navx.frc.AHRS;
-
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
-import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 
 /**
  * An example command.  You can replace me with your own command.
  */
-public class RotateChassisToAnglePID extends Command {
-    private double targetAngle;
-    public static PIDController anglecontroller;
-    private AHRS navx;
-    private int count;
+public class DriveStraight extends Command {
+    private double error;
+    private Encoder leftEncoder;    // Grayhill 63R
+    private Encoder rightEncoder;
+    private static final double speed = 0.6;
+    private static final double wheelDiameter = 6;
+    private static final double pulsesPerRevolution = 256;
+    private static final double encoderGearRatio = 3;
+    private static final double gearRatio = 64 / 1;
+    private static final double distancePerPulse = Math.PI * wheelDiameter / pulsesPerRevolution / encoderGearRatio / gearRatio;
+    private static final double kP = 0.05;
 
-	public RotateChassisToAnglePID(double angle) {
-        // Use requires() here to declare subsystem dependencies
-        super("Rotate Chassis To Angle PID");
-        targetAngle = angle;
-        navx = RobotMap.navx;
-        requires(Robot.driveTrain);
-        anglecontroller = DriveTrain.angleController;
-        count = 0;
-        }
+	public DriveStraight() {
+		requires(Robot.driveTrain);
+	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-                navx.zeroYaw();
-                anglecontroller.setSetpoint(90);
-                anglecontroller.enable();
-        }
-    
+        leftEncoder = RobotMap.leftDriveEncoder;
+        rightEncoder = RobotMap.rightDriveEncoder;
+        leftEncoder.setDistancePerPulse(distancePerPulse);
+        rightEncoder.setDistancePerPulse(distancePerPulse);
+        leftEncoder.reset();
+        rightEncoder.reset();
+	}
+
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-                Robot.robotDrive.tankDrive(DriveTrain.rotateSpeed, -1*DriveTrain.rotateSpeed);
-        }
+        error = leftEncoder.getDistance() - rightEncoder.getDistance();
+        Robot.robotDrive.arcadeDrive(speed, kP * error, false);
+	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-                return false;
+		return false;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-                Robot.robotDrive.tankDrive(0, 0);
-                anglecontroller.disable();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-                end();
 	}
 }
