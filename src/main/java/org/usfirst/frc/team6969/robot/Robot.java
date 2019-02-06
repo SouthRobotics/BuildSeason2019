@@ -9,11 +9,15 @@ package org.usfirst.frc.team6969.robot;
 
 import java.util.ArrayList;
 
+import org.usfirst.frc.team6969.robot.commands.GripPipelineHATCH;
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.vision.VisionThread;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -31,6 +35,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;;
  * project.
  */
 public class Robot extends TimedRobot {
+	
+	private static final int IMG_WIDTH = 266;
+	private static final int IMG_HEIGHT = 200;
+	
+	private VisionThread visionThread;
+	private double centerX = 0.0;
+	
+	private final Object imgLock = new Object();
 	// Robot class controls the whole robot
 	// if you ever get lost: https://frc-pdr.readthedocs.io/en/latest/index.html
 	
@@ -77,7 +89,16 @@ public class Robot extends TimedRobot {
 			pixyData.add(new Integer(-1));
 		pixyCenter = 158;
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-		camera.setResolution(266, 200);
+		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
+		visionThread = new VisionThread(camera, new GripPipelineHATCH(), pipeline -> {
+			if (!pipeline.filterContoursOutput().isEmpty()) {
+				Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+				synchronized (imgLock) {
+					centerX = r.x + (r.width / 2);
+				}
+			}
+		});
+		visionThread.start();
 	}
 
 	/**
@@ -121,6 +142,13 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		double centerX;
+		synchronized (imgLock) {
+			centerX = this.centerX;
+		}
+		double turn = centerX - (IMG_WIDTH / 2);
+		System.out.println(centerX);
+	
 		Scheduler.getInstance().run();
 	}
 

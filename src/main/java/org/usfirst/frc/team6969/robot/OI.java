@@ -89,7 +89,6 @@ public class OI {
 		lButton5.whenPressed(new RotateChassisToAnglePID(-90));
 		rButton5.whileHeld(new SpinRollerIntake(true));
 		rButton6.whileHeld(new SpinRollerIntake(false));
-		lButton7.whenPressed(new GripPipelineHATCH());
 
 	}
 	
