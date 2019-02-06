@@ -1,5 +1,3 @@
-package org.usfirst.frc.team6969.robot.commands;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -28,11 +26,10 @@ import org.opencv.objdetect.*;
 public class GripPipeline implements VisionPipeline {
 
 	//Outputs
+	private Mat resizeImageOutput = new Mat();
 	private Mat blur0Output = new Mat();
 	private Mat normalize0Output = new Mat();
-	private Mat rgbThresholdOutput = new Mat();
 	private Mat hsvThresholdOutput = new Mat();
-	private Mat maskOutput = new Mat();
 	private Mat blur1Output = new Mat();
 	private Mat cvErodeOutput = new Mat();
 	private Mat normalize1Output = new Mat();
@@ -47,42 +44,37 @@ public class GripPipeline implements VisionPipeline {
 	 * This is the primary method that runs the entire pipeline and updates the outputs.
 	 */
 	@Override	public void process(Mat source0) {
+		// Step Resize_Image0:
+		Mat resizeImageInput = source0;
+		double resizeImageWidth = 640;
+		double resizeImageHeight = 480;
+		int resizeImageInterpolation = Imgproc.INTER_CUBIC;
+		resizeImage(resizeImageInput, resizeImageWidth, resizeImageHeight, resizeImageInterpolation, resizeImageOutput);
+
 		// Step Blur0:
-		Mat blur0Input = source0;
+		Mat blur0Input = resizeImageOutput;
 		BlurType blur0Type = BlurType.get("Median Filter");
-		double blur0Radius = 10.377358490566039;
+		double blur0Radius = 9.178990311065787;
 		blur(blur0Input, blur0Type, blur0Radius, blur0Output);
 
 		// Step Normalize0:
 		Mat normalize0Input = blur0Output;
 		int normalize0Type = Core.NORM_MINMAX;
 		double normalize0Alpha = 0.0;
-		double normalize0Beta = 300.0;
+		double normalize0Beta = 200.0;
 		normalize(normalize0Input, normalize0Type, normalize0Alpha, normalize0Beta, normalize0Output);
-
-		// Step RGB_Threshold0:
-		Mat rgbThresholdInput = normalize0Output;
-		double[] rgbThresholdRed = {214.180790960452, 255.0};
-		double[] rgbThresholdGreen = {189.68926553672316, 255.0};
-		double[] rgbThresholdBlue = {7.203389830508475, 189.09090909090907};
-		rgbThreshold(rgbThresholdInput, rgbThresholdRed, rgbThresholdGreen, rgbThresholdBlue, rgbThresholdOutput);
 
 		// Step HSV_Threshold0:
 		Mat hsvThresholdInput = normalize0Output;
-		double[] hsvThresholdHue = {5.084745762711864, 54.86631016042781};
-		double[] hsvThresholdSaturation = {86.44067796610169, 168.63636363636365};
-		double[] hsvThresholdValue = {165.6779661016949, 255.0};
+		double[] hsvThresholdHue = {20.338983050847457, 59.67914438502674};
+		double[] hsvThresholdSaturation = {57.6271186440678, 255.0};
+		double[] hsvThresholdValue = {109.53212006665856, 228.89078498293512};
 		hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
-		// Step Mask0:
-		Mat maskInput = hsvThresholdOutput;
-		Mat maskMask = rgbThresholdOutput;
-		mask(maskInput, maskMask, maskOutput);
-
 		// Step Blur1:
-		Mat blur1Input = maskOutput;
+		Mat blur1Input = hsvThresholdOutput;
 		BlurType blur1Type = BlurType.get("Gaussian Blur");
-		double blur1Radius = 5.660377358490567;
+		double blur1Radius = 10.81081081081081;
 		blur(blur1Input, blur1Type, blur1Radius, blur1Output);
 
 		// Step CV_erode0:
@@ -108,19 +100,27 @@ public class GripPipeline implements VisionPipeline {
 
 		// Step Filter_Contours0:
 		ArrayList<MatOfPoint> filterContoursContours = findContoursOutput;
-		double filterContoursMinArea = 1000.0;
-		double filterContoursMinPerimeter = 0.0;
+		double filterContoursMinArea = 10000.0;
+		double filterContoursMinPerimeter = 0;
 		double filterContoursMinWidth = 0;
 		double filterContoursMaxWidth = 1000;
 		double filterContoursMinHeight = 0;
 		double filterContoursMaxHeight = 1000;
-		double[] filterContoursSolidity = {0.0, 100.0};
+		double[] filterContoursSolidity = {0, 100};
 		double filterContoursMaxVertices = 1000000;
 		double filterContoursMinVertices = 0;
 		double filterContoursMinRatio = 0;
 		double filterContoursMaxRatio = 1000;
 		filterContours(filterContoursContours, filterContoursMinArea, filterContoursMinPerimeter, filterContoursMinWidth, filterContoursMaxWidth, filterContoursMinHeight, filterContoursMaxHeight, filterContoursSolidity, filterContoursMaxVertices, filterContoursMinVertices, filterContoursMinRatio, filterContoursMaxRatio, filterContoursOutput);
 
+	}
+
+	/**
+	 * This method is a generated getter for the output of a Resize_Image.
+	 * @return Mat output from Resize_Image.
+	 */
+	public Mat resizeImageOutput() {
+		return resizeImageOutput;
 	}
 
 	/**
@@ -140,27 +140,11 @@ public class GripPipeline implements VisionPipeline {
 	}
 
 	/**
-	 * This method is a generated getter for the output of a RGB_Threshold.
-	 * @return Mat output from RGB_Threshold.
-	 */
-	public Mat rgbThresholdOutput() {
-		return rgbThresholdOutput;
-	}
-
-	/**
 	 * This method is a generated getter for the output of a HSV_Threshold.
 	 * @return Mat output from HSV_Threshold.
 	 */
 	public Mat hsvThresholdOutput() {
 		return hsvThresholdOutput;
-	}
-
-	/**
-	 * This method is a generated getter for the output of a Mask.
-	 * @return Mat output from Mask.
-	 */
-	public Mat maskOutput() {
-		return maskOutput;
 	}
 
 	/**
@@ -205,18 +189,16 @@ public class GripPipeline implements VisionPipeline {
 
 
 	/**
-	 * Segment an image based on color ranges.
-	 * @param input The image on which to perform the RGB threshold.
-	 * @param red The min and max red.
-	 * @param green The min and max green.
-	 * @param blue The min and max blue.
+	 * Scales and image to an exact size.
+	 * @param input The image on which to perform the Resize.
+	 * @param width The width of the output in pixels.
+	 * @param height The height of the output in pixels.
+	 * @param interpolation The type of interpolation.
 	 * @param output The image in which to store the output.
 	 */
-	private void rgbThreshold(Mat input, double[] red, double[] green, double[] blue,
-		Mat out) {
-		Imgproc.cvtColor(input, out, Imgproc.COLOR_BGR2RGB);
-		Core.inRange(out, new Scalar(red[0], green[0], blue[0]),
-			new Scalar(red[1], green[1], blue[1]), out);
+	private void resizeImage(Mat input, double width, double height,
+		int interpolation, Mat output) {
+		Imgproc.resize(input, output, new Size(width, height), 0.0, 0.0, interpolation);
 	}
 
 	/**
@@ -233,18 +215,6 @@ public class GripPipeline implements VisionPipeline {
 		Imgproc.cvtColor(input, out, Imgproc.COLOR_BGR2HSV);
 		Core.inRange(out, new Scalar(hue[0], sat[0], val[0]),
 			new Scalar(hue[1], sat[1], val[1]), out);
-	}
-
-	/**
-	 * Filter out an area of an image using a binary mask.
-	 * @param input The image on which the mask filters.
-	 * @param mask The binary image that is used to filter.
-	 * @param output The image in which to store the output.
-	 */
-	private void mask(Mat input, Mat mask, Mat output) {
-		mask.convertTo(mask, CvType.CV_8UC1);
-		Core.bitwise_xor(output, output, output);
-		input.copyTo(output, mask);
 	}
 
 	/**
