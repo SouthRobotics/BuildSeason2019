@@ -21,11 +21,11 @@ import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class RotateChassisToAnglePID extends Command implements PIDOutput {
-    private double pidOutput;
+public class RotateChassisToAnglePID extends Command {
     private double targetAngle;
-    private PIDController anglecontroller;
+    public static PIDController anglecontroller;
     private AHRS navx;
+    private int count;
 
 	public RotateChassisToAnglePID(double angle) {
         // Use requires() here to declare subsystem dependencies
@@ -33,59 +33,41 @@ public class RotateChassisToAnglePID extends Command implements PIDOutput {
         targetAngle = angle;
         navx = RobotMap.navx;
         requires(Robot.driveTrain);
-	}
+        anglecontroller = DriveTrain.angleController;
+        count = 0;
+        }
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-        setTimeout(5); // command auto stops after 5 seconds (prevents us from getting stuck in infinite loop)
-        navx.zeroYaw();
-        initPIDController();
-    }
+                navx.zeroYaw();
+                anglecontroller.setSetpoint(90);
+                anglecontroller.enable();
+        }
     
-    public void initPIDController() {
-        anglecontroller = new PIDController(DriveTrain.Kp,
-                DriveTrain.Ki,
-                DriveTrain.Kd,
-                navx, this);    //pid values need tuning, especially for smaller angles!
-        anglecontroller.setInputRange(-180.0, 180.0);
-        anglecontroller.setOutputRange(-0.6, 0.6);  // don't need to rotate extremely fast
-        anglecontroller.setAbsoluteTolerance(1);  // 2 degree threshold
-        anglecontroller.setContinuous(true);
-        anglecontroller.setSetpoint(targetAngle);
-        anglecontroller.enable();
-    }
-
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-        Robot.robotDrive.tankDrive(pidOutput, -pidOutput);
-	}
+                Robot.robotDrive.tankDrive(DriveTrain.rotateSpeed, -1*DriveTrain.rotateSpeed);
+        }
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		if (anglecontroller.onTarget() && isTimedOut())
-            return true;
-        return false;
+                return false;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-        Robot.robotDrive.tankDrive(0, 0);
-        anglecontroller.disable();
+                Robot.robotDrive.tankDrive(0, 0);
+                anglecontroller.disable();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-        end();
+                end();
 	}
-
-    @Override
-    public void pidWrite(double output) {
-        pidOutput = output;
-    }
 }
