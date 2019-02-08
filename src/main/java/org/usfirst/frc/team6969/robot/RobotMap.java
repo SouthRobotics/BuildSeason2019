@@ -12,7 +12,6 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -63,21 +62,15 @@ public class RobotMap {
     public static Spark driveTrainBackLeft;
 	public static Spark driveTrainFrontLeft;
 	
+    //Spark motorcontrollers that control subsystems
 	public static SpeedController clawLeft;
 	public static SpeedController clawRight;
 	
-    
-    //Spark motorcontrollers that control subsystems
-    
     //list of sensors: http://1418.team/assets/resources/Introduction%20to%20Sensors.pdf
     
     //Limit switches
 	public static DigitalInput magLimit;
-	
-	public static Potentiometer pot;
 
-	public static Encoder leftDriveEncoder;
-	public static Encoder rightDriveEncoder;
     /*
      Example code to use limit switch:
      if (limitSwitchName.get())
@@ -86,12 +79,14 @@ public class RobotMap {
 
 	 // Potentiometers
 	 // https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599719-potentiometers-measuring-joint-angle-or-linear-motion
-    
+	public static Potentiometer bottomJointPot;
+	public static Potentiometer middleJointPot;
+	public static Potentiometer topJointPot;
+	 
+
     //Other sensors
 	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
 	public static AHRS navx;	// https://pdocs.kauailabs.com/navx-mxp/
-	
-
 
     /*
      * Example code to use Analog gyro:
@@ -153,16 +148,18 @@ public class RobotMap {
 		*/
 
 	    //PWM ports for sensors
-		//pot = new AnalogPotentiometer(0, 360);
+	    magLimit = new  DigitalInput(0);
+		
+		//potentiometers center wire goes to S.
+		bottomJointPot = new AnalogPotentiometer(0, 360, 0);
+		middleJointPot = new AnalogPotentiometer(1, 360, 0);
+		topJointPot = new AnalogPotentiometer(2, 360, 0);
+
 
 	    //Other ports for sensors
-		gyro = new AnalogGyro(1);
+		//gyro = new AnalogGyro(1);
 		navx = new AHRS(SPI.Port.kMXP);
-		pot = new AnalogPotentiometer(0,360,0);
-		leftDriveEncoder = new Encoder(0, 1);
-		rightDriveEncoder = new Encoder(2, 3);
-		
-
+	    
 		//creates motor groups for TankDrive
 		/*
 	    final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainFrontLeft, driveTrainMiddleLeft, driveTrainBackLeft); //left drivetrain motors
