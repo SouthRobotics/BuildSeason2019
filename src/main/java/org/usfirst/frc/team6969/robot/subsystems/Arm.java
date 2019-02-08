@@ -32,6 +32,9 @@ public class Arm extends Subsystem {
     private static Potentiometer middlePotentiometer;
     private static Potentiometer topPotentiometer;
     private static Encoder rotatingPlatformEncoder;
+    public static PIDController bottomAnglePID;
+    public static PIDController middleAnglePID;
+    public static PIDController topAnglePID;
 
     public void initDefaultCommand() {
         rotatingPlatformMotor = RobotMap.rotatingPlatformMotor;
@@ -43,6 +46,7 @@ public class Arm extends Subsystem {
         topPotentiometer = RobotMap.topPotentiometer;
         rotatingPlatformEncoder = RobotMap.rotatingPlatformEncoder;
         setDefaultCommand(null);
+        bottomAnglePID = new PIDController()
 	}
     
     public void rotate(int joint, double speed) {  
