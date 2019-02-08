@@ -54,6 +54,7 @@ public class RobotMap {
 
 	public static SpeedController clawLeft;
 	public static SpeedController clawRight;
+	
 	/*
 	public static SpeedController driveTrainBackRight;
 	public static SpeedController driveTrainMiddleRight;
@@ -136,8 +137,6 @@ public class RobotMap {
 
 		clawLeft = new WPI_TalonSRX(0); 
 		clawRight =  new WPI_TalonSRX(1);
-		
-		
 		//PWM port numbers for subsystems.
 		
 		/*
