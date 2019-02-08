@@ -18,6 +18,7 @@ import org.usfirst.frc.team6969.robot.commands.SpinRollerIntake;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -54,7 +55,7 @@ public class OI {
 
 	public int yAxis = 1;
 
-	public Joystick leftJoy = new Joystick(0);
+	public static Joystick leftJoy = new Joystick(0);
 	public Button lButton1 = new JoystickButton(leftJoy, 1),
 		lButton2 = new JoystickButton(leftJoy, 2),
 		lButton3 = new JoystickButton(leftJoy, 3),
@@ -68,7 +69,7 @@ public class OI {
 		lButton11 = new JoystickButton(leftJoy, 11),
 		lButton12 = new JoystickButton(leftJoy, 12);
 
-	public Joystick rightJoy = new Joystick(1);
+	public static Joystick rightJoy = new Joystick(1);
 	public Button rButton1 = new JoystickButton(rightJoy, 1),
 		rButton2 = new JoystickButton(rightJoy, 2),
 		rButton3 = new JoystickButton(rightJoy, 3),
@@ -81,6 +82,8 @@ public class OI {
 		rButton10 = new JoystickButton(rightJoy, 10),
 		rButton11 = new JoystickButton(rightJoy, 11),
 		rButton12 = new JoystickButton(rightJoy, 12);
+
+		
     
     public OI() {
 		rButton2.whenPressed(new ManualOverride());
@@ -91,6 +94,9 @@ public class OI {
 		rButton6.whileHeld(new SpinRollerIntake(false));
 
 	}
+
+	
+	
 	
     /*public XboxController getController() {
         return controller;
