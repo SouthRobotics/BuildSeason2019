@@ -9,6 +9,8 @@ package org.usfirst.frc.team6969.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -56,6 +58,8 @@ public class RobotMap {
 	public static SpeedController driveTrainBackLeft;
 	public static SpeedController driveTrainMiddleLeft;
 	public static SpeedController driveTrainFrontLeft;
+
+	public static CameraServer abc;
 	
     /*
      Example code to use limit switch:
@@ -111,6 +115,7 @@ public class RobotMap {
 		driveTrainBackLeft = new WPI_TalonSRX(1); 
 		driveTrainMiddleLeft = new WPI_TalonSRX(0);
 		driveTrainFrontLeft =  new WPI_TalonSRX(2);
+
 
 		//PWM port numbers for subsystems.
 		

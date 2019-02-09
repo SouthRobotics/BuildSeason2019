@@ -42,11 +42,11 @@ public class DriveTrain extends Subsystem {
 	}
 	public double leftSpeed()//returns level that left trigger is pressed
 	{
-		return Robot.m_oi.leftJoy.getRawAxis(Robot.m_oi.yAxis)*-1;//-1 because axis is inverted
+		return Robot.m_oi.leftJoy.getRawAxis(Robot.m_oi.yAxis);//-1 because axis is inverted
 	}
 	public double rightSpeed()//returns level that right trigger is pressed
 	{
-		return Robot.m_oi.rightJoy.getRawAxis(Robot.m_oi.yAxis)*-1;
+		return Robot.m_oi.rightJoy.getRawAxis(Robot.m_oi.yAxis);
 	}
 	public void move()//called in TeleOpDrive.java
 	{

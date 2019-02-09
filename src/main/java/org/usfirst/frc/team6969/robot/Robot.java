@@ -10,6 +10,8 @@ package org.usfirst.frc.team6969.robot;
 import java.util.ArrayList;
 
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
+
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -57,6 +59,8 @@ public class Robot extends TimedRobot {
 		ds = DriverStation.getInstance();
 		pdp.clearStickyFaults();	// clears pdp issue with yellow light
 		robotDrive =  RobotMap.drive;
+		CameraServer.getInstance().startAutomaticCapture();
+
 
 	}
 
