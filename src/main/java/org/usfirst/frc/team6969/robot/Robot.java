@@ -42,14 +42,7 @@ public class Robot extends TimedRobot {
     public static DifferentialDrive robotDrive;
 	public static DriverStation ds;
 	public static PowerDistributionPanel pdp;
-	public static SerialPort arduino;
-	private String arduinoString;
-	private ArrayList<Integer> pixyData;
-	private Integer pixyVal;
-	private int pixyCounter;
-	public static int pixyCenter;
-	public static final int PIXYXCENTER = 158;	// pixy cam x-values range from 0 to 316 
-	
+
 	//auto command... will vary based on location/alliance
 	public Command autonomousCommand = null;
 	
@@ -67,12 +60,7 @@ public class Robot extends TimedRobot {
 		ds = DriverStation.getInstance();
 		pdp.clearStickyFaults();	// clears pdp issue with yellow light
 		robotDrive =  RobotMap.drive;
-		arduino = new SerialPort(9600, SerialPort.Port.kUSB1);
-		arduinoString = "";
-		pixyData = new ArrayList<Integer>();
-		for (int i = 0; i < 50; i++)	// initialize pixyData
-			pixyData.add(new Integer(-1));
-		pixyCenter = 158;
+
 	}
 
 	/**
@@ -140,8 +128,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		getPixyData();
-		System.out.println("Center: " + pixyCenter);
 		reportCollisionDetection();
 		displaySmartDashboardData();
 	}
@@ -158,38 +144,7 @@ public class Robot extends TimedRobot {
 	Pre: Arduino is connected to RoboRio via usb port 1
 	Post: x-coordinate of center of target is stored in pixyCenter
 	*/
-	private void getPixyData() {
 
-		arduino.write(new byte[] {0x12}, 1);	//RoboRio must initiate communication with arduino
-		
-		if ( arduino.getBytesReceived() > 0 ) {
-
-			arduinoString = arduino.readString();
-
-			if ( pixyData.size() > 50 )	// only remember last 3 centers
-				pixyData.remove(0);
-
-			try{	//arduino sometimes passes strings containing characters other than #s when detection not found
-				
-				pixyVal = new Integer(Integer.parseInt(arduinoString));
-
-				if ( pixyVal.intValue() >= 0 ) {	//-1 is default if no object detected			
-					pixyData.add(pixyVal);
-					pixyCounter = 0;
-				}
-				else
-					pixyCounter++;
-			}
-			catch(Exception e){
-				System.out.println("Error parsing Pixy data.");
-			}
-
-			pixyCenter = pixyData.get(49);
-
-			if ( pixyCounter > 8 )	//if lost sight of object stop turning
-				pixyCenter = -1;
-		}
-	}
 
 	/*
 	Sends error message to Driver Station warning that a collision may have occured
@@ -226,7 +181,6 @@ public class Robot extends TimedRobot {
 	private void displaySmartDashboardData() {
 		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
-		SmartDashboard.putNumber("Angle", RobotMap.bottomJointPot.get());
 	}
 }
 
