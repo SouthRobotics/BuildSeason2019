@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -87,6 +88,7 @@ public class RobotMap {
     //Other sensors
 	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
 	public static AHRS navx;	// https://pdocs.kauailabs.com/navx-mxp/
+	public static Servo servo;
 
     /*
      * Example code to use Analog gyro:
@@ -159,6 +161,8 @@ public class RobotMap {
 	    //Other ports for sensors
 		//gyro = new AnalogGyro(1);
 		navx = new AHRS(SPI.Port.kMXP);
+
+		servo = new Servo(9);
 	    
 		//creates motor groups for TankDrive
 		/*
