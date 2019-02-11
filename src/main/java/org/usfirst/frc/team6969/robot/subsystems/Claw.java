@@ -9,6 +9,7 @@ package org.usfirst.frc.team6969.robot.subsystems;
 
 import org.usfirst.frc.team6969.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -19,10 +20,12 @@ public class Claw extends Subsystem {
 
     private static SpeedController leftMotor;
     private static SpeedController rightMotor;
+    private static Servo servo;
 
     public void initDefaultCommand() {
         leftMotor = RobotMap.clawLeft;
         rightMotor = RobotMap.clawRight;
+        servo = RobotMap.servo;
         setDefaultCommand(null);
 	}
     
@@ -39,5 +42,17 @@ public class Claw extends Subsystem {
     public void stopSpinning() {
         leftMotor.set(0);
         rightMotor.set(0);
+    }
+
+    public void closeServo() {
+        servo.set(1);
+    }
+
+    public void openServo() {
+        servo.set(0);
+    }
+
+    public void openServoInHatch() {
+        servo.set(0.65);
     }
 }
