@@ -112,28 +112,6 @@ public class RobotMap {
 
 		//Talon Documentation: https://www.ctr-electronics.com/downloads/api/java/html/index.html?com/ctre/phoenix/motorcontrol/can/WPI_TalonSRX.html
 
-		/*
-		Current PDP port numbers for Talons:
-		Talon 12 - Back Right
-		Talon 13 - Front Right
-		Talon 15 - Back Left
-		Talon 14 - Front Left
-
-		Sparks (Test Robot):
-		Spark 1 - Back Right
-		Spark 0 - Front Right
-		Spark 3 - Back Left
-		Spark 2 - Front Left
-		*/
-/*
-		driveTrainBackRight = new WPI_TalonSRX(10);
-		driveTrainMiddleRight = new WPI_TalonSRX(11); 
-		driveTrainFrontRight =  new WPI_TalonSRX(12);
-
-		driveTrainBackLeft = new WPI_TalonSRX(13); 
-		driveTrainMiddleLeft = new WPI_TalonSRX(14);
-		driveTrainFrontLeft =  new WPI_TalonSRX(15);
-*/
 		driveTrainBackRight = new Spark(1); 
 		driveTrainFrontRight =  new Spark(0);
 		driveTrainBackLeft = new Spark(3); 
@@ -150,19 +128,18 @@ public class RobotMap {
 		*/
 
 	    //PWM ports for sensors
-	    magLimit = new  DigitalInput(0);
 		
 		//potentiometers center wire goes to S.
-		bottomJointPot = new AnalogPotentiometer(0, 360, 0);
-		middleJointPot = new AnalogPotentiometer(1, 360, 0);
-		topJointPot = new AnalogPotentiometer(2, 360, 0);
+		// bottomJointPot = new AnalogPotentiometer(0, 360, 0);
+		// middleJointPot = new AnalogPotentiometer(1, 360, 0);
+		// topJointPot = new AnalogPotentiometer(2, 360, 0);
 
 
 	    //Other ports for sensors
 		//gyro = new AnalogGyro(1);
-		navx = new AHRS(SPI.Port.kMXP);
+		// navx = new AHRS(SPI.Port.kMXP);
 
-		servo = new Servo(9);
+		// servo = new Servo(9);
 	    
 		//creates motor groups for TankDrive
 		/*
