@@ -8,17 +8,16 @@
 package org.usfirst.frc.team6969.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-//All imports below are the default imports that come with the FRC package
-
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 
@@ -54,7 +53,6 @@ public class RobotMap {
 
 	public static SpeedController clawLeft;
 	public static SpeedController clawRight;
-	
 	/*
 	public static SpeedController driveTrainBackRight;
 	public static SpeedController driveTrainMiddleRight;
@@ -67,21 +65,28 @@ public class RobotMap {
 	public static Spark driveTrainBackRight;
     public static Spark driveTrainFrontRight;
     public static Spark driveTrainBackLeft;
-    public static Spark driveTrainFrontLeft;
+	public static Spark driveTrainFrontLeft;
 	
-    
     //Spark motorcontrollers that control subsystems
-    
+	
     //list of sensors: http://1418.team/assets/resources/Introduction%20to%20Sensors.pdf
     
     //Limit switches
-    public static DigitalInput magLimit;
+	public static DigitalInput magLimit;
+
     /*
      Example code to use limit switch:
      if (limitSwitchName.get())
      	motor.setSpeed(0);
      */
-    
+
+	 // Potentiometers
+	 // https://wpilib.screenstepslive.com/s/currentCS/m/java/l/599719-potentiometers-measuring-joint-angle-or-linear-motion
+	public static Potentiometer bottomJointPot;
+	public static Potentiometer middleJointPot;
+	public static Potentiometer topJointPot;
+	 
+
     //Other sensors
  //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
 	public static AHRS navx;	// https://pdocs.kauailabs.com/navx-mxp/
@@ -135,8 +140,9 @@ public class RobotMap {
 		driveTrainBackLeft = new Spark(3); 
 		driveTrainFrontLeft =  new Spark(2);
 
-		clawLeft = new WPI_TalonSRX(0); 
-		clawRight =  new WPI_TalonSRX(1);
+		clawLeft = new WPI_TalonSRX(14); //talon id number from phoenix tuner
+		clawRight = new WPI_TalonSRX(15);		
+		
 		//PWM port numbers for subsystems.
 		
 		/*
@@ -146,9 +152,15 @@ public class RobotMap {
 
 	    //PWM ports for sensors
 	    magLimit = new  DigitalInput(0);
-	    
-	    //Other ports for sensors
+		
+		//potentiometers center wire goes to S.
+		bottomJointPot = new AnalogPotentiometer(0, 360, 0);
+		middleJointPot = new AnalogPotentiometer(1, 360, 0);
+		topJointPot = new AnalogPotentiometer(2, 360, 0);
 
+
+	    //Other ports for sensors
+		//gyro = new AnalogGyro(1);
 		navx = new AHRS(SPI.Port.kMXP);
 	    
 		//creates motor groups for TankDrive

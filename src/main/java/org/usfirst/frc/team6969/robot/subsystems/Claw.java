@@ -13,28 +13,31 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * Roller intake 2019 build season
  */
 public class Claw extends Subsystem {
-	// Put methods for controlling this subsystem
-    // here. Call these from Commands.
-    private SpeedController leftMotor;
-    private SpeedController rightMotor;
 
-	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-        // setDefaultCommand(new MySpecialCommand());
+    private static SpeedController leftMotor;
+    private static SpeedController rightMotor;
+
+    public void initDefaultCommand() {
         leftMotor = RobotMap.clawLeft;
         rightMotor = RobotMap.clawRight;
-    }
+        setDefaultCommand(null);
+	}
     
-    public void in(){
-        leftMotor.set(-1);
-        rightMotor.set(-1);
+    public void spinIn() {  //slower intake is better control so ball doesn't bounce out
+        leftMotor.set(0.35);
+        rightMotor.set(-0.35);
     }
 
-    public void out(){
-        leftMotor.set(1);
+    public void spinOut() {
+        leftMotor.set(-1);
         rightMotor.set(1);
+    }
+
+    public void stopSpinning() {
+        leftMotor.set(0);
+        rightMotor.set(0);
     }
 }

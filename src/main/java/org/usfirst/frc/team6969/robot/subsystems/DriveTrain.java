@@ -16,7 +16,16 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class DriveTrain extends Subsystem {
 
 	private static DifferentialDrive robotDrive;
+	public static double Kp;
+	public static double Ki;
+	public static double Kd;
 	
+	public DriveTrain() {
+		Kp = 0.02;
+		Ki = 0.0;
+		Kd = 0.01;
+	}
+
 	public void initDefaultCommand() 
 	{
     	robotDrive =  RobotMap.drive;
@@ -30,19 +39,19 @@ public class DriveTrain extends Subsystem {
 
 	public boolean halfSpeed()//checks if left bumper is pressed -->go half speed
 	{
-		return Robot.m_oi.leftBumper.get();
+		return Robot.m_oi.lButton1.get();
 	}
 	public boolean fullSpeed()//checks if right bumper is pressed -->go full speed
 	{
-		return Robot.m_oi.rightBumper.get();
+		return Robot.m_oi.rButton1.get();
 	}
 	public double leftSpeed()//returns level that left trigger is pressed
 	{
-		return Robot.m_oi.getController().getRawAxis(Robot.m_oi.leftYAxis)*-1;//-1 because axis is inverted
+		return Robot.m_oi.leftJoy.getRawAxis(Robot.m_oi.yAxis)*-1;//-1 because axis is inverted
 	}
 	public double rightSpeed()//returns level that right trigger is pressed
 	{
-		return Robot.m_oi.getController().getRawAxis(Robot.m_oi.rightYAxis)*-1;
+		return Robot.m_oi.rightJoy.getRawAxis(Robot.m_oi.yAxis)*-1;
 	}
 	public void move()//called in TeleOpDrive.java
 	{

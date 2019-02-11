@@ -12,7 +12,7 @@ import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 import com.kauailabs.navx.frc.AHRS;
 
-public class RotateToAngle extends Command {
+public class RotateChassisToAngle extends Command {
     private double error;
 	private double threshold;
 	private double kP;
@@ -21,7 +21,7 @@ public class RotateToAngle extends Command {
     private Boolean rotateLeft;
     private double targetAngle;
 
-    public RotateToAngle(double angle) {
+    public RotateChassisToAngle(double angle) {
         requires(Robot.driveTrain);
 
         targetAngle = angle;

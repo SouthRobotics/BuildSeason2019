@@ -8,6 +8,9 @@
 package org.usfirst.frc.team6969.robot;
 
 import java.util.ArrayList;
+
+import org.usfirst.frc.team6969.robot.subsystems.Arm;
+import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -39,7 +42,7 @@ public class Robot extends TimedRobot {
 	//public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static DriveTrain driveTrain;
 	public static Claw claw;
-
+	public static Arm arm;
 	
 	//controller map
 	public static OI m_oi;
@@ -54,6 +57,7 @@ public class Robot extends TimedRobot {
 	public static int pixyCenter;
 	public static final int PIXYXCENTER = 158;	// pixy cam x-values range from 0 to 316 
 	
+	
 	//auto command... will vary based on location/alliance
 	public Command autonomousCommand = null;
 	
@@ -65,6 +69,8 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		RobotMap.init();
 		driveTrain = new DriveTrain();
+		claw = new Claw();
+		arm = new Arm();
 		m_oi = new OI();
 		pdp = new PowerDistributionPanel(30);
 		ds = DriverStation.getInstance();
@@ -231,6 +237,7 @@ public class Robot extends TimedRobot {
 	private void displaySmartDashboardData() {
 		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
+		SmartDashboard.putNumber("Angle", RobotMap.bottomJointPot.get());
 	}
 }
 
