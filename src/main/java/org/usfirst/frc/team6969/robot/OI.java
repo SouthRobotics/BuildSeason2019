@@ -7,8 +7,11 @@
 
 package org.usfirst.frc.team6969.robot;
 
+import org.usfirst.frc.team6969.robot.commands.CloseServo;
 //import org.usfirst.frc.team6969.robot.commands.ExampleSchedule;
 import org.usfirst.frc.team6969.robot.commands.ManualOverride;
+import org.usfirst.frc.team6969.robot.commands.OpenServo;
+import org.usfirst.frc.team6969.robot.commands.OpenServoInHatch;
 import org.usfirst.frc.team6969.robot.commands.SpinRollerIntake;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -82,6 +85,9 @@ public class OI {
 		rButton2.whenPressed(new ManualOverride());
 		rButton5.whileHeld(new SpinRollerIntake(true));
 		rButton6.whileHeld(new SpinRollerIntake(false));
+		rButton7.whenPressed(new CloseServo());
+		rButton8.whenPressed(new OpenServo());
+		rButton9.whenPressed(new OpenServoInHatch());
 
 	}
 	

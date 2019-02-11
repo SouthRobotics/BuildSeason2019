@@ -45,14 +45,14 @@ public class Claw extends Subsystem {
     }
 
     public void closeServo() {
-        servo.set(0);
-    }
-
-    public void openServo() {
         servo.set(1);
     }
 
+    public void openServo() {
+        servo.set(0);
+    }
+
     public void openServoInHatch() {
-        servo.set(0.35);
+        servo.set(0.65);
     }
 }

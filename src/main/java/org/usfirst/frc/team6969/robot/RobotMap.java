@@ -137,7 +137,7 @@ public class RobotMap {
 
 		clawLeft = new WPI_TalonSRX(14); //talon id number from phoenix tuner
 		clawRight = new WPI_TalonSRX(15);	
-		servo = new Servo(0);	
+		servo = new Servo(9);	
 		
 		//PWM port numbers for subsystems.
 		
