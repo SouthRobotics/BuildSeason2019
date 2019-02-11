@@ -36,32 +36,14 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
                                 return false;
                 }
 
-                public POVHat(Joystick stick, int x, int y){
-                }
-
-        
-                POVTrigger lRight = new POVTrigger(POVTrigger.rightX, POVTrigger.rightY),
-		lUpRight = new POVTrigger(POVTrigger.upRightX, POVTrigger.upRightY),
-		lUp = new POVTrigger(POVTrigger.upX, POVTrigger.upY),
-		lUpLeft = new POVTrigger(POVTrigger.upLeftX, POVTrigger.upLeftY),
-		lLeft = new POVTrigger(POVTrigger.leftX, POVTrigger.leftY),
-		lDownLeft = new POVTrigger(POVTrigger.downLeftX, POVTrigger.downLeftY),
-		lDown = new POVTrigger(POVTrigger.downX, POVTrigger.downY),
-		lDownRight = new POVTrigger(POVTrigger.downRightY, POVTrigger.downRightY);
-
-		POVTrigger rRight = new POVTrigger(POVTrigger.rightX, POVTrigger.rightY),
-		rUpRight = new POVTrigger(POVTrigger.upRightX, POVTrigger.upRightY),
-		rUp = new POVTrigger(POVTrigger.upX, POVTrigger.upY),
-		rUpLeft = new POVTrigger(POVTrigger.upLeftX, POVTrigger.upLeftY),
-		rLeft = new POVTrigger(POVTrigger.leftX, POVTrigger.leftY),
-		rDownLeft = new POVTrigger(POVTrigger.downLeftX, POVTrigger.downLeftY),
-		rDown = new POVTrigger(POVTrigger.downX, POVTrigger.downY),
-		rDownRight = new POVTrigger(POVTrigger.downRightY, POVTrigger.downRightY);
+                public POVTrigger(Joystick stick, int x, int y) {
                 
 
         }
 
 
+
+}
 
                 
 

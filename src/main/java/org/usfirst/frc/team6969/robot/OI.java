@@ -83,6 +83,26 @@ public class OI {
 		rButton11 = new JoystickButton(rightJoy, 11),
 		rButton12 = new JoystickButton(rightJoy, 12);
 
+	
+    public POVTrigger lRight = new POVTrigger(leftJoy, POVTrigger.rightX, POVTrigger.rightY),
+		lUpRight = new POVTrigger(leftJoy, POVTrigger.upRightX, POVTrigger.upRightY),
+		lUp = new POVTrigger(leftJoy, POVTrigger.upX, POVTrigger.upY),
+		lUpLeft = new POVTrigger(leftJoy, POVTrigger.upLeftX, POVTrigger.upLeftY),
+		lLeft = new POVTrigger(leftJoy, POVTrigger.leftX, POVTrigger.leftY),
+		lDownLeft = new POVTrigger(leftJoy, POVTrigger.downLeftX, POVTrigger.downLeftY),
+		lDown = new POVTrigger(leftJoy, POVTrigger.downX, POVTrigger.downY),
+		lDownRight = new POVTrigger(leftJoy, POVTrigger.downRightY, POVTrigger.downRightY);
+
+                
+	public POVTrigger rRight = new POVTrigger(rightJoy, POVTrigger.rightX, POVTrigger.rightY),
+		rUpRight = new POVTrigger(rightJoy, POVTrigger.upRightX, POVTrigger.upRightY),
+		rUp = new POVTrigger(rightJoy, POVTrigger.upX, POVTrigger.upY),
+		rUpLeft = new POVTrigger(rightJoy, POVTrigger.upLeftX, POVTrigger.upLeftY),
+		rLeft = new POVTrigger(rightJoy, POVTrigger.leftX, POVTrigger.leftY),
+		rDownLeft = new POVTrigger(rightJoy, POVTrigger.downLeftX, POVTrigger.downLeftY),
+		rDown = new POVTrigger(rightJoy, POVTrigger.downX, POVTrigger.downY),
+		rDownRight = new POVTrigger(rightJoy, POVTrigger.downRightY, POVTrigger.downRightY);
+
 		
     
     public OI() {
