@@ -67,42 +67,31 @@ public class GripPipelineHATCH implements VisionPipeline {
 		
 		cvSink.grabFrame(source0);
 		
+
 		// Step Blur0:
 		Mat blur0Input = source0;
 		BlurType blur0Type = BlurType.get("Median Filter");
-		double blur0Radius = 10.377358490566039;
+		double blur0Radius = 9.178990311065787;
 		blur(blur0Input, blur0Type, blur0Radius, blur0Output);
 
 		// Step Normalize0:
 		Mat normalize0Input = blur0Output;
 		int normalize0Type = Core.NORM_MINMAX;
 		double normalize0Alpha = 0.0;
-		double normalize0Beta = 300.0;
+		double normalize0Beta = 200.0;
 		normalize(normalize0Input, normalize0Type, normalize0Alpha, normalize0Beta, normalize0Output);
-
-		// Step RGB_Threshold0:
-		Mat rgbThresholdInput = normalize0Output;
-		double[] rgbThresholdRed = {214.180790960452, 255.0};
-		double[] rgbThresholdGreen = {189.68926553672316, 255.0};
-		double[] rgbThresholdBlue = {7.203389830508475, 189.09090909090907};
-		rgbThreshold(rgbThresholdInput, rgbThresholdRed, rgbThresholdGreen, rgbThresholdBlue, rgbThresholdOutput);
 
 		// Step HSV_Threshold0:
 		Mat hsvThresholdInput = normalize0Output;
-		double[] hsvThresholdHue = {5.084745762711864, 54.86631016042781};
-		double[] hsvThresholdSaturation = {86.44067796610169, 168.63636363636365};
-		double[] hsvThresholdValue = {165.6779661016949, 255.0};
+		double[] hsvThresholdHue = {20.338983050847457, 59.67914438502674};
+		double[] hsvThresholdSaturation = {57.6271186440678, 255.0};
+		double[] hsvThresholdValue = {109.53212006665856, 228.89078498293512};
 		hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
-		// Step Mask0:
-		Mat maskInput = hsvThresholdOutput;
-		Mat maskMask = rgbThresholdOutput;
-		mask(maskInput, maskMask, maskOutput);
-
 		// Step Blur1:
-		Mat blur1Input = maskOutput;
+		Mat blur1Input = hsvThresholdOutput;
 		BlurType blur1Type = BlurType.get("Gaussian Blur");
-		double blur1Radius = 5.660377358490567;
+		double blur1Radius = 10.81081081081081;
 		blur(blur1Input, blur1Type, blur1Radius, blur1Output);
 
 		// Step CV_erode0:
@@ -125,27 +114,24 @@ public class GripPipelineHATCH implements VisionPipeline {
 		Mat findContoursInput = normalize1Output;
 		boolean findContoursExternalOnly = false;
 		findContours(findContoursInput, findContoursExternalOnly, findContoursOutput);
-		outputStream.putFrame(normalize0Output);
-		
-		
-		// Step Filter_Contours0:
-		//ArrayList<MatOfPoint> filterContoursContours = findContoursOutput;
-		//double filterContoursMinArea = 1000.0;
-		//double filterContoursMinPerimeter = 0.0;
-		//double filterContoursMinWidth = 0;
-		//double filterContoursMaxWidth = 1000;
-		//double filterContoursMinHeight = 0;
-		//double filterContoursMaxHeight = 1000;
-		//double[] filterContoursSolidity = {0.0, 100.0};
-		//double filterContoursMaxVertices = 1000000;
-		//double filterContoursMinVertices = 0;
-		//double filterContoursMinRatio = 0;
-		//double filterContoursMaxRatio = 1000;
-		//filterContours(filterContoursContours, filterContoursMinArea, filterContoursMinPerimeter, filterContoursMinWidth, filterContoursMaxWidth, filterContoursMinHeight, filterContoursMaxHeight, filterContoursSolidity, filterContoursMaxVertices, filterContoursMinVertices, filterContoursMinRatio, filterContoursMaxRatio, filterContoursOutput);
-		
 
-		
+		// Step Filter_Contours0:
+		ArrayList<MatOfPoint> filterContoursContours = findContoursOutput;
+		double filterContoursMinArea = 10000.0;
+		double filterContoursMinPerimeter = 0;
+		double filterContoursMinWidth = 0;
+		double filterContoursMaxWidth = 1000;
+		double filterContoursMinHeight = 0;
+		double filterContoursMaxHeight = 1000;
+		double[] filterContoursSolidity = {0, 100};
+		double filterContoursMaxVertices = 1000000;
+		double filterContoursMinVertices = 0;
+		double filterContoursMinRatio = 0;
+		double filterContoursMaxRatio = 1000;
+		filterContours(filterContoursContours, filterContoursMinArea, filterContoursMinPerimeter, filterContoursMinWidth, filterContoursMaxWidth, filterContoursMinHeight, filterContoursMaxHeight, filterContoursSolidity, filterContoursMaxVertices, filterContoursMinVertices, filterContoursMinRatio, filterContoursMaxRatio, filterContoursOutput);
+
 	}
+
 
 
 

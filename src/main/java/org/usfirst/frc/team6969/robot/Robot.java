@@ -9,6 +9,7 @@ package org.usfirst.frc.team6969.robot;
 
 import java.util.ArrayList;
 
+import org.usfirst.frc.team6969.robot.commands.GripPipelineBALL;
 import org.usfirst.frc.team6969.robot.commands.GripPipelineHATCH;
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
@@ -22,6 +23,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -36,13 +38,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;;
  */
 public class Robot extends TimedRobot {
 	
-	private static final int IMG_WIDTH = 266;
-	private static final int IMG_HEIGHT = 200;
+	private static final int IMG_WIDTH = 640;
+	private static final int IMG_HEIGHT = 480;
 	
-	private VisionThread visionThread;
-	private double centerX = 0.0;
+	private VisionThread visionThread1;
+	private VisionThread visionThread2;
+	public int centerXhatch;
+	public int centerXball;
 	
-	private final Object imgLock = new Object();
+	private final Object imgLock1 = new Object();
+	private final Object imgLock2 = new Object();
 	// Robot class controls the whole robot
 	// if you ever get lost: https://frc-pdr.readthedocs.io/en/latest/index.html
 	
@@ -80,25 +85,18 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 		pdp = new PowerDistributionPanel(30);
 		ds = DriverStation.getInstance();
-		pdp.clearStickyFaults();	// clears pdp issue with yellow light
+		//pdp.clearStickyFaults();	// clears pdp issue with yellow light
 		robotDrive =  RobotMap.drive;
-		arduino = new SerialPort(9600, SerialPort.Port.kUSB1);
-		arduinoString = "";
-		pixyData = new ArrayList<Integer>();
-		for (int i = 0; i < 50; i++)	// initialize pixyData
-			pixyData.add(new Integer(-1));
-		pixyCenter = 158;
-		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		//arduino = new SerialPort(9600, SerialPort.Port.kUSB1);
+		//arduinoString = "";
+		//pixyData = new ArrayList<Integer>();
+		//for (int i = 0; i < 50; i++)	// initialize pixyData
+		//	pixyData.add(new Integer(-1));
+		//pixyCenter = 158;
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
 		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
-		visionThread = new VisionThread(camera, new GripPipelineHATCH(), pipeline -> {
-			if (!pipeline.filterContoursOutput().isEmpty()) {
-				Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-				synchronized (imgLock) {
-					centerX = r.x + (r.width / 2);
-				}
-			}
-		});
-		visionThread.start();
+		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
+		camera1.setResolution(IMG_WIDTH, IMG_HEIGHT);
 	}
 
 	/**
@@ -142,13 +140,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		double centerX;
-		synchronized (imgLock) {
-			centerX = this.centerX;
-		}
-		double turn = centerX - (IMG_WIDTH / 2);
-		System.out.println(centerX);
-	
+
 		Scheduler.getInstance().run();
 	}
 
@@ -177,7 +169,21 @@ public class Robot extends TimedRobot {
 		System.out.println("Center: " + pixyCenter);
 		reportCollisionDetection();
 		displaySmartDashboardData();
+		double centerXhatch;
+		synchronized (imgLock1) {
+			centerXhatch = this.centerXhatch;
+
+		}
+		double centerXball;
+		synchronized (imgLock2) {
+			centerXball = this.centerXball;
+
+		}
+		
+		
 	}
+		
+	
 
 	/**
 	 * This function is called periodically during test mode.
@@ -259,6 +265,8 @@ public class Robot extends TimedRobot {
 	private void displaySmartDashboardData() {
 		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
+		SmartDashboard.putNumber("Grip Angle Hatch", this.centerXhatch);
+		SmartDashboard.putNumber("Grip Angle Ball", this.centerXball);
 		//SmartDashboard.putNumber("potentiometer", RobotMap.pot.get());
 	}
 }
