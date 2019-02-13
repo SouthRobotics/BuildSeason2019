@@ -47,13 +47,12 @@ public class Robot extends TimedRobot {
 	public int centerXball;
 	NetworkTableEntry centerball;
 	NetworkTableEntry centerhatch;
-	double ballx = 0;
-	double hatchx = 0;
+	public double ballx;
+	public double hatchx;
 
 
 	
-	private final Object imgLock1 = new Object();
-	private final Object imgLock2 = new Object();
+	
 	// Robot class controls the whole robot
 	// if you ever get lost: https://frc-pdr.readthedocs.io/en/latest/index.html
 	
@@ -268,8 +267,6 @@ public class Robot extends TimedRobot {
 	private void displaySmartDashboardData() {
 		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
-		SmartDashboard.putNumber("Grip Angle Hatch", this.centerXhatch);
-		SmartDashboard.putNumber("Grip Angle Ball", this.centerXball);
 		//SmartDashboard.putNumber("potentiometer", RobotMap.pot.get());
 	}
 }
