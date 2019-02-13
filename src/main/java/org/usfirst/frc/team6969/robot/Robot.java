@@ -9,8 +9,6 @@ package org.usfirst.frc.team6969.robot;
 
 import java.util.ArrayList;
 
-import org.usfirst.frc.team6969.robot.commands.GripPipelineBALL;
-import org.usfirst.frc.team6969.robot.commands.GripPipelineHATCH;
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 
@@ -24,6 +22,8 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.networktables.*;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -45,6 +45,12 @@ public class Robot extends TimedRobot {
 	private VisionThread visionThread2;
 	public int centerXhatch;
 	public int centerXball;
+	NetworkTableEntry centerball;
+	NetworkTableEntry centerhatch;
+	double ballx = 0;
+	double hatchx = 0;
+
+
 	
 	private final Object imgLock1 = new Object();
 	private final Object imgLock2 = new Object();
@@ -97,6 +103,11 @@ public class Robot extends TimedRobot {
 		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
 		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
 		camera1.setResolution(IMG_WIDTH, IMG_HEIGHT);
+		NetworkTableInstance inst = NetworkTableInstance.getDefault();
+		NetworkTable Ball = inst.getTable("GRIP/BallReport");
+		NetworkTable Hatch = inst.getTable("GRIP/HatchReport");
+		centerball = Ball.getEntry("centerx");
+		centerhatch = Hatch.getEntry("centerx");
 	}
 
 	/**
@@ -169,16 +180,8 @@ public class Robot extends TimedRobot {
 		System.out.println("Center: " + pixyCenter);
 		reportCollisionDetection();
 		displaySmartDashboardData();
-		double centerXhatch;
-		synchronized (imgLock1) {
-			centerXhatch = this.centerXhatch;
-
-		}
-		double centerXball;
-		synchronized (imgLock2) {
-			centerXball = this.centerXball;
-
-		}
+		centerball.setDouble(ballx);
+		centerhatch.setDouble(hatchx);
 		
 		
 	}
