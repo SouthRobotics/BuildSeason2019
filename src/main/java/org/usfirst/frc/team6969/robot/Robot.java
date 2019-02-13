@@ -47,8 +47,8 @@ public class Robot extends TimedRobot {
 	public int centerXball;
 	NetworkTableEntry centerball;
 	NetworkTableEntry centerhatch;
-	public double ballx;
-	public double hatchx;
+	public static double ballx;
+	public static double hatchx;
 
 
 	
