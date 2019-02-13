@@ -7,55 +7,45 @@
 
 package org.usfirst.frc.team6969.robot.commands;
 
-import edu.wpi.first.wpilibj.Encoder;
+import org.usfirst.frc.team6969.robot.Robot;
+import org.usfirst.frc.team6969.robot.pidoutputs.customPIDOutput;
+import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
+
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import com.kauailabs.navx.frc.AHRS;
-
-import org.usfirst.frc.team6969.robot.Robot;
-import org.usfirst.frc.team6969.robot.RobotMap;
-import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 
 /**
- * An example command.  You can replace me with your own command.
+ * An example command. You can replace me with your own command.
  */
-public class RotateArmToAngle extends Command implements PIDOutput {
-    private double pidOutput;
-    private double targetAngle;
-    private Potentiometer potentiometer;
-    private PIDController anglecontroller;
-    private int joint;
+public class RotateArmToAngle extends Command {
+        private double targetAngle;
+        private PIDController anglecontroller;
+        private int joint;
+        private customPIDOutput out;
+        private Potentiometer pot;
 
-	public RotateArmToAngle(double angle, Potentiometer potentiometer, int joint) {
+	public RotateArmToAngle(Potentiometer potentiometer, PIDController controller, int joint, customPIDOutput out, double angle) {
         // Use requires() here to declare subsystem dependencies
         super("Rotate Arm To Angle PID");
         targetAngle = angle;
-        this.potentiometer = potentiometer;
+        anglecontroller = controller;
         this.joint = joint;
+        this.out = out;
         requires(Robot.arm);
+        pot = potentiometer;
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-        targetAngle += potentiometer.get();
+        targetAngle += pot.get();
         initPIDController();
     }
     
     public void initPIDController() {
-        anglecontroller = new PIDController(DriveTrain.Kp,
-                DriveTrain.Ki,
-                DriveTrain.Kd,
-                potentiometer, this);    //pid values need tuning, especially for smaller angles!
-        anglecontroller.setInputRange(0.0, 360.0);
-        anglecontroller.setOutputRange(-0.6, 0.6);  // don't need to rotate extremely fast
-        anglecontroller.setAbsoluteTolerance(1);  // 2 degree threshold
-        anglecontroller.setContinuous(true);
         anglecontroller.setSetpoint(targetAngle);
         anglecontroller.enable();
     }
@@ -63,34 +53,26 @@ public class RotateArmToAngle extends Command implements PIDOutput {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-        Robot.arm.rotate(joint, pidOutput);
+                Robot.arm.rotate(joint, out.outVal);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		if (anglecontroller.onTarget())
-            return true;
-        return false;
+              return false;  
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-        Robot.arm.rotate(joint, 0);
-        anglecontroller.disable();
-        Scheduler.getInstance().add(new LockJoint(potentiometer, joint));
+                anglecontroller.disable();
+                Scheduler.getInstance().add(new LockJoint(pot, anglecontroller, joint, out));
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-        end();
+                end();
 	}
-
-    @Override
-    public void pidWrite(double output) {
-        pidOutput = output;
-    }
 }

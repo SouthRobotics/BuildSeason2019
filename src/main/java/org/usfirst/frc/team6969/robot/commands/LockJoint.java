@@ -7,52 +7,37 @@
 
 package org.usfirst.frc.team6969.robot.commands;
 
-import edu.wpi.first.wpilibj.Encoder;
+import org.usfirst.frc.team6969.robot.pidoutputs.customPIDOutput;
+import org.usfirst.frc.team6969.robot.Robot;
+
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import com.kauailabs.navx.frc.AHRS;
+public class LockJoint extends Command {
+        private double targetAngle;
+        private PIDController anglecontroller;
+        private int joint;
+        private customPIDOutput out;
 
-import org.usfirst.frc.team6969.robot.Robot;
-import org.usfirst.frc.team6969.robot.RobotMap;
-import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
-
-
-public class LockJoint extends Command implements PIDOutput {
-    private double pidOutput;
-    private double targetAngle;
-    private Potentiometer potentiometer;
-    private PIDController anglecontroller;
-    private int joint;
-
-	public LockJoint(Potentiometer potentiometer, int joint) {
-        // Use requires() here to declare subsystem dependencies
-        super("Lock Joint PID");
-        this.potentiometer = potentiometer;
-        this.joint = joint;
-        targetAngle = potentiometer.get();
-        requires(Robot.arm);
-	}
+        public LockJoint(Potentiometer potentiometer, PIDController controller, int joint, customPIDOutput out) {
+            // Use requires() here to declare subsystem dependencies
+            super("Lock Joint");
+            targetAngle = potentiometer.get();
+            anglecontroller = controller;
+            this.joint = joint;
+            this.out = out;
+            requires(Robot.arm);
+	    }
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-        initPIDController();
-    }
+                initPIDController();
+        }
     
     public void initPIDController() {
-        anglecontroller = new PIDController(DriveTrain.Kp,
-                DriveTrain.Ki,
-                DriveTrain.Kd,
-                potentiometer, this);    //pid values need tuning, especially for smaller angles!
-        anglecontroller.setInputRange(0.0, 360.0);
-        anglecontroller.setOutputRange(-0.6, 0.6);  // don't need to rotate extremely fast
-        anglecontroller.setAbsoluteTolerance(1);  // 2 degree threshold
-        anglecontroller.setContinuous(true);
         anglecontroller.setSetpoint(targetAngle);
         anglecontroller.enable();
     }
@@ -60,7 +45,7 @@ public class LockJoint extends Command implements PIDOutput {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-        Robot.arm.rotate(joint, pidOutput);
+        Robot.arm.rotate(joint, out.outVal);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -72,6 +57,7 @@ public class LockJoint extends Command implements PIDOutput {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
+        anglecontroller.disable();
 	}
 
 	// Called when another command which requires one or more of the same
@@ -80,9 +66,4 @@ public class LockJoint extends Command implements PIDOutput {
 	protected void interrupted() {
         end();
 	}
-
-    @Override
-    public void pidWrite(double output) {
-        pidOutput = output;
-    }
 }

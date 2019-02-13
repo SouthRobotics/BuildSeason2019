@@ -7,11 +7,10 @@
 
 package org.usfirst.frc.team6969.robot.subsystems;
 
-import java.awt.Robot;
-
 import javax.lang.model.util.ElementScanner6;
 
 import org.usfirst.frc.team6969.robot.RobotMap;
+import org.usfirst.frc.team6969.robot.pidoutputs.customPIDOutput;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
@@ -24,7 +23,7 @@ import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 /**
  * 2019 build season
  */
-public class Arm extends Subsystem implements PIDOutput{
+public class Arm extends Subsystem{
 
     private static Spark rotatingPlatformMotor;
     private static Spark bottomMotor;
@@ -37,10 +36,14 @@ public class Arm extends Subsystem implements PIDOutput{
     public static PIDController bottomAnglePID;
     public static PIDController middleAnglePID;
     public static PIDController topAnglePID;
+    public static customPIDOutput bottomOut;
+    public static customPIDOutput middleOut;
+    public static customPIDOutput topOut;
+
+
     private int[][] pidVals = {{0,0,0},
                             {0,0,0},
                             {0,0,0}};
-    public static int pidSpeed;
 
     public Arm()
     {
@@ -62,19 +65,23 @@ public class Arm extends Subsystem implements PIDOutput{
     
     public void initPIDControllers() 
     {
-        bottomAnglePID = new PIDController(pidVals[0][0], pidVals[0][1], pidVals[0][2], bottomPotentiometer, this);    //pid values need tuning, especially for smaller angles!
+        bottomOut = new customPIDOutput();
+        middleOut = new customPIDOutput();
+        topOut = new customPIDOutput();
+
+        bottomAnglePID = new PIDController(pidVals[0][0], pidVals[0][1], pidVals[0][2], bottomPotentiometer, bottomOut);    //pid values need tuning, especially for smaller angles!
         bottomAnglePID.setInputRange(0.0, 360.0);
         bottomAnglePID.setOutputRange(-0.6, 0.6);  // don't need to rotate extremely fast
         bottomAnglePID.setAbsoluteTolerance(1);  // 2 degree threshold
         bottomAnglePID.setContinuous(true);
 
-        middleAnglePID = new PIDController(pidVals[1][0], pidVals[1][1], pidVals[1][2], middlePotentiometer, this);    //pid values need tuning, especially for smaller angles!
+        middleAnglePID = new PIDController(pidVals[1][0], pidVals[1][1], pidVals[1][2], middlePotentiometer, middleOut);    //pid values need tuning, especially for smaller angles!
         middleAnglePID.setInputRange(0.0, 360.0);
         middleAnglePID.setOutputRange(-0.6, 0.6);  // don't need to rotate extremely fast
         middleAnglePID.setAbsoluteTolerance(1);  // 2 degree threshold
         middleAnglePID.setContinuous(true);
 
-        topAnglePID = new PIDController(pidVals[2][0], pidVals[2][1], pidVals[2][2], topPotentiometer, this);    //pid values need tuning, especially for smaller angles!
+        topAnglePID = new PIDController(pidVals[2][0], pidVals[2][1], pidVals[2][2], topPotentiometer, topOut);    //pid values need tuning, especially for smaller angles!
         topAnglePID.setInputRange(0.0, 360.0);
         topAnglePID.setOutputRange(-0.6, 0.6);  // don't need to rotate extremely fast
         topAnglePID.setAbsoluteTolerance(1);  // 2 degree threshold
@@ -90,10 +97,5 @@ public class Arm extends Subsystem implements PIDOutput{
             middleMotor.set(speed);
         else
             topMotor.set(speed);
-    }
-
-    @Override
-    public void pidWrite(double output) {
-        
     }
 }
