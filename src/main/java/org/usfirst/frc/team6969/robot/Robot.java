@@ -181,6 +181,8 @@ public class Robot extends TimedRobot {
 		displaySmartDashboardData();
 		centerball.setDouble(ballx);
 		centerhatch.setDouble(hatchx);
+		System.out.println("Ball Center: " + ballx);
+		System.out.println("Hatch Center "+ hatchx);
 		
 		
 	}
