@@ -108,13 +108,13 @@ public class RobotMap {
 		Spark 2 - Front Left
 		*/
 
-		driveTrainBackRight = new WPI_TalonSRX(14);
-		driveTrainMiddleRight = new WPI_TalonSRX(13); 
-		driveTrainFrontRight =  new WPI_TalonSRX(15);
+		driveTrainBackRight = new WPI_TalonSRX(0);
+		driveTrainMiddleRight = new WPI_TalonSRX(2); 
+		driveTrainFrontRight =  new WPI_TalonSRX(1);
 
-		driveTrainBackLeft = new WPI_TalonSRX(1); 
-		driveTrainMiddleLeft = new WPI_TalonSRX(0);
-		driveTrainFrontLeft =  new WPI_TalonSRX(2);
+		driveTrainBackLeft = new WPI_TalonSRX(15); 
+		driveTrainMiddleLeft = new WPI_TalonSRX(13);
+		driveTrainFrontLeft =  new WPI_TalonSRX(14);
 
 
 		//PWM port numbers for subsystems.
