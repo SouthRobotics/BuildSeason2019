@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
+
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -60,6 +62,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		RobotMap.init();
+		CameraServer.getInstance().startAutomaticCapture();
 		driveTrain = new DriveTrain();
 		claw = new Claw();
 		m_oi = new OI();
@@ -226,7 +229,11 @@ public class Robot extends TimedRobot {
 	private void displaySmartDashboardData() {
 		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
-		SmartDashboard.putNumber("Angle", RobotMap.bottomJointPot.get());
+		SmartDashboard.putBoolean("Hatch Limit Switch", RobotMap.hatchLimitSwitch.get());
+		SmartDashboard.putBoolean("Ball Limit Switch", RobotMap.ballLimitSwitch.get());
+		SmartDashboard.putNumber("Bottom potentiometer", RobotMap.bottomJointPot.get());
+		SmartDashboard.putNumber("Middle potentiometer", RobotMap.middleJointMotor.get());
+		SmartDashboard.putNumber("Top potentiometer", RobotMap.topJointMotor.get());
 	}
 }
 

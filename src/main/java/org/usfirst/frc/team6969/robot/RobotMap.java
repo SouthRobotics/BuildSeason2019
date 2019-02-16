@@ -12,6 +12,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Spark;
@@ -49,7 +50,7 @@ public class RobotMap {
 	public static double wheelRotation360degree = 6.97814; //amount of wheel rotations the robot will make 360* turn in when both sides are driving opposite ways 
 	
 	//Talons that control drivetrain ( must declare talons as type SpeedController )
-	/*
+	
 	public static SpeedController driveTrainBackRight;
 	public static SpeedController driveTrainMiddleRight;
 	public static SpeedController driveTrainFrontRight;
@@ -57,20 +58,26 @@ public class RobotMap {
 	public static SpeedController driveTrainBackLeft;
 	public static SpeedController driveTrainMiddleLeft;
 	public static SpeedController driveTrainFrontLeft;
-	*/
+/*	
 	public static Spark driveTrainBackRight;
     public static Spark driveTrainFrontRight;
     public static Spark driveTrainBackLeft;
 	public static Spark driveTrainFrontLeft;
-	
+*/	
     //Spark motorcontrollers that control subsystems
 	public static SpeedController clawLeft;
 	public static SpeedController clawRight;
+	public static SpeedController bottomJointMotor;
+	public static SpeedController middleJointMotor;
+	public static SpeedController topJointMotor;
+	public static SpeedController rotatingPlatformMotor;
 	
     //list of sensors: http://1418.team/assets/resources/Introduction%20to%20Sensors.pdf
     
     //Limit switches
-	public static DigitalInput magLimit;
+	public static DigitalInput ballLimitSwitch;
+	public static DigitalInput hatchLimitSwitch;
+	public static DigitalInput rotatingPlatformLimitSwitch;
 
     /*
      Example code to use limit switch:
@@ -86,9 +93,11 @@ public class RobotMap {
 	 
 
     //Other sensors
-	public static AnalogGyro gyro; //gyro documentation: http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/ADXRS450_Gyro.html
 	public static AHRS navx;	// https://pdocs.kauailabs.com/navx-mxp/
 	public static Servo servo;
+	public static Encoder rotatingplatformEncoder;
+	public static Encoder leftDriveEncoder;
+	public static Encoder rightDriveEncoder;
 
     /*
      * Example code to use Analog gyro:
@@ -125,7 +134,7 @@ public class RobotMap {
 		Spark 3 - Back Left
 		Spark 2 - Front Left
 		*/
-/*
+
 		driveTrainBackRight = new WPI_TalonSRX(10);
 		driveTrainMiddleRight = new WPI_TalonSRX(11); 
 		driveTrainFrontRight =  new WPI_TalonSRX(12);
@@ -133,14 +142,19 @@ public class RobotMap {
 		driveTrainBackLeft = new WPI_TalonSRX(13); 
 		driveTrainMiddleLeft = new WPI_TalonSRX(14);
 		driveTrainFrontLeft =  new WPI_TalonSRX(15);
-*/
+
+/*
 		driveTrainBackRight = new Spark(1); 
 		driveTrainFrontRight =  new Spark(0);
 		driveTrainBackLeft = new Spark(3); 
 		driveTrainFrontLeft =  new Spark(2);
-
-		clawLeft = new WPI_TalonSRX(14); //talon id number from phoenix tuner
-		clawRight = new WPI_TalonSRX(15);		
+*/
+		clawLeft = new WPI_TalonSRX(9); //can id number
+		clawRight = new WPI_TalonSRX(10);		
+		bottomJointMotor = new Spark(4);
+		middleJointMotor = new Spark(8);
+		topJointMotor = new Spark(3);
+		rotatingPlatformMotor = new Spark(5);
 		
 		//PWM port numbers for subsystems.
 		
@@ -150,29 +164,35 @@ public class RobotMap {
 		*/
 
 	    //PWM ports for sensors
-	    magLimit = new  DigitalInput(0);
+		ballLimitSwitch = new  DigitalInput(9);
+		hatchLimitSwitch = new DigitalInput(8);
+		rotatingPlatformLimitSwitch = new DigitalInput(7);
 		
 		//potentiometers center wire goes to S.
-		bottomJointPot = new AnalogPotentiometer(0, 360, 0);
+		bottomJointPot = new AnalogPotentiometer(2, 360, 0);
 		middleJointPot = new AnalogPotentiometer(1, 360, 0);
-		topJointPot = new AnalogPotentiometer(2, 360, 0);
+		topJointPot = new AnalogPotentiometer(0, 360, 0);
 
 
 	    //Other ports for sensors
 		//gyro = new AnalogGyro(1);
 		navx = new AHRS(SPI.Port.kMXP);
 
-		servo = new Servo(9);
+		servo = new Servo(7);
+
+		rotatingplatformEncoder = new Encoder(9, 8);
+		leftDriveEncoder = new Encoder(6, 5);
+		rightDriveEncoder = new Encoder(4, 3);
 	    
 		//creates motor groups for TankDrive
-		/*
+		
 	    final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainFrontLeft, driveTrainMiddleLeft, driveTrainBackLeft); //left drivetrain motors
 		final SpeedControllerGroup m_right = new SpeedControllerGroup(driveTrainFrontRight, driveTrainMiddleRight, driveTrainBackRight); //Right drivetrain motors
-		*/
 		
+		/*
 		final SpeedControllerGroup m_left = new SpeedControllerGroup(driveTrainFrontLeft, driveTrainBackLeft); //left drivetrain motors
 		final SpeedControllerGroup m_right = new SpeedControllerGroup(driveTrainFrontRight, driveTrainBackRight); //Right drivetrain motors
-		
+		*/
 	    //creates TankDrive drivetrain	
 	    drive = new DifferentialDrive(m_left, m_right);
 		
