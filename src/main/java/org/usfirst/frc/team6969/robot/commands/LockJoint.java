@@ -7,7 +7,7 @@
 
 package org.usfirst.frc.team6969.robot.commands;
 
-import org.usfirst.frc.team6969.robot.pidoutputs.customPIDOutput;
+import org.usfirst.frc.team6969.robot.custom_classes.customPIDOutput;
 import org.usfirst.frc.team6969.robot.Robot;
 
 import edu.wpi.first.wpilibj.PIDController;
