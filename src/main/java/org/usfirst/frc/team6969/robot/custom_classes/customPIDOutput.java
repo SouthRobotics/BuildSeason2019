@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc.team6969.robot.pidoutputs;
+package org.usfirst.frc.team6969.robot.custom_classes;
 
 import edu.wpi.first.wpilibj.PIDOutput;
 
