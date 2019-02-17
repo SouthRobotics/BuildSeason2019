@@ -78,7 +78,7 @@ public class OI {
 		rButton12 = new JoystickButton(rightJoy, 12);
     
     public OI() {
-		rButton2.whenPressed(new ManualOverride());
+		/*rButton2.whenPressed(new ManualOverride());
 		lButton3.whenPressed(new RotateToPixyTarget(Robot.pixyCenter));
 		lButton4.whenPressed(new RotateChassisToAngle(-90));
 		lButton5.whenPressed(new RotateChassisToAnglePID(-90));
@@ -86,7 +86,8 @@ public class OI {
 		rButton6.whileHeld(new SpinRollerIntake(false));
 		rButton7.whileHeld(new SpinBottomJoint(0.25));
 		rButton8.whileHeld(new SpinMiddleJoint(0.25));
-		rButton9.whileHeld(new SpinTopJoint(0.25));
+		rButton9.whileHeld(new SpinTopJoint(0.25));*/
+		rButton10.whileHeld(new TestMotor());
 
 	}
 	

@@ -140,27 +140,38 @@ public class RobotMap {
 		Spark 2 - Front Left
 		*/
 
-		driveTrainBackRight = new WPI_TalonSRX(10);
-		driveTrainMiddleRight = new WPI_TalonSRX(11); 
-		driveTrainFrontRight =  new WPI_TalonSRX(12);
+		driveTrainBackRight = new WPI_TalonSRX(1);
+		driveTrainMiddleRight = new WPI_TalonSRX(2); 
+		driveTrainFrontRight =  new WPI_TalonSRX(0);
 
-		driveTrainBackLeft = new WPI_TalonSRX(13); 
-		driveTrainMiddleLeft = new WPI_TalonSRX(14);
-		driveTrainFrontLeft =  new WPI_TalonSRX(15);
+		driveTrainBackLeft = new WPI_TalonSRX(15); 
+		driveTrainMiddleLeft = new WPI_TalonSRX(13);
+		driveTrainFrontLeft =  new WPI_TalonSRX(14);
 
 /*
 		driveTrainBackRight = new Spark(1); 
 		driveTrainFrontRight =  new Spark(0);
 		driveTrainBackLeft = new Spark(3); 
 		driveTrainFrontLeft =  new Spark(2);
-*/
-		clawLeft = new CANSparkMax(9, MotorType.kBrushed); //can id number
-		clawRight = new CANSparkMax(10, MotorType.kBrushed);		
+*/		
+		/*
+		CAN ID MAP FOR SPARKS
+		11 - Claw Left
+		10 - Middle Joint
+		12 - Claw right
+		*/
+		clawLeft = new CANSparkMax(12, MotorType.kBrushed); //can id number
+		clawRight = null;
+		bottomJointMotor = null;
+		middleJointMotor = null;
+		topJointMotor = null;
+		rotatingPlatformMotor = null;
+		/*clawRight = new CANSparkMax(10, MotorType.kBrushed);		
 		bottomJointMotor = new CANSparkMax(4, MotorType.kBrushed);
 		middleJointMotor = new CANSparkMax(8, MotorType.kBrushed);
 		topJointMotor = new CANSparkMax(3, MotorType.kBrushed);
 		rotatingPlatformMotor = new CANSparkMax(5, MotorType.kBrushed);
-		
+		*/
 		//PWM port numbers for subsystems.
 		
 		/*
@@ -185,8 +196,8 @@ public class RobotMap {
 
 		servo = new Servo(7);
 
-		rotatingPlatformEncoder = new Counter(9);
-		rotatingPlatformEncoderIndex = new Counter(8);
+		rotatingPlatformEncoder = new Counter(2);
+		rotatingPlatformEncoderIndex = new Counter(1);
 		//leftDriveEncoder = new Encoder(6, 5);
 		//rightDriveEncoder = new Encoder(4, 3);
 	    
