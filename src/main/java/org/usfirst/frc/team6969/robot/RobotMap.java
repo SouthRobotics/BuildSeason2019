@@ -159,16 +159,20 @@ public class RobotMap {
 		11 - Claw Left
 		10 - Middle Joint
 		12 - Claw right
+		5 - Bottom Joint
+		3   - Top Joint
+		4 - Rotating Platform
 		*/
-		clawLeft = new CANSparkMax(12, MotorType.kBrushed); //can id number
+		clawLeft = new CANSparkMax(4, MotorType.kBrushed); //can id number
 		clawRight = null;
 		bottomJointMotor = null;
 		middleJointMotor = null;
 		topJointMotor = null;
 		rotatingPlatformMotor = null;
-		/*clawRight = new CANSparkMax(10, MotorType.kBrushed);		
-		bottomJointMotor = new CANSparkMax(4, MotorType.kBrushed);
-		middleJointMotor = new CANSparkMax(8, MotorType.kBrushed);
+		/*clawLeft = new CANSparkMax(11, MotorType.kBrushed);
+		clawRight = new CANSparkMax(12, MotorType.kBrushed);		
+		bottomJointMotor = new CANSparkMax(5, MotorType.kBrushed);
+		middleJointMotor = new CANSparkMax(10, MotorType.kBrushed);
 		topJointMotor = new CANSparkMax(3, MotorType.kBrushed);
 		rotatingPlatformMotor = new CANSparkMax(5, MotorType.kBrushed);
 		*/
