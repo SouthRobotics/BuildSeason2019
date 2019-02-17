@@ -7,7 +7,7 @@
 
 package org.usfirst.frc.team6969.robot.commands;
 
-import org.usfirst.frc.team6969.robot.custom_classes.customPIDOutput;
+import org.usfirst.frc.team6969.robot.custom_classes.CustomPIDOutput;
 import org.usfirst.frc.team6969.robot.Robot;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -19,9 +19,9 @@ public class LockJoint extends Command {
         private double targetAngle;
         private PIDController anglecontroller;
         private int joint;
-        private customPIDOutput out;
+        private CustomPIDOutput out;
 
-        public LockJoint(Potentiometer potentiometer, PIDController controller, int joint, customPIDOutput out) {
+        public LockJoint(Potentiometer potentiometer, PIDController controller, int joint, CustomPIDOutput out) {
             // Use requires() here to declare subsystem dependencies
             super("Lock Joint");
             targetAngle = potentiometer.get();

@@ -9,6 +9,7 @@ package org.usfirst.frc.team6969.robot;
 
 import java.util.ArrayList;
 
+import org.usfirst.frc.team6969.robot.subsystems.Arm;
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 
@@ -37,6 +38,7 @@ public class Robot extends TimedRobot {
 	//public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static DriveTrain driveTrain;
 	public static Claw claw;
+	public static Arm arm;
 
 	
 	//controller map
@@ -62,9 +64,11 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		RobotMap.init();
+		RobotMap.rotatingPlatformEncoder.setSemiPeriodMode(true);
 		CameraServer.getInstance().startAutomaticCapture();
 		driveTrain = new DriveTrain();
 		claw = new Claw();
+		arm = new Arm();
 		m_oi = new OI();
 		pdp = new PowerDistributionPanel(30);
 		ds = DriverStation.getInstance();
@@ -131,6 +135,7 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
+		resetEncoders();
 		//for every subsystem just do subsystem.initDefaultCommand()
 		//subsystems
 		//driveTrain.initDefaultCommand();
@@ -154,6 +159,11 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+	}
+
+	private void resetEncoders() {
+		RobotMap.rotatingPlatformEncoder.reset();
+		RobotMap.rotatingPlatformEncoderIndex.reset();
 	}
 
 	/*
@@ -235,6 +245,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Bottom potentiometer", RobotMap.bottomJointPot.get());
 		SmartDashboard.putNumber("Middle potentiometer", RobotMap.middleJointMotor.get());
 		SmartDashboard.putNumber("Top potentiometer", RobotMap.topJointMotor.get());
+		SmartDashboard.putNumber("Rotating Platform Rotations", RobotMap.rotatingPlatformEncoderIndex.get());
+		double angle = RobotMap.rotatingPlatformEncoder.getPeriod()/9.739499999999999E-4*361 -1;
+		SmartDashboard.putNumber("Rotating Platform Angle", angle);
 	}
 }
 

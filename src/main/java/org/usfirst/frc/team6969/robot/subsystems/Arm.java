@@ -9,9 +9,12 @@ package org.usfirst.frc.team6969.robot.subsystems;
 
 import javax.lang.model.util.ElementScanner6;
 
-import org.usfirst.frc.team6969.robot.RobotMap;
-import org.usfirst.frc.team6969.robot.pidoutputs.customPIDOutput;
+import com.revrobotics.CANSparkMax;
 
+import org.usfirst.frc.team6969.robot.RobotMap;
+import org.usfirst.frc.team6969.robot.custom_classes.*;
+
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -25,20 +28,20 @@ import edu.wpi.first.wpilibj.interfaces.Potentiometer;
  */
 public class Arm extends Subsystem{
 
-    private static Spark rotatingPlatformMotor;
-    private static Spark bottomMotor;
-    private static Spark middleMotor;
-    private static Spark topMotor;
+    private static CANSparkMax rotatingPlatformMotor;
+    private static CANSparkMax bottomMotor;
+    private static CANSparkMax middleMotor;
+    private static CANSparkMax topMotor;
     private static Potentiometer bottomPotentiometer;
     private static Potentiometer middlePotentiometer;
     private static Potentiometer topPotentiometer;
-    private static Encoder rotatingPlatformEncoder;
+    private static Counter rotatingPlatformEncoder;
     public static PIDController bottomAnglePID;
     public static PIDController middleAnglePID;
     public static PIDController topAnglePID;
-    public static customPIDOutput bottomOut;
-    public static customPIDOutput middleOut;
-    public static customPIDOutput topOut;
+    public static CustomPIDOutput bottomOut;
+    public static CustomPIDOutput middleOut;
+    public static CustomPIDOutput topOut;
 
 
     private int[][] pidVals = {{0,0,0},
@@ -48,9 +51,9 @@ public class Arm extends Subsystem{
     public Arm()
     {
         rotatingPlatformMotor = RobotMap.rotatingPlatformMotor;
-        bottomMotor = RobotMap.bottomMotor;
-        middleMotor = RobotMap.middleMotor;
-        topMotor = RobotMap.topMotor;
+        bottomMotor = RobotMap.bottomJointMotor;
+        middleMotor = RobotMap.middleJointMotor;
+        topMotor = RobotMap.topJointMotor;
         bottomPotentiometer = RobotMap.bottomJointPot;
         middlePotentiometer = RobotMap.middleJointPot;
         topPotentiometer = RobotMap.topJointPot;
@@ -65,9 +68,9 @@ public class Arm extends Subsystem{
     
     public void initPIDControllers() 
     {
-        bottomOut = new customPIDOutput();
-        middleOut = new customPIDOutput();
-        topOut = new customPIDOutput();
+        bottomOut = new CustomPIDOutput();
+        middleOut = new CustomPIDOutput();
+        topOut = new CustomPIDOutput();
 
         bottomAnglePID = new PIDController(pidVals[0][0], pidVals[0][1], pidVals[0][2], bottomPotentiometer, bottomOut);    //pid values need tuning, especially for smaller angles!
         bottomAnglePID.setInputRange(0.0, 360.0);

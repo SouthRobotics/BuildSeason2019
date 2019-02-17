@@ -14,6 +14,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
@@ -98,7 +99,8 @@ public class RobotMap {
     //Other sensors
 	public static AHRS navx;	// https://pdocs.kauailabs.com/navx-mxp/
 	public static Servo servo;
-	public static Encoder rotatingplatformEncoder;
+	public static Counter rotatingPlatformEncoder;
+	public static Counter rotatingPlatformEncoderIndex;
 	public static Encoder leftDriveEncoder;
 	public static Encoder rightDriveEncoder;
 
@@ -183,7 +185,8 @@ public class RobotMap {
 
 		servo = new Servo(7);
 
-		//rotatingplatformEncoder = new Encoder(9, 8);
+		rotatingPlatformEncoder = new Counter(9);
+		rotatingPlatformEncoderIndex = new Counter(8);
 		//leftDriveEncoder = new Encoder(6, 5);
 		//rightDriveEncoder = new Encoder(4, 3);
 	    

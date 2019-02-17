@@ -28,24 +28,18 @@ public class SpinBottomJoint extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-        if (spinIn)
-            Robot.claw.spinIn();
-        else
-            Robot.claw.spinOut();
+        Robot.arm.rotate(0, speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		//if ( ! (Robot.m_oi.leftBumper.get() || Robot.m_oi.rightBumper.get() ) )
-	      //  return true;
 		return false;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.claw.stopSpinning();
 	}
 
 	// Called when another command which requires one or more of the same

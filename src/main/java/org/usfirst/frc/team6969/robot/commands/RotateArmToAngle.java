@@ -8,7 +8,7 @@
 package org.usfirst.frc.team6969.robot.commands;
 
 import org.usfirst.frc.team6969.robot.Robot;
-import org.usfirst.frc.team6969.robot.custom_classes.customPIDOutput;
+import org.usfirst.frc.team6969.robot.custom_classes.CustomPIDOutput;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -24,10 +24,10 @@ public class RotateArmToAngle extends Command {
         private double targetAngle;
         private PIDController anglecontroller;
         private int joint;
-        private customPIDOutput out;
+        private CustomPIDOutput out;
         private Potentiometer pot;
 
-	public RotateArmToAngle(Potentiometer potentiometer, PIDController controller, int joint, customPIDOutput out, double angle) {
+	public RotateArmToAngle(Potentiometer potentiometer, PIDController controller, int joint, CustomPIDOutput out, double angle) {
         // Use requires() here to declare subsystem dependencies
         super("Rotate Arm To Angle PID");
         targetAngle = angle;
