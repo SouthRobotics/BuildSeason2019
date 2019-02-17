@@ -231,6 +231,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
 		SmartDashboard.putBoolean("Hatch Limit Switch", RobotMap.hatchLimitSwitch.get());
 		SmartDashboard.putBoolean("Ball Limit Switch", RobotMap.ballLimitSwitch.get());
+		SmartDashboard.putBoolean("rotating platform Limit Switch", RobotMap.rotatingPlatformLimitSwitch.get());
 		SmartDashboard.putNumber("Bottom potentiometer", RobotMap.bottomJointPot.get());
 		SmartDashboard.putNumber("Middle potentiometer", RobotMap.middleJointMotor.get());
 		SmartDashboard.putNumber("Top potentiometer", RobotMap.topJointMotor.get());

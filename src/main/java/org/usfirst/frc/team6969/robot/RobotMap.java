@@ -9,6 +9,9 @@ package org.usfirst.frc.team6969.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -65,12 +68,12 @@ public class RobotMap {
 	public static Spark driveTrainFrontLeft;
 */	
     //Spark motorcontrollers that control subsystems
-	public static SpeedController clawLeft;
-	public static SpeedController clawRight;
-	public static SpeedController bottomJointMotor;
-	public static SpeedController middleJointMotor;
-	public static SpeedController topJointMotor;
-	public static SpeedController rotatingPlatformMotor;
+	public static CANSparkMax clawLeft;
+	public static CANSparkMax clawRight;
+	public static CANSparkMax bottomJointMotor;
+	public static CANSparkMax middleJointMotor;
+	public static CANSparkMax topJointMotor;
+	public static CANSparkMax rotatingPlatformMotor;
 	
     //list of sensors: http://1418.team/assets/resources/Introduction%20to%20Sensors.pdf
     
@@ -149,12 +152,12 @@ public class RobotMap {
 		driveTrainBackLeft = new Spark(3); 
 		driveTrainFrontLeft =  new Spark(2);
 */
-		clawLeft = new WPI_TalonSRX(9); //can id number
-		clawRight = new WPI_TalonSRX(10);		
-		bottomJointMotor = new Spark(4);
-		middleJointMotor = new Spark(8);
-		topJointMotor = new Spark(3);
-		rotatingPlatformMotor = new Spark(5);
+		clawLeft = new CANSparkMax(9, MotorType.kBrushed); //can id number
+		clawRight = new CANSparkMax(10, MotorType.kBrushed);		
+		bottomJointMotor = new CANSparkMax(4, MotorType.kBrushed);
+		middleJointMotor = new CANSparkMax(8, MotorType.kBrushed);
+		topJointMotor = new CANSparkMax(3, MotorType.kBrushed);
+		rotatingPlatformMotor = new CANSparkMax(5, MotorType.kBrushed);
 		
 		//PWM port numbers for subsystems.
 		
@@ -164,9 +167,9 @@ public class RobotMap {
 		*/
 
 	    //PWM ports for sensors
-		ballLimitSwitch = new  DigitalInput(9);
-		hatchLimitSwitch = new DigitalInput(8);
-		rotatingPlatformLimitSwitch = new DigitalInput(7);
+		ballLimitSwitch = new  DigitalInput(8);
+		hatchLimitSwitch = new DigitalInput(9);
+		rotatingPlatformLimitSwitch = new DigitalInput(0);
 		
 		//potentiometers center wire goes to S.
 		bottomJointPot = new AnalogPotentiometer(2, 360, 0);
@@ -180,9 +183,9 @@ public class RobotMap {
 
 		servo = new Servo(7);
 
-		rotatingplatformEncoder = new Encoder(9, 8);
-		leftDriveEncoder = new Encoder(6, 5);
-		rightDriveEncoder = new Encoder(4, 3);
+		//rotatingplatformEncoder = new Encoder(9, 8);
+		//leftDriveEncoder = new Encoder(6, 5);
+		//rightDriveEncoder = new Encoder(4, 3);
 	    
 		//creates motor groups for TankDrive
 		
