@@ -163,19 +163,13 @@ public class RobotMap {
 		3   - Top Joint
 		4 - Rotating Platform
 		*/
-		clawLeft = new CANSparkMax(4, MotorType.kBrushed); //can id number
-		clawRight = null;
-		bottomJointMotor = null;
-		middleJointMotor = null;
-		topJointMotor = null;
-		rotatingPlatformMotor = null;
-		/*clawLeft = new CANSparkMax(11, MotorType.kBrushed);
+		clawLeft = new CANSparkMax(11, MotorType.kBrushed);
 		clawRight = new CANSparkMax(12, MotorType.kBrushed);		
 		bottomJointMotor = new CANSparkMax(5, MotorType.kBrushed);
 		middleJointMotor = new CANSparkMax(10, MotorType.kBrushed);
 		topJointMotor = new CANSparkMax(3, MotorType.kBrushed);
-		rotatingPlatformMotor = new CANSparkMax(5, MotorType.kBrushed);
-		*/
+		rotatingPlatformMotor = new CANSparkMax(4, MotorType.kBrushed);
+		
 		//PWM port numbers for subsystems.
 		
 		/*
@@ -183,10 +177,9 @@ public class RobotMap {
 		SmartDashboard.putNumber("key", "value")
 		*/
 
-	    //PWM ports for sensors
-		ballLimitSwitch = new  DigitalInput(8);
-		hatchLimitSwitch = new DigitalInput(9);
-		rotatingPlatformLimitSwitch = new DigitalInput(0);
+		ballLimitSwitch = new  DigitalInput(9);
+		hatchLimitSwitch = new DigitalInput(8);
+		rotatingPlatformLimitSwitch = new DigitalInput(7);
 		
 		//potentiometers center wire goes to S.
 		bottomJointPot = new AnalogPotentiometer(2, 360, 0);
@@ -198,7 +191,7 @@ public class RobotMap {
 		//gyro = new AnalogGyro(1);
 		navx = new AHRS(SPI.Port.kMXP);
 
-		servo = new Servo(7);
+		servo = new Servo(8);
 
 		rotatingPlatformEncoder = new Counter(2);
 		rotatingPlatformEncoderIndex = new Counter(1);

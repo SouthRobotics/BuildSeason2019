@@ -243,11 +243,11 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Ball Limit Switch", RobotMap.ballLimitSwitch.get());
 		SmartDashboard.putBoolean("rotating platform Limit Switch", RobotMap.rotatingPlatformLimitSwitch.get());
 		SmartDashboard.putNumber("Bottom potentiometer", RobotMap.bottomJointPot.get());
-		//SmartDashboard.putNumber("Middle potentiometer", RobotMap.middleJointMotor.get());
-		//SmartDashboard.putNumber("Top potentiometer", RobotMap.topJointMotor.get());
-		//SmartDashboard.putNumber("Rotating Platform Rotations", RobotMap.rotatingPlatformEncoderIndex.get());
-		//double angle = RobotMap.rotatingPlatformEncoder.getPeriod()/9.739499999999999E-4*361 -1;
-		//SmartDashboard.putNumber("Rotating Platform Angle", angle);
+		SmartDashboard.putNumber("Middle potentiometer", RobotMap.middleJointPot.get());
+		SmartDashboard.putNumber("Top potentiometer", RobotMap.topJointPot.get());
+		SmartDashboard.putNumber("Rotating Platform Rotations", RobotMap.rotatingPlatformEncoderIndex.get());
+		double angle = RobotMap.rotatingPlatformEncoder.getPeriod()/9.739499999999999E-4*361 -1;
+		SmartDashboard.putNumber("Rotating Platform Angle", angle);
 	}
 }
 

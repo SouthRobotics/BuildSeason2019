@@ -9,6 +9,7 @@ package org.usfirst.frc.team6969.robot;
 
 //import org.usfirst.frc.team6969.robot.commands.ExampleSchedule;
 import org.usfirst.frc.team6969.robot.commands.*;
+import org.usfirst.frc.team6969.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -87,7 +88,16 @@ public class OI {
 		rButton7.whileHeld(new SpinBottomJoint(0.25));
 		rButton8.whileHeld(new SpinMiddleJoint(0.25));
 		rButton9.whileHeld(new SpinTopJoint(0.25));*/
-		rButton10.whileHeld(new TestMotor());
+		rButton3.whenPressed(new CloseServo());
+		rButton4.whileHeld(new OpenServo());
+		rButton5.whileHeld(new SpinRollerIntake(true));
+		rButton6.whileHeld(new SpinRollerIntake(false));
+		rButton7.whileHeld(new TestMotor(RobotMap.rotatingPlatformMotor));
+		rButton8.whileHeld(new TestMotor(RobotMap.bottomJointMotor));
+		rButton9.whileHeld(new TestMotor(RobotMap.middleJointMotor));
+		rButton10.whileHeld(new TestMotor(RobotMap.topJointMotor));
+		rButton11.whileHeld(new TestMotor(RobotMap.clawLeft));
+		rButton12.whileHeld(new TestMotor(RobotMap.clawRight));
 
 	}
 	
