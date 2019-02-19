@@ -136,7 +136,7 @@ public class RobotMap {
 
 
 	    //Other ports for sensors
-		gyro = new AnalogGyro(0);
+		//gyro = new AnalogGyro(1);
 		// navx = new AHRS(SPI.Port.kMXP);
 
 		// servo = new Servo(9);
