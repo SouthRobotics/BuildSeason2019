@@ -10,20 +10,31 @@ package org.usfirst.frc.team6969.robot.subsystems;
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 import org.usfirst.frc.team6969.robot.commands.TeleOpDrive;
+
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends Subsystem implements PIDOutput{
 
 	private static DifferentialDrive robotDrive;
 	public static double Kp;
 	public static double Ki;
 	public static double Kd;
+	public static PIDController angleController;
+	public static double pidOut;
 	
 	public DriveTrain() {
 		Kp = 0.02;
 		Ki = 0.0;
 		Kd = 0.01;
+		angleController = new PIDController(Kp, Ki, Kd, RobotMap.gyro, this);
+		angleController.setInputRange(-180, 180);
+		angleController.setPercentTolerance(1);
+		angleController.setOutputRange(-.5, .5);
+		SmartDashboard.putData(angleController);
 	}
 
 	public void initDefaultCommand() 
@@ -56,6 +67,11 @@ public class DriveTrain extends Subsystem {
 			robotDrive.tankDrive(leftSpeed(),rightSpeed());
 		else
 			robotDrive.tankDrive(.75*leftSpeed(), .75*rightSpeed());
+	}
+
+	@Override
+	public void pidWrite(double output) {
+		pidOut = output;
 	}
 	
 }
