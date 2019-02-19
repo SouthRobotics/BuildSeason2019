@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
+
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -73,6 +75,7 @@ public class Robot extends TimedRobot {
 		/* for (int i = 0; i < 50; i++)	// initialize pixyData
 			pixyData.add(new Integer(-1));
 		pixyCenter = 158; */
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
