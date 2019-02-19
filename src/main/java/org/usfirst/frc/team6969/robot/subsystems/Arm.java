@@ -44,9 +44,9 @@ public class Arm extends Subsystem{
     public static CustomPIDOutput topOut;
 
 
-    private int[][] pidVals = {{0,0,0},
-                            {0,0,0},
-                            {0,0,0}};
+    private double[][] pidVals = {{0,0,0, 0},
+                            {0.04,0.0,0.03, 0},
+                            {0.01,0,0, 0}};
 
     public Arm()
     {
@@ -72,33 +72,31 @@ public class Arm extends Subsystem{
         middleOut = new CustomPIDOutput();
         topOut = new CustomPIDOutput();
 
-        bottomAnglePID = new PIDController(pidVals[0][0], pidVals[0][1], pidVals[0][2], bottomPotentiometer, bottomOut);    //pid values need tuning, especially for smaller angles!
+        bottomAnglePID = new PIDController(pidVals[0][0], pidVals[0][1], pidVals[0][2], pidVals[0][3], bottomPotentiometer, bottomOut);    //pid values need tuning, especially for smaller angles!
         bottomAnglePID.setInputRange(0.0, 360.0);
         bottomAnglePID.setOutputRange(-0.6, 0.6);  // don't need to rotate extremely fast
         bottomAnglePID.setAbsoluteTolerance(1);  // 2 degree threshold
-        bottomAnglePID.setContinuous(true);
+        bottomAnglePID.setContinuous(false);
 
-        middleAnglePID = new PIDController(pidVals[1][0], pidVals[1][1], pidVals[1][2], middlePotentiometer, middleOut);    //pid values need tuning, especially for smaller angles!
+        middleAnglePID = new PIDController(pidVals[1][0], pidVals[1][1], pidVals[1][2], pidVals[1][3], middlePotentiometer, middleOut);    //pid values need tuning, especially for smaller angles!
         middleAnglePID.setInputRange(0.0, 360.0);
-        middleAnglePID.setOutputRange(-0.6, 0.6);  // don't need to rotate extremely fast
+        middleAnglePID.setOutputRange(-0.25, 0.25);  // don't need to rotate extremely fast
         middleAnglePID.setAbsoluteTolerance(1);  // 2 degree threshold
-        middleAnglePID.setContinuous(true);
+        middleAnglePID.setContinuous(false);
 
-        topAnglePID = new PIDController(pidVals[2][0], pidVals[2][1], pidVals[2][2], topPotentiometer, topOut);    //pid values need tuning, especially for smaller angles!
+        topAnglePID = new PIDController(pidVals[2][0], pidVals[2][1], pidVals[2][2], pidVals[2][3], topPotentiometer, topOut);    //pid values need tuning, especially for smaller angles!
         topAnglePID.setInputRange(0.0, 360.0);
-        topAnglePID.setOutputRange(-0.6, 0.6);  // don't need to rotate extremely fast
+        topAnglePID.setOutputRange(-0.2, 0.2);  // don't need to rotate extremely fast
         topAnglePID.setAbsoluteTolerance(1);  // 2 degree threshold
-        topAnglePID.setContinuous(true);
+        topAnglePID.setContinuous(false);
     }
     
     public void rotate(int joint, double speed) {  
         if (joint == 0)
-            rotatingPlatformMotor.set(speed);
-        else if (joint == 1)
             bottomMotor.set(speed);
-        else if (joint == 2)
+        else if (joint == 1)
             middleMotor.set(speed);
-        else
+        else if (joint == 2)
             topMotor.set(speed);
     }
 }

@@ -88,6 +88,7 @@ public class OI {
 		rButton7.whileHeld(new SpinBottomJoint(0.25));
 		rButton8.whileHeld(new SpinMiddleJoint(0.25));
 		rButton9.whileHeld(new SpinTopJoint(0.25));*/
+		rButton2.whenPressed(new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut));
 		rButton3.whenPressed(new CloseServo());
 		rButton4.whileHeld(new OpenServo());
 		rButton5.whileHeld(new SpinRollerIntake(true));

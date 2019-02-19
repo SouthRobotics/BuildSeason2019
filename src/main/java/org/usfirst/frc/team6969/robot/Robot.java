@@ -139,7 +139,8 @@ public class Robot extends TimedRobot {
 		//for every subsystem just do subsystem.initDefaultCommand()
 		//subsystems
 		//driveTrain.initDefaultCommand();
-		
+		SmartDashboard.putData(arm.middleAnglePID);
+
 	}
 
 	/**
