@@ -8,6 +8,7 @@
 package org.usfirst.frc.team6969.robot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
@@ -25,6 +26,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.networktables.*;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team6969.robot.commands.NetworkTablesDesktopClient;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;;
@@ -40,15 +42,13 @@ public class Robot extends TimedRobot {
 	
 	private static final int IMG_WIDTH = 640;
 	private static final int IMG_HEIGHT = 480;
-	
-	private VisionThread visionThread1;
-	private VisionThread visionThread2;
-	public int centerXhatch;
-	public int centerXball;
+	double[] ballx;
+	double[] hatchx;
 	NetworkTableEntry centerball;
 	NetworkTableEntry centerhatch;
-	public static double ballx;
-	public static double hatchx;
+	NetworkTable Ball;
+	NetworkTable Hatch;
+	
 
 
 	
@@ -100,14 +100,21 @@ public class Robot extends TimedRobot {
 		//pixyCenter = 158;
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
 		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
-		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
-		camera1.setResolution(IMG_WIDTH, IMG_HEIGHT);
+		//UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
+		//camera1.setResolution(IMG_WIDTH, IMG_HEIGHT);
 		NetworkTableInstance inst = NetworkTableInstance.getDefault();
-		NetworkTable Ball = inst.getTable("GRIP/BallReport");
-		NetworkTable Hatch = inst.getTable("GRIP/HatchReport");
-		centerball = Ball.getEntry("centerx");
-		centerhatch = Hatch.getEntry("centerx");
-	}
+		inst.startClientTeam(6969);
+		Ball = inst.getTable("GRIP/BallReport/");
+		Hatch = inst.getTable("GRIP/HatchReport/");
+		
+    	
+		
+    	
+    	
+    }
+
+	
+		
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -175,14 +182,20 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		getPixyData();
-		System.out.println("Center: " + pixyCenter);
+		//getPixyData();
+		//System.out.println("Center: " + pixyCenter);
 		reportCollisionDetection();
 		displaySmartDashboardData();
-		centerball.setDouble(ballx);
-		centerhatch.setDouble(hatchx);
-		System.out.println("Ball Center: " + ballx);
-		System.out.println("Hatch Center "+ hatchx);
+		centerball = Ball.getEntry("centerX");
+		centerhatch = Hatch.getEntry("centerX");
+		centerball.getDoubleArray(ballx); 
+		centerhatch.getDoubleArray(hatchx);
+		System.out.println("X Hatch: " + Arrays.toString(hatchx) + " X Ball: " + Arrays.toString(ballx));
+		
+	    
+		
+		
+		
 		
 		
 	}
