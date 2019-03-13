@@ -69,12 +69,12 @@ public class RobotMap {
 	public static Spark driveTrainFrontLeft;
 */	
     //Spark motorcontrollers that control subsystems
-	public static CANSparkMax clawLeft;
-	public static CANSparkMax clawRight;
-	public static CANSparkMax bottomJointMotor;
-	public static CANSparkMax middleJointMotor;
-	public static CANSparkMax topJointMotor;
-	public static CANSparkMax rotatingPlatformMotor;
+	public static SpeedController clawLeft;
+	public static SpeedController clawRight;
+	public static SpeedController bottomJointMotor;
+	public static SpeedController middleJointMotor;
+	public static SpeedController topJointMotor;
+	public static SpeedController rotatingPlatformMotor;
 	
     //list of sensors: http://1418.team/assets/resources/Introduction%20to%20Sensors.pdf
     
@@ -99,7 +99,7 @@ public class RobotMap {
     //Other sensors
 	public static AHRS navx;	// https://pdocs.kauailabs.com/navx-mxp/
 	public static Servo servo;
-	public static Counter rotatingPlatformEncoder;
+	public static Encoder rotatingPlatformEncoder;
 	public static Counter rotatingPlatformEncoderIndex;
 	public static Encoder leftDriveEncoder;
 	public static Encoder rightDriveEncoder;
@@ -163,12 +163,12 @@ public class RobotMap {
 		3   - Top Joint
 		4 - Rotating Platform
 		*/
-		clawLeft = new CANSparkMax(11, MotorType.kBrushed);
-		clawRight = new CANSparkMax(12, MotorType.kBrushed);		
-		bottomJointMotor = new CANSparkMax(5, MotorType.kBrushed);
-		middleJointMotor = new CANSparkMax(10, MotorType.kBrushed);
-		topJointMotor = new CANSparkMax(3, MotorType.kBrushed);
-		rotatingPlatformMotor = new CANSparkMax(4, MotorType.kBrushed);
+		clawLeft = new WPI_TalonSRX(11);
+		clawRight = new WPI_TalonSRX(10);		
+		bottomJointMotor = new WPI_TalonSRX(3);
+		middleJointMotor = new WPI_TalonSRX(12);
+		topJointMotor = new WPI_TalonSRX(4);
+		rotatingPlatformMotor = new WPI_TalonSRX(5);
 		
 		//PWM port numbers for subsystems.
 		
@@ -191,12 +191,11 @@ public class RobotMap {
 		//gyro = new AnalogGyro(1);
 		navx = new AHRS(SPI.Port.kMXP);
 
-		servo = new Servo(8);
+		servo = new Servo(9);
 
-		rotatingPlatformEncoder = new Counter(2);
-		rotatingPlatformEncoderIndex = new Counter(1);
-		//leftDriveEncoder = new Encoder(6, 5);
-		//rightDriveEncoder = new Encoder(4, 3);
+		rotatingPlatformEncoder = new Encoder(0, 1);
+		leftDriveEncoder = new Encoder(4, 5);
+		rightDriveEncoder = new Encoder(2, 3);
 	    
 		//creates motor groups for TankDrive
 		

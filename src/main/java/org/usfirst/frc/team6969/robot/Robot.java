@@ -64,7 +64,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		RobotMap.init();
-		RobotMap.rotatingPlatformEncoder.setSemiPeriodMode(true);
 		CameraServer.getInstance().startAutomaticCapture();
 		driveTrain = new DriveTrain();
 		claw = new Claw();
@@ -164,7 +163,6 @@ public class Robot extends TimedRobot {
 
 	private void resetEncoders() {
 		RobotMap.rotatingPlatformEncoder.reset();
-		RobotMap.rotatingPlatformEncoderIndex.reset();
 	}
 
 	/*
@@ -246,9 +244,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Bottom potentiometer", RobotMap.bottomJointPot.get());
 		SmartDashboard.putNumber("Middle potentiometer", RobotMap.middleJointPot.get());
 		SmartDashboard.putNumber("Top potentiometer", RobotMap.topJointPot.get());
-		SmartDashboard.putNumber("Rotating Platform Rotations", RobotMap.rotatingPlatformEncoderIndex.get());
-		double angle = RobotMap.rotatingPlatformEncoder.getPeriod()/9.739499999999999E-4*361 -1;
-		SmartDashboard.putNumber("Rotating Platform Angle", angle);
 	}
 }
 

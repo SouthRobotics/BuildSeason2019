@@ -28,14 +28,14 @@ import edu.wpi.first.wpilibj.interfaces.Potentiometer;
  */
 public class Arm extends Subsystem{
 
-    private static CANSparkMax rotatingPlatformMotor;
-    private static CANSparkMax bottomMotor;
-    private static CANSparkMax middleMotor;
-    private static CANSparkMax topMotor;
+    private static SpeedController rotatingPlatformMotor;
+    private static SpeedController bottomMotor;
+    private static SpeedController middleMotor;
+    private static SpeedController topMotor;
     private static Potentiometer bottomPotentiometer;
     private static Potentiometer middlePotentiometer;
     private static Potentiometer topPotentiometer;
-    private static Counter rotatingPlatformEncoder;
+    private static Encoder rotatingPlatformEncoder;
     public static PIDController bottomAnglePID;
     public static PIDController middleAnglePID;
     public static PIDController topAnglePID;

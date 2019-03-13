@@ -16,12 +16,12 @@ import com.revrobotics.CANSparkMax;
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 
-public class TestMotor extends Command {
+public class TestMotorReverse extends Command {
 	// do not make this variable static or else boolean will never change after first call
 	private double speed;	
 	private SpeedController motor;
 
-	public TestMotor(SpeedController motor) {
+	public TestMotorReverse(SpeedController motor) {
 		this.motor = motor;
 	}
 
@@ -33,7 +33,7 @@ public class TestMotor extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-        motor.set(0.25);
+        motor.set(-0.25);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
