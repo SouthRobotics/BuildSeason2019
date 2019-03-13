@@ -207,10 +207,10 @@ public class Robot extends TimedRobot {
 		bally = centerbally.getDoubleArray(bally); 
 		hatchy = centerhatchy.getDoubleArray(hatchy); 
 
-		String hatchString = hatchx.length>0?hatchx[0] + "":"None";
-		String ballString = ballx.length>0?ballx[0] + "":"None";
-		String hatchString1 = hatchy.length>0?hatchy[0] + "":"None";
-		String ballString1 = bally.length>0?bally[0] + "":"None";
+		String hatchString = (hatchx != null &&hatchx.length>0)?hatchx[0] + "":"None";
+		String ballString = (ballx != null &&ballx.length>0)?ballx[0] + "":"None";
+		String hatchString1 = (hatchy != null &&hatchy.length>0)?hatchy[0] + "":"None";
+		String ballString1 = (bally != null &&bally.length>0)?bally[0] + "":"None";
 
 		System.out.println("HATCH: (" + hatchString + ", " + hatchString1 + ") BAll: (" + ballString + ", " + ballString1 + ")");
 	
