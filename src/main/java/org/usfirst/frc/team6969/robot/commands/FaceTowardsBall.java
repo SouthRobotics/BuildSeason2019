@@ -9,15 +9,46 @@ package org.usfirst.frc.team6969.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team6969.robot.Robot;
+import org.usfirst.frc.team6969.robot.RobotMap;
 
 /**
  * An example command.  You can replace me with your own command.
  */
 public class FaceTowardsBall extends Command {
+	public static final int centerX = 320/2;
+	public static final int centerY = 240/2;
+	public static final double minSpeed = 0.3;
+	public static final double maxSpeed = 0.8;
+	public static final int threshold = 10;//how many pixels off center is still acceptable; the distance from the center which the robot should stop rotating
+
+	public int offX(){
+		int avgPos = 0;
+		double[] xPos = Robot.ballx;
+		if(xPos.length == 0){
+			System.out.println("/!\\ WARNING: NO BALL DETECTED /!\\");
+			return 0;
+		}
+		for(int i = 0;i < xPos.length;i++){
+			avgPos += xPos[i];
+		}
+		avgPos /= xPos.length;
+		avgPos -= centerX;
+		System.out.println("Off from center by " + avgPos + " pixels");
+		return avgPos;
+	}
 	public FaceTowardsBall() {
 		// Use requires() here to declare subsystem dependencies
 		//requires(Robot.m_subsystem);
+
+		double rightSpeed = 0;
+		if(){
+
+		}
+
+		RobotMap.drive.tankDrive(leftSpeed, rightSpeed);
 	}
+
+
 
 	// Called just before this Command runs the first time
 	@Override

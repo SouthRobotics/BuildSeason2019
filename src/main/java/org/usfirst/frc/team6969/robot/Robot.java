@@ -42,10 +42,10 @@ public class Robot extends TimedRobot {
 	
 	private static final int IMG_WIDTH = 640;
 	private static final int IMG_HEIGHT = 480;
-	public double[] ballx;
-	public double[] hatchx;
-	public double[] bally;
-	public double[] hatchy;
+	public static double[] ballx;
+	public static double[] hatchx;
+	public static double[] bally;
+	public static double[] hatchy;
 	NetworkTableEntry centerball;
 	NetworkTableEntry centerhatch;
 	NetworkTableEntry centerbally;
