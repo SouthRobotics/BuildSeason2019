@@ -15,8 +15,8 @@ import org.usfirst.frc.team6969.robot.RobotMap;
  * An example command.  You can replace me with your own command.
  */
 public class FaceTowardsBall extends Command {
-	public static final int centerX = 320/2;
-	public static final int centerY = 240/2;
+	public static final int centerX = 320;
+	public static final int centerY = 240;
 	public static final double minSpeed = 0.3;//minimun speed, used when very close to target
 	public static final double maxSpeed = 0.8;//max speed, used when distance is bigger than variable below
 	public static final double maxSpeedAtThisDistance = 50;//starts to slow down once it gets this close to target
@@ -27,7 +27,7 @@ public class FaceTowardsBall extends Command {
 	public int offX(){//how far off from the ball is the robot? range [-CAM_WIDTH/2, CAM_WIDTH/2]
 		int avgPos = 0;
 		double[] xPos = Robot.ballx;
-		if(xPos.length == 0){
+		if(xPos == null ||xPos.length == 0){
 			System.out.println("/!\\ WARNING: NO BALL DETECTED /!\\");
 			return 0;
 		}
@@ -43,6 +43,19 @@ public class FaceTowardsBall extends Command {
 		// Use requires() here to declare subsystem dependencies
 		//requires(Robot.m_subsystem);
 
+	}
+
+
+
+	// Called just before this Command runs the first time
+	@Override
+	protected void initialize() {
+	}
+
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+		
 		double rightSpeed = 0;//speeds for the sides of the robot
 		double leftSpeed = 0;
 		off = offX();//update how far off from target the robot is
@@ -60,18 +73,6 @@ public class FaceTowardsBall extends Command {
 		RobotMap.driveTrainFrontLeft.set(leftSpeed);
 		RobotMap.driveTrainBackRight.set(rightSpeed);
 		RobotMap.driveTrainFrontRight.set(rightSpeed);
-	}
-
-
-
-	// Called just before this Command runs the first time
-	@Override
-	protected void initialize() {
-	}
-
-	// Called repeatedly when this Command is scheduled to run
-	@Override
-	protected void execute() {
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
