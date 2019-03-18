@@ -18,10 +18,10 @@ public class SpinTopJoint extends Command {
     private double speed;	
 
 	public SpinTopJoint(boolean forward) {
-        requires(Robot.arm);
-		this.speed = 0.30;
+        //requires(Robot.arm);
+		this.speed = 0.2;
 		if (!forward)
-			speed = -0.30;
+			speed = -0.2;
 	}
 
 	// Called just before this Command runs the first time
@@ -52,6 +52,6 @@ public class SpinTopJoint extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		Robot.claw.stopSpinning();
+		end();
 	}
 }

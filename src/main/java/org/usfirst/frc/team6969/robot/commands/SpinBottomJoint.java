@@ -18,7 +18,7 @@ public class SpinBottomJoint extends Command {
     private double speed;	
 
 	public SpinBottomJoint(boolean forward) {
-        requires(Robot.arm);
+        //requires(Robot.arm);
 		this.speed = 0.30;
 		if (!forward)
 			speed = -0.30;
@@ -52,6 +52,6 @@ public class SpinBottomJoint extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		Robot.claw.stopSpinning();
+		end();
 	}
 }

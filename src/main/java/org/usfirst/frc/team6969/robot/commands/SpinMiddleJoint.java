@@ -18,7 +18,7 @@ public class SpinMiddleJoint extends Command {
     private double speed;	
 
 	public SpinMiddleJoint(boolean forward) {
-        requires(Robot.arm);
+        //requires(Robot.arm);
 		this.speed = 0.25;
 		if (!forward)
 			speed = -0.30;
@@ -53,6 +53,6 @@ public class SpinMiddleJoint extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		Robot.claw.stopSpinning();
+		end();
 	}
 }

@@ -49,12 +49,7 @@ public class LockJoint extends Command {
 	@Override
 	protected void execute() {
         outValue = out.outVal;
-        if (outValue > 0)
-                if (outValue > 0.3)
-                        outValue = 0.3;
-        else
-                if (outValue < -0.3)
-                        outValue = -0.3;
+ 
         Robot.arm.rotate(joint, -outValue);
         SmartDashboard.putNumber("Out Value", out.outVal);
         SmartDashboard.putData(anglecontroller);

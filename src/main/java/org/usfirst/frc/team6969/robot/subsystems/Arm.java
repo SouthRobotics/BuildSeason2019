@@ -36,12 +36,12 @@ public class Arm extends Subsystem{
     private static Potentiometer middlePotentiometer;
     private static Potentiometer topPotentiometer;
     private static Encoder rotatingPlatformEncoder;
-    public PIDController bottomAnglePID;
-    public PIDController middleAnglePID;
-    public PIDController topAnglePID;
-    public CustomPIDOutput bottomOut;
-    public CustomPIDOutput middleOut;
-    public CustomPIDOutput topOut;
+    public static PIDController bottomAnglePID;
+    public static PIDController middleAnglePID;
+    public static PIDController topAnglePID;
+    public static CustomPIDOutput bottomOut;
+    public static CustomPIDOutput middleOut;
+    public static CustomPIDOutput topOut;
 
 
     private double[][] pidVals = {{0.04,0.0,0.03, 0},
