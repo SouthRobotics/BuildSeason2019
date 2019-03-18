@@ -33,7 +33,7 @@ public class TestMotorReverse extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-        motor.set(-0.25);
+        motor.set(-0.3);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -46,6 +46,8 @@ public class TestMotorReverse extends Command {
 	@Override
 	protected void end() {
 		motor.set(0);
+		Scheduler.getInstance().add(new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut));
+
 	}
 
 	// Called when another command which requires one or more of the same

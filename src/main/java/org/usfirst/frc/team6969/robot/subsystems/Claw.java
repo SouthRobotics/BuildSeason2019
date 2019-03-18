@@ -30,15 +30,15 @@ public class Claw extends Subsystem {
 	}
     
     public void spinIn() {  //slower intake is better control so ball doesn't bounce out
-    leftMotor.set(-0.25);
-    rightMotor.set(0.25);
+    leftMotor.set(0.25);
+    rightMotor.set(-0.25);
     }
 
     public void spinOut() {
         /*leftMotor.set(0.35);
         rightMotor.set(-0.35);*/
-        leftMotor.set(01);
-        rightMotor.set(-1);
+        leftMotor.set(-1);
+        rightMotor.set(1);
     }
 
     public void stopSpinning() {
@@ -47,14 +47,14 @@ public class Claw extends Subsystem {
     }
 
     public void closeServo() {
-        servo.set(1);
+        servo.set(0.55);
     }
 
     public void openServo() {
-        servo.set(0);
+        servo.set(0.0);
     }
 
     public void openServoInHatch() {
-        servo.set(0.65);
+        servo.set(0.40);
     }
 }

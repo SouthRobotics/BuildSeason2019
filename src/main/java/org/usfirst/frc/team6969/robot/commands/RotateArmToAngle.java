@@ -66,7 +66,7 @@ public class RotateArmToAngle extends Command {
 	@Override
 	protected void end() {
                 anglecontroller.disable();
-                Scheduler.getInstance().add(new LockJoint(pot, anglecontroller, joint, out));
+                //Scheduler.getInstance().add(new LockJoint(pot, anglecontroller, joint, out));
 	}
 
 	// Called when another command which requires one or more of the same

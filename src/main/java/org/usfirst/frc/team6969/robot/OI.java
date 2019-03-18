@@ -89,12 +89,13 @@ public class OI {
 		rButton8.whileHeld(new SpinMiddleJoint(0.25));
 		rButton9.whileHeld(new SpinTopJoint(0.25));*/
 		rButton2.whenPressed(new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut));
+		rButton3.whenPressed(new RotateArmToAngle(RobotMap.topJointPot, Robot.arm.topAnglePID, 2, Robot.arm.topOut, 30));
 		rButton5.whileHeld(new SpinRollerIntake(true));
 		rButton6.whileHeld(new SpinRollerIntake(false));
 		rButton7.whileHeld(new TestMotor(RobotMap.rotatingPlatformMotor));
-		rButton8.whileHeld(new TestMotor(RobotMap.bottomJointMotor));
-		rButton9.whileHeld(new TestMotor(RobotMap.middleJointMotor));
-		rButton10.whileHeld(new TestMotor(RobotMap.topJointMotor));
+		rButton8.whileHeld(new SpinBottomJoint(true));
+		rButton9.whileHeld(new SpinMiddleJoint(true));
+		rButton10.whileHeld(new SpinTopJoint(true));
 		//rButton10.whileHeld(new TestMotor(RobotMap.topJointMotor));
 		rButton11.whileHeld(new TestMotor(RobotMap.clawLeft));
 		rButton12.whileHeld(new TestMotor(RobotMap.clawRight));
@@ -103,9 +104,9 @@ public class OI {
 		lButton4.whenPressed(new OpenServo());
 		lButton5.whenPressed(new OpenServoInHatch());
 		lButton7.whileHeld(new TestMotorReverse(RobotMap.rotatingPlatformMotor));
-		lButton8.whileHeld(new TestMotorReverse(RobotMap.bottomJointMotor));
-		lButton9.whileHeld(new TestMotorReverse(RobotMap.middleJointMotor));
-		lButton10.whileHeld(new TestMotorReverse(RobotMap.topJointMotor));
+		lButton8.whileHeld(new SpinBottomJoint(false));
+		lButton9.whileHeld(new SpinMiddleJoint(false));
+		lButton10.whileHeld(new SpinTopJoint(false));
 		//rButton10.whileHeld(new TestMotor(RobotMap.topJointMotor));
 		lButton11.whileHeld(new TestMotor(RobotMap.clawLeft));
 		lButton12.whileHeld(new TestMotor(RobotMap.clawRight));

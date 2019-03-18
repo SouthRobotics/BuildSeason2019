@@ -8,6 +8,8 @@
 package org.usfirst.frc.team6969.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 
@@ -15,9 +17,11 @@ public class SpinTopJoint extends Command {
 	// do not make this variable static or else boolean will never change after first call
     private double speed;	
 
-	public SpinTopJoint(double speed) {
+	public SpinTopJoint(boolean forward) {
         requires(Robot.arm);
-        this.speed = speed;
+		this.speed = 0.30;
+		if (!forward)
+			speed = -0.30;
 	}
 
 	// Called just before this Command runs the first time
@@ -40,6 +44,8 @@ public class SpinTopJoint extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
+		Robot.arm.rotate(2, 0);
+		Scheduler.getInstance().add(new LockJoint(RobotMap.topJointPot, Robot.arm.topAnglePID, 2, Robot.arm.topOut));
 	}
 
 	// Called when another command which requires one or more of the same

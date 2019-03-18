@@ -27,7 +27,7 @@ public class LockJoint extends Command {
             // Use requires() here to declare subsystem dependencies
             super("Lock Joint");
             targetAngle = potentiometer.get();
-            targetAngle = 85;
+            //targetAngle = 85;
             anglecontroller = controller;
             this.joint = joint;
             this.out = out;
@@ -50,15 +50,15 @@ public class LockJoint extends Command {
 	protected void execute() {
         outValue = out.outVal;
         if (outValue > 0)
-                if (outValue > 0.25)
-                        outValue = 0.25;
+                if (outValue > 0.3)
+                        outValue = 0.3;
         else
-                if (outValue < -0.25)
-                        outValue = -0.25;
-        Robot.arm.rotate(joint, outValue);
+                if (outValue < -0.3)
+                        outValue = -0.3;
+        Robot.arm.rotate(joint, -outValue);
         SmartDashboard.putNumber("Out Value", out.outVal);
-        //SmartDashboard.putData(anglecontroller);
-
+        SmartDashboard.putData(anglecontroller);
+        SmartDashboard.putNumber("target setpoint", anglecontroller.getSetpoint());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

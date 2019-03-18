@@ -15,6 +15,7 @@ import com.revrobotics.CANSparkMax;
 
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
+import org.usfirst.frc.team6969.robot.subsystems.Arm;
 
 public class TestMotor extends Command {
 	// do not make this variable static or else boolean will never change after first call
@@ -33,7 +34,7 @@ public class TestMotor extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-        motor.set(0.25);
+        motor.set(0.3);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -46,6 +47,7 @@ public class TestMotor extends Command {
 	@Override
 	protected void end() {
 		motor.set(0);
+		Scheduler.getInstance().add(new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut));
 	}
 
 	// Called when another command which requires one or more of the same
