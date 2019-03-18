@@ -150,7 +150,7 @@ public class RobotMap {
 		//pot = new AnalogPotentiometer(0, 360);
 
 	    //Other ports for sensors
-		gyro = new AnalogGyro(1);
+		//gyro = new AnalogGyro(1);
 		navx = new AHRS(SPI.Port.kMXP);
 	    
 		//creates motor groups for TankDrive

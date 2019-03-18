@@ -42,14 +42,7 @@ public class Robot extends TimedRobot {
 	
 	private static final int IMG_WIDTH = 640;
 	private static final int IMG_HEIGHT = 480;
-	public static double[] ballx;
-	public static double[] hatchx;
-	public static double[] bally;
-	public static double[] hatchy;
-	NetworkTableEntry centerball;
-	NetworkTableEntry centerhatch;
-	NetworkTableEntry centerbally;
-	NetworkTableEntry centerhatchy;
+	
 
 
 	
@@ -103,25 +96,7 @@ public class Robot extends TimedRobot {
 		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
 		//UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
 		//camera1.setResolution(IMG_WIDTH, IMG_HEIGHT);
-		NetworkTableInstance inst = NetworkTableInstance.getDefault();
-		NetworkTableInstance inst1 = NetworkTableInstance.getDefault();
-		NetworkTableInstance inst2 = NetworkTableInstance.getDefault();
-		NetworkTableInstance inst3 = NetworkTableInstance.getDefault();
 		
-		inst.startClient();
-		inst1.startClient();
-		inst2.startClient();
-		inst3.startClient();
-		
-		NetworkTable Ball = inst1.getTable("GRIP/BallReport");
-		NetworkTable Hatch = inst.getTable("GRIP/HatchReport");
-		NetworkTable Ball1 = inst2.getTable("GRIP/BallReport");
-		NetworkTable Hatch1 = inst3.getTable("GRIP/HatchReport");
-
-		centerball = Ball.getEntry("centerX");
-		centerhatch = Hatch.getEntry("centerX");
-		centerbally = Ball1.getEntry("centerY");
-		centerhatchy = Hatch1.getEntry("centerY");
 		
     	
 		
@@ -202,18 +177,7 @@ public class Robot extends TimedRobot {
 		//System.out.println("Center: " + pixyCenter);
 		reportCollisionDetection();
 		displaySmartDashboardData();
-		ballx = centerball.getDoubleArray(ballx); 
-		hatchx = centerhatch.getDoubleArray(hatchx); 
-		bally = centerbally.getDoubleArray(bally); 
-		hatchy = centerhatchy.getDoubleArray(hatchy); 
-
-		String hatchString = hatchx.length>0?hatchx[0] + "":"None";
-		String ballString = ballx.length>0?ballx[0] + "":"None";
-		String hatchString1 = hatchy.length>0?hatchy[0] + "":"None";
-		String ballString1 = bally.length>0?bally[0] + "":"None";
-
-		System.out.println("HATCH: (" + hatchString + ", " + hatchString1 + ") BAll: (" + ballString + ", " + ballString1 + ")");
-	
+		
 		
 		
 		

@@ -9,17 +9,11 @@ package org.usfirst.frc.team6969.robot;
 
 //import org.usfirst.frc.team6969.robot.commands.ExampleSchedule;
 import org.usfirst.frc.team6969.robot.commands.ManualOverride;
-import org.usfirst.frc.team6969.robot.commands.RotateChassisToAngle;
-import org.usfirst.frc.team6969.robot.commands.RotateChassisToAnglePID;
-import org.usfirst.frc.team6969.robot.commands.FaceTowardsBall;
 
-import org.usfirst.frc.team6969.robot.commands.RotateToPixyTarget;
-import org.usfirst.frc.team6969.robot.commands.SpinRollerIntake;
-
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.Trigger;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -39,89 +33,69 @@ public class OI {
 	by subclassing Button you can create custom triggers and bind those to
 	commands the same as any other Button.
 
-	// TRIGGERING COMMANDS WITH BUTTONS
-	Once you have a button, it's trivial to bind it to a button in one of three ways:
-	  Start the command when the button is pressed and let it run the command
-	  until it is finished as determined by it's isFinished method.
-	  button.whenPressed(new ExampleCommand());
-
-	  Run the command while the button is being held down and interrupt it once
-	  the button is released.
-	  button.whileHeld(new ExampleCommand());
-
-	  Start the command when the button is released and let it run the command
-	  until it is finished as determined by it's isFinished method.
-	  button.whenReleased(new ExampleCommand());
-	*/
-
-	public int yAxis = 1;
-
-	public static Joystick leftJoy = new Joystick(0);
-	public Button lButton1 = new JoystickButton(leftJoy, 1),
-		lButton2 = new JoystickButton(leftJoy, 2),
-		lButton3 = new JoystickButton(leftJoy, 3),
-		lButton4 = new JoystickButton(leftJoy, 4),
-		lButton5 = new JoystickButton(leftJoy, 5),
-		lButton6 = new JoystickButton(leftJoy, 6),
-		lButton7 = new JoystickButton(leftJoy, 7),
-		lButton8 = new JoystickButton(leftJoy, 8),
-		lButton9 = new JoystickButton(leftJoy, 9),
-		lButton10 = new JoystickButton(leftJoy, 10),
-		lButton11 = new JoystickButton(leftJoy, 11),
-		lButton12 = new JoystickButton(leftJoy, 12);
-
-	public static Joystick rightJoy = new Joystick(1);
-	public Button rButton1 = new JoystickButton(rightJoy, 1),
-		rButton2 = new JoystickButton(rightJoy, 2),
-		rButton3 = new JoystickButton(rightJoy, 3),
-		rButton4 = new JoystickButton(rightJoy, 4),
-		rButton5 = new JoystickButton(rightJoy, 5),
-		rButton6 = new JoystickButton(rightJoy, 6),
-		rButton7 = new JoystickButton(rightJoy, 7),
-		rButton8 = new JoystickButton(rightJoy, 8),
-		rButton9 = new JoystickButton(rightJoy, 9),
-		rButton10 = new JoystickButton(rightJoy, 10),
-		rButton11 = new JoystickButton(rightJoy, 11),
-		rButton12 = new JoystickButton(rightJoy, 12);
-
+		//XBOX 360 controller mappings (we got these from DriverStation)
 	
-    public POVTrigger lRight = new POVTrigger(leftJoy, POVTrigger.rightX, POVTrigger.rightY),
-		lUpRight = new POVTrigger(leftJoy, POVTrigger.upRightX, POVTrigger.upRightY),
-		lUp = new POVTrigger(leftJoy, POVTrigger.upX, POVTrigger.upY),
-		lUpLeft = new POVTrigger(leftJoy, POVTrigger.upLeftX, POVTrigger.upLeftY),
-		lLeft = new POVTrigger(leftJoy, POVTrigger.leftX, POVTrigger.leftY),
-		lDownLeft = new POVTrigger(leftJoy, POVTrigger.downLeftX, POVTrigger.downLeftY),
-		lDown = new POVTrigger(leftJoy, POVTrigger.downX, POVTrigger.downY),
-		lDownRight = new POVTrigger(leftJoy, POVTrigger.downRightY, POVTrigger.downRightY);
-
-                
-	public POVTrigger rRight = new POVTrigger(rightJoy, POVTrigger.rightX, POVTrigger.rightY),
-		rUpRight = new POVTrigger(rightJoy, POVTrigger.upRightX, POVTrigger.upRightY),
-		rUp = new POVTrigger(rightJoy, POVTrigger.upX, POVTrigger.upY),
-		rUpLeft = new POVTrigger(rightJoy, POVTrigger.upLeftX, POVTrigger.upLeftY),
-		rLeft = new POVTrigger(rightJoy, POVTrigger.leftX, POVTrigger.leftY),
-		rDownLeft = new POVTrigger(rightJoy, POVTrigger.downLeftX, POVTrigger.downLeftY),
-		rDown = new POVTrigger(rightJoy, POVTrigger.downX, POVTrigger.downY),
-		rDownRight = new POVTrigger(rightJoy, POVTrigger.downRightY, POVTrigger.downRightY);
-
+	 Buttons: (gives pressed or not pressed)
+	  1: X
+	  2: A
+	  3: B
+	  4: Y
+	  5: Left Bumper
+	  6: Right Bumper
+	  7: Back Left Trigger
+	  8: Back Right Trigger
+	  9: Back
+	  10: Start
+	  
+	  Axes: (gives degrees or amount pressed)
+	  1. 
+	  	 
+	//XBOX 1 controller mappings (we got these from DriverStation)
+		 Buttons: (gives pressed or not pressed)
+		  1: A
+		  2: B
+		  3: X
+		  4: Y
+		  5: Left Bumper
+		  6: Right Bumper
+		  7: View Button
+		  8: Menu Button
+		  9: Left Joystick
+		  10: Right Joystick
+		  
+		  Axes: (gives degrees or amount pressed)
+		  0. Left Joystick X Axis
+		  1. Left Joystick Y Axis 
+		  2. Back Left Trigger
+		  3. Back Right Trigger
+		  4. Right Joystick X Axis
+		  5. Right Joystick Y Axis
+		*/	
+	
+		private XboxController controller = new XboxController(1); // Must be USB port 1 in DriverStation.
 		
-    
-    public OI() {
-		rButton2.whenPressed(new ManualOverride());
-		//lButton3.whenPressed(new RotateToPixyTarget(Robot.pixyCenter));
-		//lButton4.whenPressed(new RotateChassisToAngle(90));
-		//lButton5.whenPressed(new RotateChassisToAnglePID(-90));
-		//rButton5.whileHeld(new SpinRollerIntake(true));
-		//rButton6.whileHeld(new SpinRollerIntake(false));
-		rButton11.whenPressed(new FaceTowardsBall());
+	
+		public Button aButton = new JoystickButton(controller, 1),
+				bButton = new JoystickButton(controller, 2),
+				xButton = new JoystickButton(controller, 3),
+				yButton = new JoystickButton(controller, 4),
+				leftBumper = new JoystickButton(controller,5),
+				rightBumper = new JoystickButton(controller, 6),
+				viewButton = new JoystickButton(controller, 7),
+				menuButton = new JoystickButton(controller, 8),
+				leftStick = new JoystickButton(controller, 9),	//push stick in not tilt
+				rightStick = new JoystickButton(controller, 10);
+		
+		public int leftYAxis = 1;
+		public int rightYAxis = 5;
+	
+		public OI() {
+			viewButton.whenPressed(new ManualOverride());
+			
 	}
-
-	
-	
-	
-    /*public XboxController getController() {
-        return controller;
-    }*/
+	public XboxController getController() {
+	return controller;
+}
     
         
 }
