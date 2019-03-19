@@ -215,5 +215,6 @@ public class RobotMap {
 	     when true, safetyenabled turns off motors if their output isn't updated for a certain amount of time
 	     setExpiration() sets the time for safetyenabled
 	     */
+		drive.setSafetyEnabled(false);
 	}
 }

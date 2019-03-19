@@ -74,18 +74,18 @@ public class Arm extends Subsystem{
 
         bottomAnglePID = new PIDController(pidVals[0][0], pidVals[0][1], pidVals[0][2], pidVals[0][3], bottomPotentiometer, bottomOut);    //pid values need tuning, especially for smaller angles!
         bottomAnglePID.setInputRange(0.0, 360.0);
-        bottomAnglePID.setOutputRange(-0.6, 0.6);  // don't need to rotate extremely fast
+        bottomAnglePID.setOutputRange(-0.3, 0.3);  // don't need to rotate extremely fast
         bottomAnglePID.setAbsoluteTolerance(1);  // 2 degree threshold
         bottomAnglePID.setContinuous(false);
 
         middleAnglePID = new PIDController(pidVals[1][0], pidVals[1][1], pidVals[1][2], pidVals[1][3], middlePotentiometer, middleOut);    //pid values need tuning, especially for smaller angles!
-        middleAnglePID.setInputRange(50.0, 290.0);
+        middleAnglePID.setInputRange(0.0, 360.0);
         middleAnglePID.setOutputRange(-0.25, 0.25);  // don't need to rotate extremely fast
         middleAnglePID.setAbsoluteTolerance(1);  // 2 degree threshold
         middleAnglePID.setContinuous(false);
 
         topAnglePID = new PIDController(pidVals[2][0], pidVals[2][1], pidVals[2][2], pidVals[2][3], topPotentiometer, topOut);    //pid values need tuning, especially for smaller angles!
-        topAnglePID.setInputRange(115, 275.0);
+        topAnglePID.setInputRange(0, 360.0);
         topAnglePID.setOutputRange(-0.2, 0.2);  // don't need to rotate extremely fast
         topAnglePID.setAbsoluteTolerance(1);  // 2 degree threshold
         topAnglePID.setContinuous(false);

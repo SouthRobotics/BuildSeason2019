@@ -42,6 +42,7 @@ public class LockJoint extends Command {
     
     public void initPIDController() {
         anglecontroller.setSetpoint(targetAngle);
+        anglecontroller.setAbsoluteTolerance(5);
         anglecontroller.enable();
     }
 
@@ -65,7 +66,7 @@ public class LockJoint extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-        anglecontroller.disable();
+        //anglecontroller.disable();
 	}
 
 	// Called when another command which requires one or more of the same

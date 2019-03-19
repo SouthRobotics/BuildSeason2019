@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Watchdog;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -152,6 +153,7 @@ public class Robot extends TimedRobot {
 		System.out.println("Center: " + pixyCenter);
 		reportCollisionDetection();
 		displaySmartDashboardData();
+		RobotMap.drive.feedWatchdog();
 	}
 
 	/**
@@ -162,7 +164,6 @@ public class Robot extends TimedRobot {
 	}
 
 	private void resetEncoders() {
-		RobotMap.rotatingPlatformEncoder.reset();
 	}
 
 	/*
@@ -244,6 +245,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Bottom potentiometer", RobotMap.bottomJointPot.get());
 		SmartDashboard.putNumber("Middle potentiometer", RobotMap.middleJointPot.get());
 		SmartDashboard.putNumber("Top potentiometer", RobotMap.topJointPot.get());
+		SmartDashboard.putNumber("bottom out", Arm.bottomOut.outVal);
 	}
 }
 
