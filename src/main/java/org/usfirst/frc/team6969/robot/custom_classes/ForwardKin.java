@@ -16,6 +16,7 @@ package org.usfirst.frc.team6969.robot.custom_classes;
 bottom: 32.5
 middle: 32.25
 top: 11
+front of robot to bottom joint: 12.5
 */
 public class ForwardKin {
     public static double[] getXY(double ang1, double ang2, double ang3, double[] lengths)
