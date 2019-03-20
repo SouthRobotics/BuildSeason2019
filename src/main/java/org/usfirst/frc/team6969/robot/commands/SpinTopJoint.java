@@ -45,7 +45,7 @@ public class SpinTopJoint extends Command {
 	@Override
 	protected void end() {
 		Robot.arm.rotate(2, 0);
-		Scheduler.getInstance().add(new LockJoint(RobotMap.topJointPot, Robot.arm.topAnglePID, 2, Robot.arm.topOut));
+		Scheduler.getInstance().add(new LockJoint(RobotMap.topJointPot, Robot.arm.topAnglePID, 2, Robot.arm.topOut, RobotMap.topJointPot.get()));
 	}
 
 	// Called when another command which requires one or more of the same

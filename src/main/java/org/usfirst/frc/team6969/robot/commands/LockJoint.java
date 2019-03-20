@@ -17,21 +17,19 @@ import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LockJoint extends Command {
-        private double targetAngle;
         private PIDController anglecontroller;
         private int joint;
         private CustomPIDOutput out;
-        private double outValue;
+        private double outValue, setpoint;
 
-        public LockJoint(Potentiometer potentiometer, PIDController controller, int joint, CustomPIDOutput out) {
+        public LockJoint(Potentiometer potentiometer, PIDController controller, int joint, CustomPIDOutput out, double setpoint) {
             // Use requires() here to declare subsystem dependencies
             super("Lock Joint");
-            targetAngle = potentiometer.get();
-            //targetAngle = 85;
             anglecontroller = controller;
             this.joint = joint;
             this.out = out;
-            requires(Robot.arm);
+            this.setpoint = setpoint;
+            //requires(Robot.arm);
 	    }
 
 	// Called just before this Command runs the first time
@@ -41,8 +39,8 @@ public class LockJoint extends Command {
         }
     
     public void initPIDController() {
-        anglecontroller.setSetpoint(targetAngle);
-        anglecontroller.setAbsoluteTolerance(5);
+        anglecontroller.setSetpoint(setpoint);
+        anglecontroller.setAbsoluteTolerance(3);
         anglecontroller.enable();
     }
 

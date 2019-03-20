@@ -41,7 +41,6 @@ public class RotateArmToAngle extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-        targetAngle += pot.get();
         initPIDController();
     }
     
@@ -53,7 +52,7 @@ public class RotateArmToAngle extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-                Robot.arm.rotate(joint, out.outVal);
+                Robot.arm.rotate(joint, -out.outVal);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -65,7 +64,7 @@ public class RotateArmToAngle extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-                anglecontroller.disable();
+                //anglecontroller.disable();
                 //Scheduler.getInstance().add(new LockJoint(pot, anglecontroller, joint, out));
 	}
 

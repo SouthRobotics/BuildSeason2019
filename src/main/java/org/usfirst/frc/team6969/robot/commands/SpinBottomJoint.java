@@ -45,7 +45,7 @@ public class SpinBottomJoint extends Command {
 	@Override
 	protected void end() {
 		Robot.arm.rotate(0, 0);
-		Scheduler.getInstance().add(new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut));
+		Scheduler.getInstance().add(new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, RobotMap.bottomJointPot.get()));
 	}
 
 	// Called when another command which requires one or more of the same

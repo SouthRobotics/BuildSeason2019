@@ -46,7 +46,6 @@ public class TestMotorReverse extends Command {
 	@Override
 	protected void end() {
 		motor.set(0);
-		Scheduler.getInstance().add(new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut));
 
 	}
 

@@ -45,7 +45,7 @@ public class SpinMiddleJoint extends Command {
 	@Override
 	protected void end() {
 		Robot.arm.rotate(1, 0);
-		Scheduler.getInstance().add(new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut));
+		Scheduler.getInstance().add(new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut, RobotMap.middleJointPot.get()));
 
 	}
 

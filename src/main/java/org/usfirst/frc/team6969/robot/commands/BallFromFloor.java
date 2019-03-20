@@ -7,23 +7,19 @@
 
 package org.usfirst.frc.team6969.robot.commands;
 
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-import com.revrobotics.CANSparkMax;
-
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
-import org.usfirst.frc.team6969.robot.subsystems.Arm;
 
-public class TestMotor extends Command {
-	// do not make this variable static or else boolean will never change after first call
-	private double speed;	
-	private SpeedController motor;
-
-	public TestMotor(SpeedController motor) {
-		this.motor = motor;
+/**
+ * An example command.  You can replace me with your own command.
+ */
+public class BallFromFloor extends Command {
+	public int test = 0;
+	public BallFromFloor() {
+		requires(Robot.arm);
 	}
 
 	// Called just before this Command runs the first time
@@ -34,25 +30,32 @@ public class TestMotor extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-        motor.set(0.3);
+		Command servo = new OpenServo();
+		Command bottom = new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, 113);
+		Command middle = new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut, 175);
+		Command top = new LockJoint(RobotMap.topJointPot, Robot.arm.topAnglePID, 2, Robot.arm.topOut, 90);
+		servo.start();
+		bottom.start();
+		middle.start();
+		top.start();
+		test = 1;
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return (test == 1);
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		motor.set(0);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		end();
 	}
 }

@@ -246,6 +246,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Middle potentiometer", RobotMap.middleJointPot.get());
 		SmartDashboard.putNumber("Top potentiometer", RobotMap.topJointPot.get());
 		SmartDashboard.putNumber("bottom out", Arm.bottomOut.outVal);
+		SmartDashboard.putData(Arm.bottomAnglePID);
+		SmartDashboard.putData(Arm.middleAnglePID);
+		SmartDashboard.putData(Arm.topAnglePID);
 	}
 }
 
