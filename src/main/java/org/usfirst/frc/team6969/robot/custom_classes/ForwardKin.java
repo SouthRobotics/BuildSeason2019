@@ -8,8 +8,15 @@
 package org.usfirst.frc.team6969.robot.custom_classes;
 
 /**
- * Add your docs here.
+ * z is rotation
+ * x is how far out
+ * y is height
  */
+/*lengths of joints (inches):
+bottom: 32.5
+middle: 32.25
+top: 11
+*/
 public class ForwardKin {
     public static double[] getXY(double ang1, double ang2, double ang3, double[] lengths)
     {

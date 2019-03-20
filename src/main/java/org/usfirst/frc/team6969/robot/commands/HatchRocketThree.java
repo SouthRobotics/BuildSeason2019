@@ -16,9 +16,9 @@ import org.usfirst.frc.team6969.robot.RobotMap;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class BallFromFloor extends Command {
+public class HatchRocketThree extends Command {
 	public int test = 0;
-	public BallFromFloor() {
+	public HatchRocketThree() {
 	}
 
 	// Called just before this Command runs the first time
@@ -29,10 +29,10 @@ public class BallFromFloor extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Command servo = new OpenServo();
-		Command bottom = new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, 105);
-		Command middle = new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut, 175);
-		Command top = new LockJoint(RobotMap.topJointPot, Robot.arm.topAnglePID, 2, Robot.arm.topOut, 90);
+		Command servo = new CloseServo();
+		Command bottom = new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, 90);
+		Command middle = new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut, 296);
+		Command top = new LockJoint(RobotMap.topJointPot, Robot.arm.topAnglePID, 2, Robot.arm.topOut, 362);
 		servo.start();
 		bottom.start();
 		middle.start();

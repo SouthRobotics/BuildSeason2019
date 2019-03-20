@@ -193,7 +193,7 @@ public class RobotMap {
 
 		servo = new Servo(9);
 
-		rotatingPlatformEncoder = new Encoder(0, 1);
+		rotatingPlatformEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 		leftDriveEncoder = new Encoder(4, 5);
 		rightDriveEncoder = new Encoder(2, 3);
 	    
