@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team6969.robot.commands;
 
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
@@ -17,12 +18,13 @@ import org.usfirst.frc.team6969.robot.RobotMap;
 public class FaceTowardsBall extends Command {
 	public static final int centerX = 320;
 	public static final int centerY = 240;
-	public static final double minSpeed = 0.3;//minimun speed, used when very close to target
-	public static final double maxSpeed = 0.8;//max speed, used when distance is bigger than variable below
+	public static final double minSpeed = 0.1;//minimun speed, used when very close to target
+	public static final double maxSpeed = 0.3;//max speed, used when distance is bigger than variable below
 	public static final double maxSpeedAtThisDistance = 50;//starts to slow down once it gets this close to target
 	public static final int threshold = 10;//how many pixels off center is still acceptable; the distance from the center which the robot should stop rotating
 
 	public double off;
+	public Talon armRot;
 
 	public int offX(){//how far off from the ball is the robot? range [-CAM_WIDTH/2, CAM_WIDTH/2]
 		int avgPos = 0;
@@ -50,29 +52,30 @@ public class FaceTowardsBall extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+		armRot = new Talon(5);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		
-		double rightSpeed = 0;//speeds for the sides of the robot
-		double leftSpeed = 0;
+		double speed = 0;//speeds for the sides of the robot
 		off = offX();//update how far off from target the robot is
 		if(Math.abs(off) > maxSpeedAtThisDistance){
-			rightSpeed = off > 0? maxSpeed : -maxSpeed;
+			speed = off > 0? maxSpeed : -maxSpeed;
 		}else{
 			double mult = minSpeed;
 			mult += (maxSpeed - minSpeed) * Math.abs(off) / maxSpeedAtThisDistance;
-			rightSpeed = off > 0? mult : -mult;
+			speed = off > 0? mult : -mult;
 		}
 
-		leftSpeed = -rightSpeed;
+		armRot.set(speed);
+		// leftSpeed = -rightSpeed;
 		//set speeds; move robot basically.
-		RobotMap.driveTrainBackLeft.set(leftSpeed);
-		RobotMap.driveTrainFrontLeft.set(leftSpeed);
-		RobotMap.driveTrainBackRight.set(rightSpeed);
-		RobotMap.driveTrainFrontRight.set(rightSpeed);
+		// RobotMap.driveTrainBackLeft.set(leftSpeed);
+		// RobotMap.driveTrainFrontLeft.set(leftSpeed);
+		// RobotMap.driveTrainBackRight.set(rightSpeed);
+		// RobotMap.driveTrainFrontRight.set(rightSpeed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
