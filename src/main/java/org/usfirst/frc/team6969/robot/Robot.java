@@ -65,8 +65,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		RobotMap.init();
-		CameraServer.getInstance().startAutomaticCapture();
-		driveTrain = new DriveTrain();
+		CameraServer.getInstance().startAutomaticCapture(0);
 		claw = new Claw();
 		arm = new Arm();
 		m_oi = new OI();
@@ -174,7 +173,7 @@ public class Robot extends TimedRobot {
 	private void getPixyData() {
 
 		arduino.write(new byte[] {0x12}, 1);	//RoboRio must initiate communication with arduino
-		
+
 		if ( arduino.getBytesReceived() > 0 ) {
 
 			arduinoString = arduino.readString();
@@ -202,6 +201,8 @@ public class Robot extends TimedRobot {
 			if ( pixyCounter > 8 )	//if lost sight of object stop turning
 				pixyCenter = -1;
 		}
+		else
+		    System.out.println("no arduino comm");
 	}
 
 	/*

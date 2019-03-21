@@ -101,13 +101,10 @@ public class OI {
 		rButton11.whenPressed(new Cargo_HumanHatch());
 		rButton12.whenPressed(new BallHuman());
 
-		//rButton10.whileHeld(new TestMotor(RobotMap.topJointMotor));
-		rButton11.whileHeld(new TestMotor(RobotMap.clawLeft));
-		rButton12.whileHeld(new TestMotor(RobotMap.clawRight));
-
 		lButton3.whenPressed(new CloseServo());
 		lButton4.whenPressed(new OpenServo());
 		lButton5.whenPressed(new OpenServoInHatch());
+		lButton6.whileHeld(new RotateToPixyTarget());
 		lButton7.whileHeld(new SpinRotatingPlatform(true));
 		lButton8.whileHeld(new SpinBottomJoint(false));
 		lButton9.whileHeld(new SpinMiddleJoint(false));
