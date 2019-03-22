@@ -73,8 +73,10 @@ public class Robot extends TimedRobot {
 		RobotMap.init();
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
 		camera.setResolution(640, 480);
+		camera.setFPS(15);
 		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
-		camera1.setResolution(1280, 720);
+		camera1.setResolution(640, 480);
+		camera1.setFPS(15);
 		claw = new Claw();
 		arm = new Arm();
 		m_oi = new OI();
@@ -82,7 +84,7 @@ public class Robot extends TimedRobot {
 		ds = DriverStation.getInstance();
 		pdp.clearStickyFaults();	// clears pdp issue with yellow light
 		robotDrive =  RobotMap.drive;
-		arduino = new SerialPort(9600, SerialPort.Port.kUSB1);
+		arduino = new SerialPort(9600, SerialPort.Port.kUSB);
 		arduinoString = "";
 		pixyData = new ArrayList<Integer>();
 		for (int i = 0; i < 50; i++)	// initialize pixyData
