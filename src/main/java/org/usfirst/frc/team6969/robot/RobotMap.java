@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team6969.robot;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
@@ -169,6 +170,7 @@ public class RobotMap {
 		middleJointMotor = new WPI_TalonSRX(12);
 		topJointMotor = new WPI_TalonSRX(4);
 		rotatingPlatformMotor = new WPI_TalonSRX(5);
+		((WPI_TalonSRX)rotatingPlatformMotor).setNeutralMode(NeutralMode.Brake);
 		
 		//PWM port numbers for subsystems.
 		
@@ -193,7 +195,7 @@ public class RobotMap {
 
 		servo = new Servo(9);
 
-		rotatingPlatformEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+		rotatingPlatformEncoder = new Encoder(0, 1);
 		leftDriveEncoder = new Encoder(4, 5);
 		rightDriveEncoder = new Encoder(2, 3);
 	    

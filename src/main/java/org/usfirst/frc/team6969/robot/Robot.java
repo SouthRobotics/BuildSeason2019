@@ -9,6 +9,8 @@ package org.usfirst.frc.team6969.robot;
 
 import java.util.ArrayList;
 
+import org.usfirst.frc.team6969.robot.commands.LockJoint;
+import org.usfirst.frc.team6969.robot.custom_classes.ForwardKin;
 import org.usfirst.frc.team6969.robot.subsystems.Arm;
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
@@ -54,6 +56,9 @@ public class Robot extends TimedRobot {
 	private int pixyCounter;
 	public static int pixyCenter;
 	public static final int PIXYXCENTER = 158;	// pixy cam x-values range from 0 to 316 
+	public static final double[] armLengths = {32.5, 32.25, 11};
+	public static Command bottomLimit = new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, 64);
+
 	
 	//auto command... will vary based on location/alliance
 	public Command autonomousCommand = null;
@@ -153,6 +158,8 @@ public class Robot extends TimedRobot {
 		reportCollisionDetection();
 		displaySmartDashboardData();
 		RobotMap.drive.feedWatchdog();
+		if (RobotMap.bottomJointPot.get() > 105)
+			bottomLimit.start();
 	}
 
 	/**
@@ -234,6 +241,10 @@ public class Robot extends TimedRobot {
 
 	}
 
+	public double getArmY() {
+		return ForwardKin.getY(RobotMap.bottomJointPot.get(), RobotMap.middleJointPot.get() - 187, RobotMap.topJointPot.get() - 193 + 180, armLengths) - 12.5;
+	}
+
 	/*
 	Place values to monitor in Smart Dashboard
 	*/
@@ -250,6 +261,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData(Arm.bottomAnglePID);
 		SmartDashboard.putData(Arm.middleAnglePID);
 		SmartDashboard.putData(Arm.topAnglePID);
+		SmartDashboard.putNumber("How far out", getArmY());
 	}
 }
 
