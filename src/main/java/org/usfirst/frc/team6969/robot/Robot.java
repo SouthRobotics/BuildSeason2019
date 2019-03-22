@@ -10,6 +10,7 @@ package org.usfirst.frc.team6969.robot;
 import java.util.ArrayList;
 
 import org.usfirst.frc.team6969.robot.commands.LockJoint;
+import org.usfirst.frc.team6969.robot.commands.TeleOpDrive;
 import org.usfirst.frc.team6969.robot.custom_classes.ForwardKin;
 import org.usfirst.frc.team6969.robot.subsystems.Arm;
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
@@ -80,6 +81,7 @@ public class Robot extends TimedRobot {
 		claw = new Claw();
 		arm = new Arm();
 		m_oi = new OI();
+		driveTrain = new DriveTrain();
 		pdp = new PowerDistributionPanel(30);
 		ds = DriverStation.getInstance();
 		pdp.clearStickyFaults();	// clears pdp issue with yellow light

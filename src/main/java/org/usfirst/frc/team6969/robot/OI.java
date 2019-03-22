@@ -101,8 +101,8 @@ public class OI {
 		rButton11.whenPressed(new Cargo_HumanHatch());
 		rButton12.whenPressed(new BallHuman());
 
-		lButton2.whenPressed(new SpinRotatingPlatform(true));
-		lButton3.whenPressed(new SpinRotatingPlatform(false));
+		lButton2.whileHeld(new SpinRotatingPlatform(true));
+		lButton3.whileHeld(new SpinRotatingPlatform(false));
 		lButton4.whileHeld(new SpinBottomJoint(false));
 		lButton5.whileHeld(new SpinBottomJoint(true));
 		lButton6.whileHeld(new SpinMiddleJoint(false));
@@ -112,6 +112,8 @@ public class OI {
 		
 		lButton10.whileHeld(new SpinRollerIntake(true));
 		lButton11.whileHeld(new SpinRollerIntake(false));
+
+		lButton12.whileActive(new TestMotor(RobotMap.driveTrainMiddleLeft));
 
 	}
 	

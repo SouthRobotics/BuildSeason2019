@@ -170,7 +170,6 @@ public class RobotMap {
 		middleJointMotor = new WPI_TalonSRX(12);
 		topJointMotor = new WPI_TalonSRX(4);
 		rotatingPlatformMotor = new WPI_TalonSRX(5);
-		((WPI_TalonSRX)rotatingPlatformMotor).setNeutralMode(NeutralMode.Brake);
 		
 		//PWM port numbers for subsystems.
 		
