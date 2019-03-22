@@ -71,6 +71,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		RobotMap.init();
 		CameraServer.getInstance().startAutomaticCapture(0);
+		CameraServer.getInstance().startAutomaticCapture(2);
 		claw = new Claw();
 		arm = new Arm();
 		m_oi = new OI();

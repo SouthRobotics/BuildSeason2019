@@ -101,17 +101,17 @@ public class OI {
 		rButton11.whenPressed(new Cargo_HumanHatch());
 		rButton12.whenPressed(new BallHuman());
 
-		lButton3.whenPressed(new CloseServo());
-		lButton4.whenPressed(new OpenServo());
-		lButton5.whenPressed(new OpenServoInHatch());
-		lButton6.whileHeld(new RotateToPixyTarget());
-		lButton7.whileHeld(new SpinRotatingPlatform(true));
-		lButton8.whileHeld(new SpinBottomJoint(false));
-		lButton9.whileHeld(new SpinMiddleJoint(false));
-		lButton10.whileHeld(new SpinTopJoint(false));
-		//rButton10.whileHeld(new TestMotor(RobotMap.topJointMotor));
-		lButton11.whileHeld(new SpinRollerIntake(true));
-		lButton12.whileHeld(new SpinRollerIntake(false));
+		lButton2.whenPressed(new SpinRotatingPlatform(true));
+		lButton3.whenPressed(new SpinRotatingPlatform(false));
+		lButton4.whileHeld(new SpinBottomJoint(false));
+		lButton5.whileHeld(new SpinBottomJoint(true));
+		lButton6.whileHeld(new SpinMiddleJoint(false));
+		lButton7.whileHeld(new SpinMiddleJoint(true));
+		lButton8.whileHeld(new SpinTopJoint(false));
+		lButton9.whileHeld(new SpinTopJoint(true));
+		
+		lButton10.whileHeld(new SpinRollerIntake(true));
+		lButton11.whileHeld(new SpinRollerIntake(false));
 
 	}
 	

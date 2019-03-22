@@ -36,9 +36,11 @@ public class Arm extends Subsystem{
     private static Potentiometer middlePotentiometer;
     private static Potentiometer topPotentiometer;
     private static Encoder rotatingPlatformEncoder;
+    public static PIDController rotatingPlatformPID;
     public static PIDController bottomAnglePID;
     public static PIDController middleAnglePID;
     public static PIDController topAnglePID;
+    public static CustomPIDOutput rotatingPlatformOut;
     public static CustomPIDOutput bottomOut;
     public static CustomPIDOutput middleOut;
     public static CustomPIDOutput topOut;
@@ -68,10 +70,17 @@ public class Arm extends Subsystem{
     
     public void initPIDControllers() 
     {
+        rotatingPlatformOut = new CustomPIDOutput();
         bottomOut = new CustomPIDOutput();
         middleOut = new CustomPIDOutput();
         topOut = new CustomPIDOutput();
 
+       /* rotatingPlatformPID = new PIDController(pidVals[0][0], pidVals[0][1], pidVals[0][2], pidVals[0][3], Robot., rotatingPlatformOut);    //pid values need tuning, especially for smaller angles!
+        rotatingPlatformPID.setInputRange(0.0, 360.0);
+        rotatingPlatformPID.setOutputRange(-0.3, 0.3);
+        rotatingPlatformPID.setAbsoluteTolerance(4); 
+        rotatingPlatformPID.setContinuous(false);*/
+        
         bottomAnglePID = new PIDController(pidVals[0][0], pidVals[0][1], pidVals[0][2], pidVals[0][3], bottomPotentiometer, bottomOut);    //pid values need tuning, especially for smaller angles!
         bottomAnglePID.setInputRange(0.0, 360.0);
         bottomAnglePID.setOutputRange(-0.3, 0.3);  // don't need to rotate extremely fast
