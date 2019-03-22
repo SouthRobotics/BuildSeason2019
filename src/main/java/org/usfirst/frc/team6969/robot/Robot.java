@@ -15,6 +15,7 @@ import org.usfirst.frc.team6969.robot.subsystems.Arm;
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -70,8 +71,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		RobotMap.init();
-		CameraServer.getInstance().startAutomaticCapture(0);
-		CameraServer.getInstance().startAutomaticCapture(2);
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
+		camera.setResolution(640, 480);
+		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
+		camera1.setResolution(1280, 720);
 		claw = new Claw();
 		arm = new Arm();
 		m_oi = new OI();
