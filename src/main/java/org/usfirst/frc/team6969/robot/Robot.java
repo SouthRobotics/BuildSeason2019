@@ -8,6 +8,7 @@
 package org.usfirst.frc.team6969.robot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.usfirst.frc.team6969.robot.commands.LockJoint;
 import org.usfirst.frc.team6969.robot.custom_classes.ForwardKin;
@@ -17,12 +18,21 @@ import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.vision.VisionThread;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Watchdog;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.networktables.*;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.command.Command;
+
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;;
@@ -35,6 +45,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;;
  * project.
  */
 public class Robot extends TimedRobot {
+	
+	private static final int IMG_WIDTH = 640;
+	private static final int IMG_HEIGHT = 480;
+	public static double[] ballx;
+	public static double[] hatchx;
+	public static double[] bally;
+	public static double[] hatchy;
+	NetworkTableEntry centerball;
+	NetworkTableEntry centerhatch;
+	NetworkTableEntry centerbally;
+	NetworkTableEntry centerhatchy;
+
+
+	
+	
 	// Robot class controls the whole robot
 	// if you ever get lost: https://frc-pdr.readthedocs.io/en/latest/index.html
 	
@@ -82,7 +107,7 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 		pdp = new PowerDistributionPanel(30);
 		ds = DriverStation.getInstance();
-		pdp.clearStickyFaults();	// clears pdp issue with yellow light
+		//pdp.clearStickyFaults();	// clears pdp issue with yellow light
 		robotDrive =  RobotMap.drive;
 		arduino = new SerialPort(9600, SerialPort.Port.kUSB);
 		arduinoString = "";
@@ -91,6 +116,44 @@ public class Robot extends TimedRobot {
 			pixyData.add(new Integer(-1));
 		pixyCenter = 158;
 	}
+		//arduino = new SerialPort(9600, SerialPort.Port.kUSB1);
+		//arduinoString = "";
+		//pixyData = new ArrayList<Integer>();
+		//for (int i = 0; i < 50; i++)	// initialize pixyData
+		//	pixyData.add(new Integer(-1));
+		//pixyCenter = 158;
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
+		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
+		//UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
+		//camera1.setResolution(IMG_WIDTH, IMG_HEIGHT);
+		NetworkTableInstance inst = NetworkTableInstance.getDefault();
+		NetworkTableInstance inst1 = NetworkTableInstance.getDefault();
+		NetworkTableInstance inst2 = NetworkTableInstance.getDefault();
+		NetworkTableInstance inst3 = NetworkTableInstance.getDefault();
+		
+		inst.startClient();
+		inst1.startClient();
+		inst2.startClient();
+		inst3.startClient();
+		
+		NetworkTable Ball = inst1.getTable("GRIP/BallReport");
+		NetworkTable Hatch = inst.getTable("GRIP/HatchReport");
+		NetworkTable Ball1 = inst2.getTable("GRIP/BallReport");
+		NetworkTable Hatch1 = inst3.getTable("GRIP/HatchReport");
+
+		centerball = Ball.getEntry("centerX");
+		centerhatch = Hatch.getEntry("centerX");
+		centerbally = Ball1.getEntry("centerY");
+		centerhatchy = Hatch1.getEntry("centerY");
+		
+    	
+		
+    	
+    	
+    }
+
+	
+		
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -133,6 +196,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+
 		Scheduler.getInstance().run();
 	}
 
@@ -159,14 +223,33 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		getPixyData();
-		System.out.println("Center: " + pixyCenter);
+		//getPixyData();
+		//System.out.println("Center: " + pixyCenter);
 		reportCollisionDetection();
 		displaySmartDashboardData();
 		RobotMap.drive.feedWatchdog();
 		if (RobotMap.bottomJointPot.get() > 105)
 			bottomLimit.start();
+		ballx = centerball.getDoubleArray(ballx); 
+		hatchx = centerhatch.getDoubleArray(hatchx); 
+		bally = centerbally.getDoubleArray(bally); 
+		hatchy = centerhatchy.getDoubleArray(hatchy); 
+
+		String hatchString = (hatchx != null &&hatchx.length>0)?hatchx[0] + "":"None";
+		String ballString = (ballx != null &&ballx.length>0)?ballx[0] + "":"None";
+		String hatchString1 = (hatchy != null &&hatchy.length>0)?hatchy[0] + "":"None";
+		String ballString1 = (bally != null &&bally.length>0)?bally[0] + "":"None";
+
+		System.out.println("HATCH: (" + hatchString + ", " + hatchString1 + ") BAll: (" + ballString + ", " + ballString1 + ")");
+	
+		
+		
+		
+		
+		
 	}
+		
+	
 
 	/**
 	 * This function is called periodically during test mode.
