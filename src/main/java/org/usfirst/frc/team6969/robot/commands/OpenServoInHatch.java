@@ -14,7 +14,7 @@ import org.usfirst.frc.team6969.robot.subsystems.Claw;
 
 public class OpenServoInHatch extends Command {
 	public OpenServoInHatch() {
-		requires(Robot.claw);
+		//requires(Robot.claw);
 	}
 
 	// Called just before this Command runs the first time
