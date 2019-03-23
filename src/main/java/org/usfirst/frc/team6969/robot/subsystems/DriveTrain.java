@@ -55,7 +55,7 @@ public class DriveTrain extends Subsystem {
 		else if(fullSpeed())
 			robotDrive.tankDrive(leftSpeed(),rightSpeed());
 		else
-			robotDrive.tankDrive(.75*leftSpeed(), .75*rightSpeed());
+			robotDrive.tankDrive(-.75*rightSpeed(), -.75*leftSpeed());
 	}
 	
 }

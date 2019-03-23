@@ -40,7 +40,7 @@ public class LockJoint extends Command {
     
     public void initPIDController() {
         anglecontroller.setSetpoint(setpoint);
-        anglecontroller.setAbsoluteTolerance(3);
+        anglecontroller.setAbsoluteTolerance(1);
         anglecontroller.enable();
     }
 

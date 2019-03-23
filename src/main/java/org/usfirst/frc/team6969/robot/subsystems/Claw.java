@@ -37,8 +37,8 @@ public class Claw extends Subsystem {
     public void spinOut() {
         /*leftMotor.set(0.35);
         rightMotor.set(-0.35);*/
-        leftMotor.set(-0.8);
-        rightMotor.set(0.8);
+        leftMotor.set(-0.55);
+        rightMotor.set(0.55);
     }
 
     public void stopSpinning() {

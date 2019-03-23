@@ -30,9 +30,12 @@ public class BallFromFloor extends Command {
 	@Override
 	protected void execute() {
 		Command servo = new OpenServo();
-		Command bottom = new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, 105);
-		Command middle = new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut, 175);
-		Command top = new LockJoint(RobotMap.topJointPot, Robot.arm.topAnglePID, 2, Robot.arm.topOut, 90);
+		System.out.println("bottom start" + Robot.bottomStart);
+		System.out.println("middle start" + Robot.middleStart);
+		System.out.println("top start" + Robot.topStart);
+		Command bottom = new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, 109);
+		Command middle = new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut, 135);
+		Command top = new LockJoint(RobotMap.topJointPot, Robot.arm.topAnglePID, 2, Robot.arm.topOut, 196);
 		servo.start();
 		bottom.start();
 		middle.start();

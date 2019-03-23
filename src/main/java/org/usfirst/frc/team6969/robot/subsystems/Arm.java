@@ -95,7 +95,7 @@ public class Arm extends Subsystem{
 
         topAnglePID = new PIDController(pidVals[2][0], pidVals[2][1], pidVals[2][2], pidVals[2][3], topPotentiometer, topOut);    //pid values need tuning, especially for smaller angles!
         topAnglePID.setInputRange(0, 360.0);
-        topAnglePID.setOutputRange(-0.2, 0.2);  // don't need to rotate extremely fast
+        topAnglePID.setOutputRange(-0.3, 0.3);  // don't need to rotate extremely fast
         topAnglePID.setAbsoluteTolerance(1);  // 2 degree threshold
         topAnglePID.setContinuous(false);
     }

@@ -60,6 +60,7 @@ public class Robot extends TimedRobot {
 	public static final int PIXYXCENTER = 158;	// pixy cam x-values range from 0 to 316 
 	public static final double[] armLengths = {32.5, 32.25, 11};
 	public static Command bottomLimit = new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, 64);
+	public static double bottomStart, middleStart, topStart;
 
 	
 	//auto command... will vary based on location/alliance
@@ -71,7 +72,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		RobotMap.init();
+		RobotMap.init();		
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
 		camera.setResolution(640, 480);
 		camera.setFPS(15);
@@ -128,6 +129,7 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
+
 	}
 
 	/**
@@ -148,6 +150,9 @@ public class Robot extends TimedRobot {
 			autonomousCommand.cancel();
 		}
 		resetEncoders();
+		bottomStart = RobotMap.bottomJointPot.get();
+		middleStart = RobotMap.middleJointPot.get();
+		topStart = RobotMap.topJointPot.get();
 		//for every subsystem just do subsystem.initDefaultCommand()
 		//subsystems
 		//driveTrain.initDefaultCommand();
@@ -166,8 +171,8 @@ public class Robot extends TimedRobot {
 		reportCollisionDetection();
 		displaySmartDashboardData();
 		RobotMap.drive.feedWatchdog();
-		if (RobotMap.bottomJointPot.get() > 105)
-			bottomLimit.start();
+		//if (RobotMap.bottomJointPot.get() > 105)
+			//bottomLimit.start();
 	}
 
 	/**
