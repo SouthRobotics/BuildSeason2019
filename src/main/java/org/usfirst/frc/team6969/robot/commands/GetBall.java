@@ -21,7 +21,7 @@ public class GetBall extends CommandGroup {
     addParallel(new SpinRollerIntake(true));
     addParallel(new BallFromFloor());
     while (!RobotMap.ballLimitSwitch.get()){
-      RobotMap.drive.tankDrive(.5, .5 );
+      RobotMap.drive.tankDrive(.1, .1 );
 
     }
 
