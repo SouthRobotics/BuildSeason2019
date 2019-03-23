@@ -89,8 +89,7 @@ public class OI {
 		rButton8.whileHeld(new SpinMiddleJoint(0.25));
 		rButton9.whileHeld(new SpinTopJoint(0.25));*/
 		//rButton2.whenPressed(new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut));
-		
-		/*rButton2.whenPressed(new BallFromFloor());
+		rButton2.whenPressed(new BallFromFloor());
 		rButton3.whenPressed(new BallRocketOne());
 		rButton4.whenPressed(new BallRocketTwo());
 		rButton5.whenPressed(new BallRocketThree());
@@ -115,29 +114,6 @@ public class OI {
 		lButton11.whileHeld(new SpinRollerIntake(false));
 
 		lButton12.whileActive(new TestMotor(RobotMap.driveTrainMiddleLeft));
-		*/
-
-		lButton3.whileHeld(new SpinBottomJoint(false));
-		lButton4.whileHeld(new SpinBottomJoint(true));
-		lButton5.whileHeld(new SpinMiddleJoint(false));
-		lButton6.whileHeld(new SpinMiddleJoint(true));
-		rButton5.whileHeld(new SpinTopJoint(false));
-		rButton6.whileHeld(new SpinTopJoint(true));
-		
-		rButton3.whenPressed(new SpinRollerIntake(true));
-		rButton4.whileHeld(new SpinRollerIntake(false));
-
-		rButton7.whenPressed(new BallFromFloor());
-		rButton8.whenPressed(new BallRocketOne());
-		rButton9.whenPressed(new BallRocketTwo());
-		rButton10.whenPressed(new BallRocketThree());
-		rButton11.whenPressed(new HatchRocketOne());
-		rButton12.whenPressed(new HatchRocketTwo());
-		lButton7.whenPressed(new HatchRocketThree());
-		lButton8.whenPressed(new HatchFromFloor());
-		lButton9.whenPressed(new BallCargo());
-		lButton10.whenPressed(new Cargo_HumanHatch());
-		lButton1.whenPressed(new BallHuman());
 
 	}
 	
