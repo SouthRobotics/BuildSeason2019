@@ -17,6 +17,8 @@ import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -25,6 +27,8 @@ import edu.wpi.first.wpilibj.Watchdog;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.networktables.*;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;;
 
 /**
@@ -43,6 +47,16 @@ public class Robot extends TimedRobot {
 	public static DriveTrain driveTrain;
 	public static Claw claw;
 	public static Arm arm;
+	private static final int IMG_WIDTH = 640;
+	private static final int IMG_HEIGHT = 480;
+	public static double[] ballx;
+	public static double[] hatchx;
+	public static double[] bally;
+	public static double[] hatchy;
+	NetworkTableEntry centerball;
+	NetworkTableEntry centerhatch;
+	NetworkTableEntry centerbally;
+	NetworkTableEntry centerhatchy;
 
 	
 	//controller map
@@ -90,6 +104,25 @@ public class Robot extends TimedRobot {
 		for (int i = 0; i < 50; i++)	// initialize pixyData
 			pixyData.add(new Integer(-1));
 		pixyCenter = 158;
+		NetworkTableInstance inst = NetworkTableInstance.getDefault();
+		NetworkTableInstance inst1 = NetworkTableInstance.getDefault();
+		NetworkTableInstance inst2 = NetworkTableInstance.getDefault();
+		NetworkTableInstance inst3 = NetworkTableInstance.getDefault();
+		
+		inst.startClient();
+		inst1.startClient();
+		inst2.startClient();
+		inst3.startClient();
+		
+		NetworkTable Ball = inst1.getTable("GRIP/BallReport");
+		NetworkTable Hatch = inst.getTable("GRIP/HatchReport");
+		NetworkTable Ball1 = inst2.getTable("GRIP/BallReport");
+		NetworkTable Hatch1 = inst3.getTable("GRIP/HatchReport");
+
+		centerball = Ball.getEntry("centerX");
+		centerhatch = Hatch.getEntry("centerX");
+		centerbally = Ball1.getEntry("centerY");
+		centerhatchy = Hatch1.getEntry("centerY");
 	}
 
 	/**
@@ -164,8 +197,21 @@ public class Robot extends TimedRobot {
 		reportCollisionDetection();
 		displaySmartDashboardData();
 		RobotMap.drive.feedWatchdog();
-		if (RobotMap.bottomJointPot.get() > 105)
+		if (RobotMap.bottomJointPot.get() > 105){
 			bottomLimit.start();
+		}
+		ballx = centerball.getDoubleArray(ballx); 
+		hatchx = centerhatch.getDoubleArray(hatchx); 
+		bally = centerbally.getDoubleArray(bally); 
+		hatchy = centerhatchy.getDoubleArray(hatchy); 
+
+		String hatchString = (hatchx != null &&hatchx.length>0)?hatchx[0] + "":"None";
+		String ballString = (ballx != null &&ballx.length>0)?ballx[0] + "":"None";
+		String hatchString1 = (hatchy != null &&hatchy.length>0)?hatchy[0] + "":"None";
+		String ballString1 = (bally != null &&bally.length>0)?bally[0] + "":"None";
+
+		System.out.println("HATCH: (" + hatchString + ", " + hatchString1 + ") BAll: (" + ballString + ", " + ballString1 + ")");
+	
 	}
 
 	/**
@@ -186,7 +232,7 @@ public class Robot extends TimedRobot {
 	private void getPixyData() {
 
 		arduino.write(new byte[] {0x12}, 1);	//RoboRio must initiate communication with arduino
-
+		
 		if ( arduino.getBytesReceived() > 0 ) {
 
 			arduinoString = arduino.readString();
@@ -214,8 +260,6 @@ public class Robot extends TimedRobot {
 			if ( pixyCounter > 8 )	//if lost sight of object stop turning
 				pixyCenter = -1;
 		}
-		else
-		    System.out.println("no arduino comm");
 	}
 
 	/*
