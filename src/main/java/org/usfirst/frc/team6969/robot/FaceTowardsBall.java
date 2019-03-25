@@ -24,7 +24,7 @@ public class FaceTowardsBall extends Command {
 	public static final int threshold = 10;//how many pixels off center is still acceptable; the distance from the center which the robot should stop rotating
 
 	public double off;
-	public Talon armRot;
+//	public Talon armRot;
 
 	public int offX(){//how far off from the ball is the robot? range [-CAM_WIDTH/2, CAM_WIDTH/2]
 		int avgPos = 0;
@@ -52,7 +52,8 @@ public class FaceTowardsBall extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		armRot = new Talon(5);
+
+
 	}
 
 	// Called repeatedly when this Command is scheduled to run
