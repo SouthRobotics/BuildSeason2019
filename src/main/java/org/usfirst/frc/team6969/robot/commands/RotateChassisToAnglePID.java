@@ -16,42 +16,36 @@ import com.kauailabs.navx.frc.AHRS;
 
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
+import org.usfirst.frc.team6969.robot.custom_classes.CustomPIDOutput;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
 
 /**
  * An example command.  You can replace me with your own command.
  */
-public class RotateChassisToAnglePID extends Command implements PIDOutput {
-    private double pidOutput;
+public class RotateChassisToAnglePID extends Command {
+    private CustomPIDOutput pidOutput;
     private double targetAngle;
     private PIDController anglecontroller;
     private AHRS navx;
 
-	public RotateChassisToAnglePID(double angle) {
-        // Use requires() here to declare subsystem dependencies
+	public RotateChassisToAnglePID(PIDController controller, CustomPIDOutput output, double angle) {
         super("Rotate Chassis To Angle PID");
         targetAngle = angle;
+        pidOutput = output;
+        anglecontroller = controller;
         navx = RobotMap.navx;
-        requires(Robot.driveTrain);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-        setTimeout(5); // command auto stops after 5 seconds (prevents us from getting stuck in infinite loop)
+                setTimeout(5);
         navx.zeroYaw();
         initPIDController();
     }
     
     public void initPIDController() {
-        anglecontroller = new PIDController(DriveTrain.Kp,
-                DriveTrain.Ki,
-                DriveTrain.Kd,
-                navx, this);    //pid values need tuning, especially for smaller angles!
-        anglecontroller.setInputRange(-180.0, 180.0);
-        anglecontroller.setOutputRange(-0.6, 0.6);  // don't need to rotate extremely fast
-        anglecontroller.setAbsoluteTolerance(1);  // 2 degree threshold
-        anglecontroller.setContinuous(true);
+        anglecontroller.setAbsoluteTolerance(1); 
         anglecontroller.setSetpoint(targetAngle);
         anglecontroller.enable();
     }
@@ -59,15 +53,13 @@ public class RotateChassisToAnglePID extends Command implements PIDOutput {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-        Robot.robotDrive.tankDrive(pidOutput, -pidOutput);
+        Robot.robotDrive.tankDrive(pidOutput.outVal, -pidOutput.outVal);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		if (anglecontroller.onTarget() && isTimedOut())
-            return true;
-        return false;
+	        return (anglecontroller.onTarget());
 	}
 
 	// Called once after isFinished returns true
@@ -83,9 +75,4 @@ public class RotateChassisToAnglePID extends Command implements PIDOutput {
 	protected void interrupted() {
         end();
 	}
-
-    @Override
-    public void pidWrite(double output) {
-        pidOutput = output;
-    }
 }

@@ -7,9 +7,14 @@
 
 package org.usfirst.frc.team6969.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 import org.usfirst.frc.team6969.robot.commands.TeleOpDrive;
+import org.usfirst.frc.team6969.robot.custom_classes.CustomPIDOutput;
+
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -19,11 +24,16 @@ public class DriveTrain extends Subsystem {
 	public static double Kp;
 	public static double Ki;
 	public static double Kd;
+	public static PIDController drivePID;
+	public static CustomPIDOutput driveOut;
+	public static AHRS navx;
 	
 	public DriveTrain() {
 		Kp = 0.02;
 		Ki = 0.0;
 		Kd = 0.01;
+		navx = RobotMap.navx;
+		initPIDControllers();
 	}
 
 	public void initDefaultCommand() 
@@ -31,6 +41,18 @@ public class DriveTrain extends Subsystem {
     	robotDrive =  RobotMap.drive;
         setDefaultCommand(new TeleOpDrive());
 	}	
+
+	public void initPIDControllers() 
+    {
+        driveOut = new CustomPIDOutput();
+        
+        drivePID = new PIDController(Kp, Ki, Kd, navx, driveOut); 
+        drivePID.setInputRange(-180.0, 180.0);
+        drivePID.setOutputRange(-0.6, 0.6);
+        drivePID.setAbsoluteTolerance(1);  
+        drivePID.setContinuous(false);
+
+    }
 
 	public boolean halfSpeed()//checks if left bumper is pressed -->go half speed
 	{
@@ -56,6 +78,15 @@ public class DriveTrain extends Subsystem {
 			robotDrive.tankDrive(leftSpeed(),rightSpeed());
 		else
 			robotDrive.tankDrive(-.75*rightSpeed(), -.75*leftSpeed());
+	}
+
+	public void drive(double leftSpeed, double rightSpeed) {
+		robotDrive.tankDrive(leftSpeed, rightSpeed);
+	}
+
+	public void stop()
+	{
+		robotDrive.tankDrive(0, 0);
 	}
 	
 }

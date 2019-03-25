@@ -1,3 +1,4 @@
+
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -8,24 +9,23 @@
 package org.usfirst.frc.team6969.robot.commands;
 
 import org.usfirst.frc.team6969.robot.Robot;
-import org.usfirst.frc.team6969.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.SerialPort;
+
 import edu.wpi.first.wpilibj.command.Command;
+
 
 public class RotateToPixyTarget extends Command {
   
   public static SerialPort arduino;
   public static int center;
-  public static int cen;
   public static final int PIXYXCENTER = 158;     // Pixycam x values go from 0 to 316 (center is 158)
   private double error;
   private double rotation;
   private double kP;
 
-  public RotateToPixyTarget() {
-    //requires(Robot.driveTrain);
-    center = Robot.pixyCenter;
+  public RotateToPixyTarget(int cen) {
+    requires(Robot.driveTrain);
+    center = cen;
     error = 0;
     rotation = 0;
     kP = 0.06;
@@ -53,17 +53,17 @@ public class RotateToPixyTarget extends Command {
         error = Math.abs( PIXYXCENTER - center );
         rotation = error * kP;
 
-        if ( rotation > .15 )	// Don't need to turn extremely fast, so max at .55 for better accuracy
-          rotation = 0.15;
+        if ( rotation > .55 )	// Don't need to turn extremely fast, so max at .55 for better accuracy
+          rotation = 0.55;
     
         // .45 is min amount of power to move motors. want to slow down as we near target to ensure we don't overshoot
-        if ( rotation < 0.1 || error < 50 )
-          rotation = 0.1;
+        if ( rotation < 0.45 || error < 50 )
+          rotation = 0.35;
 
         if ( center > PIXYXCENTER )
-        RobotMap.rotatingPlatformMotor.set(rotation);
+          Robot.robotDrive.tankDrive(rotation, -rotation);
         else
-        RobotMap.rotatingPlatformMotor.set(-rotation);
+          Robot.robotDrive.tankDrive(-rotation, rotation);
       }
       else {  // target was lost
         Robot.pixyCenter = PIXYXCENTER;
@@ -87,13 +87,11 @@ public class RotateToPixyTarget extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    RobotMap.rotatingPlatformMotor.set(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }
