@@ -15,6 +15,12 @@ import org.usfirst.frc.team6969.robot.custom_classes.ForwardKin;
 import org.usfirst.frc.team6969.robot.subsystems.Arm;
 import org.usfirst.frc.team6969.robot.subsystems.Claw;
 import org.usfirst.frc.team6969.robot.subsystems.DriveTrain;
+//added for GRIP
+import edu.wpi.first.networktables.*;
+import edu.wpi.first.networktables.NetworkTable;
+
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -62,7 +68,17 @@ public class Robot extends TimedRobot {
 	public static Command bottomLimit = new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, 64);
 	public static double bottomStart, middleStart, topStart;
 
-	
+	//GRIP
+	private static final int IMG_WIDTH = 640;
+	private static final int IMG_HEIGHT = 480;
+	public static double[] ballx;
+	public static double[] hatchx;
+	public static double[] bally;
+	public static double[] hatchy;
+	NetworkTableEntry centerball;
+	NetworkTableEntry centerhatch;
+	NetworkTableEntry centerbally;
+	NetworkTableEntry centerhatchy;
 	//auto command... will vary based on location/alliance
 	public Command autonomousCommand = null;
 	
@@ -93,6 +109,31 @@ public class Robot extends TimedRobot {
 		for (int i = 0; i < 50; i++)	// initialize pixyData
 			pixyData.add(new Integer(-1));
 		pixyCenter = 158;
+
+		//GRIP
+		// UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
+		// camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
+		//UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
+		//camera1.setResolution(IMG_WIDTH, IMG_HEIGHT);
+		NetworkTableInstance inst = NetworkTableInstance.getDefault();
+		NetworkTableInstance inst1 = NetworkTableInstance.getDefault();
+		NetworkTableInstance inst2 = NetworkTableInstance.getDefault();
+		NetworkTableInstance inst3 = NetworkTableInstance.getDefault();
+		
+		inst.startClient();
+		inst1.startClient();
+		inst2.startClient();
+		inst3.startClient();
+		
+		NetworkTable Ball = inst1.getTable("GRIP/BallReport");
+		NetworkTable Hatch = inst.getTable("GRIP/HatchReport");
+		NetworkTable Ball1 = inst2.getTable("GRIP/BallReport");
+		NetworkTable Hatch1 = inst3.getTable("GRIP/HatchReport");
+
+		centerball = Ball.getEntry("centerX");
+		centerhatch = Hatch.getEntry("centerX");
+		centerbally = Ball1.getEntry("centerY");
+		centerhatchy = Hatch1.getEntry("centerY");
 	}
 
 	/**

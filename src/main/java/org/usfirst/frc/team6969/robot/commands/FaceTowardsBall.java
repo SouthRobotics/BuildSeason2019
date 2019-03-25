@@ -77,7 +77,7 @@ public class FaceTowardsBall extends Command {
 //		 RobotMap.driveTrainFrontLeft.set(speed);
 //		 RobotMap.driveTrainBackRight.set(-speed);
 //		 RobotMap.driveTrainFrontRight.set(-speed);
-		Robot.driveTrain.tankDrive(speed, -speed);
+		Robot.robotDrive.tankDrive(speed, -speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
