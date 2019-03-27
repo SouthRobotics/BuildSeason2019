@@ -116,7 +116,10 @@ public class OI {
 		lButton8.whileHeld(new SpinTopJoint(false));
 		lButton9.whileHeld(new SpinTopJoint(true));
 		
-		lButton10.whileHeld(new SpinRollerIntake(true));
+		// lButton10.whileHeld(new SpinRollerIntake(true));
+		lButton10.whileHeld(new FaceTowardsBall());
+
+
 		lButton11.whileHeld(new SpinRollerIntake(false));
 
 		lButton12.whileActive(new TestMotor(RobotMap.driveTrainMiddleLeft));
