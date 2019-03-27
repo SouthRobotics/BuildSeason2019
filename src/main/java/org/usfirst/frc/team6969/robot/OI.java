@@ -99,6 +99,7 @@ public class OI {
 		rButton9.whenPressed(new BallRocketOne());
 		rButton10.whenPressed(new BallRocketTwo());
 		rButton11.whenPressed(new BallRocketThree());
+		rButton12.whenPressed(new DriveDistance(60));
 		//rButton6.whenPressed(new HatchRocketOne());
 		//rButton7.whenPressed(new HatchRocketTwo());
 		//rButton8.whenPressed(new HatchRocketThree());

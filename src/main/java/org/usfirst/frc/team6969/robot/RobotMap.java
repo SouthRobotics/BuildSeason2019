@@ -178,9 +178,9 @@ public class RobotMap {
 		SmartDashboard.putNumber("key", "value")
 		*/
 
-		ballLimitSwitch = new  DigitalInput(9);
+		/*ballLimitSwitch = new  DigitalInput(9);
 		hatchLimitSwitch = new DigitalInput(8);
-		rotatingPlatformLimitSwitch = new DigitalInput(7);
+		rotatingPlatformLimitSwitch = new DigitalInput(7);*/
 		
 		//potentiometers center wire goes to S.
 		bottomJointPot = new AnalogPotentiometer(2, 360, 0);
@@ -195,8 +195,8 @@ public class RobotMap {
 		servo = new Servo(9);
 
 		rotatingPlatformEncoder = new Encoder(0, 1);
-		leftDriveEncoder = new Encoder(4, 5);
-		rightDriveEncoder = new Encoder(2, 3);
+		leftDriveEncoder = new Encoder(6, 7);
+		rightDriveEncoder = new Encoder(8, 9);
 	    
 		//creates motor groups for TankDrive
 		

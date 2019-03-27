@@ -81,7 +81,6 @@ public class Robot extends TimedRobot {
 		camera1.setFPS(15);
 		claw = new Claw();
 		arm = new Arm();
-		m_oi = new OI();
 		driveTrain = new DriveTrain();
 		pdp = new PowerDistributionPanel(30);
 		ds = DriverStation.getInstance();
@@ -90,6 +89,7 @@ public class Robot extends TimedRobot {
 		arduino = new SerialPort(9600, SerialPort.Port.kUSB);
 		arduinoString = "";
 		pixyData = new ArrayList<Integer>();
+		m_oi = new OI();
 		for (int i = 0; i < 50; i++)	// initialize pixyData
 			pixyData.add(new Integer(-1));
 		pixyCenter = 158;
@@ -264,9 +264,9 @@ public class Robot extends TimedRobot {
 	private void displaySmartDashboardData() {
 		SmartDashboard.putBoolean("Robot is moving", RobotMap.navx.isMoving());
 		SmartDashboard.putNumber("Yaw", RobotMap.navx.getYaw());
-		SmartDashboard.putBoolean("Hatch Limit Switch", RobotMap.hatchLimitSwitch.get());
-		SmartDashboard.putBoolean("Ball Limit Switch", RobotMap.ballLimitSwitch.get());
-		SmartDashboard.putBoolean("rotating platform Limit Switch", RobotMap.rotatingPlatformLimitSwitch.get());
+		//SmartDashboard.putBoolean("Hatch Limit Switch", RobotMap.hatchLimitSwitch.get());
+		//SmartDashboard.putBoolean("Ball Limit Switch", RobotMap.ballLimitSwitch.get());
+		//SmartDashboard.putBoolean("rotating platform Limit Switch", RobotMap.rotatingPlatformLimitSwitch.get());
 		SmartDashboard.putNumber("Bottom potentiometer", RobotMap.bottomJointPot.get());
 		SmartDashboard.putNumber("Middle potentiometer", RobotMap.middleJointPot.get());
 		SmartDashboard.putNumber("Top potentiometer", RobotMap.topJointPot.get());

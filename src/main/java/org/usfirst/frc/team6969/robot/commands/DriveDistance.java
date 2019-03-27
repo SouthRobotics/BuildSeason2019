@@ -16,8 +16,8 @@ import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 
 public class DriveDistance extends Command {
-    private static final double TICKS_PER_INCH = 50;
-    private static final double POWER = 0.6;
+    private static final double TICKS_PER_INCH = 40.5;
+    private static final double POWER = 0.;
     private double targetDistance;
     private Encoder leftEncoder;
     private Encoder rightEncoder;
@@ -45,7 +45,7 @@ public class DriveDistance extends Command {
 	@Override
 	protected void execute() {
         pow = driveStraight(POWER, navx.getYaw()-initialAngle, 0.005);
-		Robot.driveTrain.drive(pow[0], pow[1]);	
+		Robot.driveTrain.drive(-pow[0], -pow[1]);	
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -67,7 +67,7 @@ public class DriveDistance extends Command {
         end();
     }
     
-    public static double[] driveStraight(double powSetpoint, double angleDifference, double tuningConstant) {                                                                                                                      //memes
+    public static double[] driveStraight(double powSetpoint, double angleDifference, double tuningConstant) {
 		return new double[] {(powSetpoint + (angleDifference*tuningConstant)), (powSetpoint - (angleDifference*tuningConstant))};
 	}
 }
