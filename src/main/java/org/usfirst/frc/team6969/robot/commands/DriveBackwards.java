@@ -15,7 +15,7 @@ import com.kauailabs.navx.frc.AHRS;
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 
-public class DriveDistance extends Command {
+public class DriveBackwards extends Command {
     private static final double TICKS_PER_INCH = 40.5;
     private static final double POWER = 0.;
     private double targetDistance;
@@ -26,7 +26,7 @@ public class DriveDistance extends Command {
     private double initialEncoderReading;
     private double[] pow;
 
-	public DriveDistance(double targetDistance) {   //targetDistance in inches
+	public DriveBackwards(double targetDistance) {   //targetDistance in inches
         requires(Robot.driveTrain);
         this.targetDistance = targetDistance;
         navx = RobotMap.navx;
@@ -44,12 +44,8 @@ public class DriveDistance extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-	pow = driveStraight(POWER, navx.getYaw()-initialAngle, 0.005);
-	/*if (pow[0] > .4)
-		pow[0] = .4;
-	if (pow[1] > .4)
-		pow[1] = .4;*/
-		Robot.driveTrain.drive(-pow[0], -pow[1]);	
+        pow = driveStraight(POWER, navx.getYaw()-initialAngle, 0.005);
+		Robot.driveTrain.drive(pow[0], pow[1]);	
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -61,7 +57,7 @@ public class DriveDistance extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-        //Robot.driveTrain.stop();
+        Robot.driveTrain.stop();
 	}
 
 	// Called when another command which requires one or more of the same

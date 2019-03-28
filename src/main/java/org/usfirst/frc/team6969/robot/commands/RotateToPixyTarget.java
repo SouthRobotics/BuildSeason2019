@@ -6,7 +6,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc.team6969.robot.commands;
+/*package org.usfirst.frc.team6969.robot.commands;
 
 import org.usfirst.frc.team6969.robot.Robot;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -23,9 +23,9 @@ public class RotateToPixyTarget extends Command {
   private double rotation;
   private double kP;
 
-  public RotateToPixyTarget(int cen) {
+  public RotateToPixyTarget() {
     requires(Robot.driveTrain);
-    center = cen;
+    center = -1;
     error = 0;
     rotation = 0;
     kP = 0.06;
@@ -87,6 +87,7 @@ public class RotateToPixyTarget extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.driveTrain.stop();
   }
 
   // Called when another command which requires one or more of the same
@@ -94,4 +95,4 @@ public class RotateToPixyTarget extends Command {
   @Override
   protected void interrupted() {
   }
-}
+}*/

@@ -51,13 +51,13 @@ public class Robot extends TimedRobot {
     public static DifferentialDrive robotDrive;
 	public static DriverStation ds;
 	public static PowerDistributionPanel pdp;
-	public static SerialPort arduino;
+	/*public static SerialPort arduino;
 	private String arduinoString;
 	private ArrayList<Integer> pixyData;
 	private Integer pixyVal;
 	private int pixyCounter;
 	public static int pixyCenter;
-	public static final int PIXYXCENTER = 158;	// pixy cam x-values range from 0 to 316 
+	public static final int PIXYXCENTER = 158;	// pixy cam x-values range from 0 to 316 */
 	public static final double[] armLengths = {32.5, 32.25, 11};
 	public static Command bottomLimit = new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, 64);
 	public static double bottomStart, middleStart, topStart;
@@ -74,11 +74,8 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		RobotMap.init();		
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
-		camera.setResolution(640, 480);
-		camera.setFPS(15);
-		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
-		camera1.setResolution(640, 480);
-		camera1.setFPS(15);
+		camera.setResolution(320, 240);
+		camera.setFPS(10);
 		claw = new Claw();
 		arm = new Arm();
 		driveTrain = new DriveTrain();
@@ -86,13 +83,13 @@ public class Robot extends TimedRobot {
 		ds = DriverStation.getInstance();
 		pdp.clearStickyFaults();	// clears pdp issue with yellow light
 		robotDrive =  RobotMap.drive;
-		arduino = new SerialPort(9600, SerialPort.Port.kUSB);
+		m_oi = new OI();
+		/*arduino = new SerialPort(9600, SerialPort.Port.kUSB);
 		arduinoString = "";
 		pixyData = new ArrayList<Integer>();
-		m_oi = new OI();
 		for (int i = 0; i < 50; i++)	// initialize pixyData
 			pixyData.add(new Integer(-1));
-		pixyCenter = 158;
+		pixyCenter = 158;*/
 	}
 
 	/**
@@ -166,8 +163,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		getPixyData();
-		System.out.println("Center: " + pixyCenter);
+		/*getPixyData();
+		System.out.println("Center: " + pixyCenter);*/
 		reportCollisionDetection();
 		displaySmartDashboardData();
 		RobotMap.drive.feedWatchdog();
@@ -190,7 +187,7 @@ public class Robot extends TimedRobot {
 	Pre: Arduino is connected to RoboRio via usb port 1
 	Post: x-coordinate of center of target is stored in pixyCenter
 	*/
-	private void getPixyData() {
+	/*private void getPixyData() {
 
 		arduino.write(new byte[] {0x12}, 1);	//RoboRio must initiate communication with arduino
 
@@ -211,19 +208,20 @@ public class Robot extends TimedRobot {
 				}
 				else
 					pixyCounter++;
+
+				pixyCenter = pixyData.get(49);
+				pixyCenter = pixyVal;
 			}
 			catch(Exception e){
 				System.out.println("Error parsing Pixy data.");
 			}
 
-			pixyCenter = pixyData.get(49);
-
-			if ( pixyCounter > 8 )	//if lost sight of object stop turning
-				pixyCenter = -1;
+			//if ( pixyCounter > 8 )	//if lost sight of object stop turning
+			//	pixyCenter = -1;
 		}
 		else
 		    System.out.println("no arduino comm");
-	}
+	}*/
 
 	/*
 	Sends error message to Driver Station warning that a collision may have occured

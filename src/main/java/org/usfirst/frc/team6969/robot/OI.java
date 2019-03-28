@@ -99,7 +99,7 @@ public class OI {
 		rButton9.whenPressed(new BallRocketOne());
 		rButton10.whenPressed(new BallRocketTwo());
 		rButton11.whenPressed(new BallRocketThree());
-		rButton12.whenPressed(new DriveDistance(60));
+		rButton12.whileHeld(new Drive(0.5));
 		//rButton6.whenPressed(new HatchRocketOne());
 		//rButton7.whenPressed(new HatchRocketTwo());
 		//rButton8.whenPressed(new HatchRocketThree());
@@ -108,7 +108,8 @@ public class OI {
 		rButton11.whenPressed(new Cargo_HumanHatch());
 		rButton12.whenPressed(new BallHuman());*/
 
-		lButton2.whileHeld(new SpinRotatingPlatform(true));
+		//lButton2.whileHeld(new SpinRotatingPlatform(true));
+		//lButton2.whileHeld(new RotateToPixyTarget());
 		lButton3.whileHeld(new SpinRotatingPlatform(false));
 		lButton4.whileHeld(new SpinBottomJoint(false));
 		lButton5.whileHeld(new SpinBottomJoint(true));
