@@ -110,7 +110,7 @@ public class OI {
 
 		//lButton2.whileHeld(new SpinRotatingPlatform(true));
 		//lButton2.whileHeld(new RotateToPixyTarget());
-		lButton3.whileHeld(new SpinRotatingPlatform(false));
+		lButton3.whileHeld(new SavePotentiometerReadings());
 		lButton4.whileHeld(new SpinBottomJoint(false));
 		lButton5.whileHeld(new SpinBottomJoint(true));
 		lButton6.whileHeld(new SpinMiddleJoint(false));

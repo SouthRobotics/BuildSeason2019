@@ -8,47 +8,31 @@
 package org.usfirst.frc.team6969.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
-
 import org.usfirst.frc.team6969.robot.Robot;
 import org.usfirst.frc.team6969.robot.RobotMap;
 
-/**
- * An example command.  You can replace me with your own command.
- */
-public class BallFromFloor extends Command {
-	public int test = 0;
-	public BallFromFloor() {
+public class SavePotentiometerReadings extends Command {
+	public SavePotentiometerReadings() {
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+        Robot.bottomStart = RobotMap.bottomJointPot.get();
+        Robot.middleStart = RobotMap.middleJointPot.get();
+        Robot.topStart = RobotMap.topJointPot.get();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Command servo = new OpenServo();
-		System.out.println("bottom start" + Robot.bottomStart);
-		System.out.println("middle start" + Robot.middleStart);
-		System.out.println("top start" + Robot.topStart);
-		//hard-coded presets: 101, 140, 215
-		Command bottom = new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, 101 /*(Robot.bottomStart + 46)*/ );
-		Command middle = new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut, 140 /*(Robot.middleStart + 20)*/ );
-		Command top = new LockJoint(RobotMap.topJointPot, Robot.arm.topAnglePID, 2, Robot.arm.topOut, 215 /*(Robot.topStart - 102)*/ );
-		servo.start();
-		bottom.start();
-		middle.start();
-		top.start();
-		test = 1;
-
+        
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return (test == 1);
+		return true;
 	}
 
 	// Called once after isFinished returns true

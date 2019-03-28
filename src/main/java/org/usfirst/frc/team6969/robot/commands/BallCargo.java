@@ -30,9 +30,10 @@ public class BallCargo extends Command {
 	@Override
 	protected void execute() {
 		Command servo = new OpenServo();
-		Command bottom = new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, 71);
-		Command middle = new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut, 185);
-		Command top = new LockJoint(RobotMap.topJointPot, Robot.arm.topAnglePID, 2, Robot.arm.topOut, 314);
+		//hard-coded presets: 71, 185, 314
+		Command bottom = new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, (Robot.bottomStart + 16) );
+		Command middle = new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut, (Robot.middleStart + 65) );
+		Command top = new LockJoint(RobotMap.topJointPot, Robot.arm.topAnglePID, 2, Robot.arm.topOut, (Robot.topStart - 3) );
 		servo.start();
 		bottom.start();
 		middle.start();
