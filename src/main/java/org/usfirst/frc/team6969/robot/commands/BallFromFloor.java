@@ -34,8 +34,8 @@ public class BallFromFloor extends Command {
 		System.out.println("middle start" + Robot.middleStart);
 		System.out.println("top start" + Robot.topStart);
 		//hard-coded presets: 101, 140, 215
-		Command bottom = new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, 101 /*(Robot.bottomStart + 46)*/ );
-		Command middle = new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut, 140 /*(Robot.middleStart + 20)*/ );
+		Command bottom = new LockJoint(RobotMap.bottomJointPot, Robot.arm.bottomAnglePID, 0, Robot.arm.bottomOut, 109 /*(Robot.bottomStart + 46)*/ );
+		Command middle = new LockJoint(RobotMap.middleJointPot, Robot.arm.middleAnglePID, 1, Robot.arm.middleOut, 146 /*(Robot.middleStart + 20)*/ );
 		Command top = new LockJoint(RobotMap.topJointPot, Robot.arm.topAnglePID, 2, Robot.arm.topOut, 215 /*(Robot.topStart - 102)*/ );
 		servo.start();
 		bottom.start();
