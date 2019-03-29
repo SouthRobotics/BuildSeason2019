@@ -273,9 +273,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData(Arm.middleAnglePID);
 		SmartDashboard.putData(Arm.topAnglePID);
 		SmartDashboard.putNumber("How far out", getArmY());
-		SmartDashboard.putNumber("bottom start", bottomStart);
-		SmartDashboard.putNumber("middle start", middleStart);
-		SmartDashboard.putNumber("top start", topStart);
 	}
 }
 
